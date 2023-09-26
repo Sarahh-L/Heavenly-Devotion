@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dialogue;
 
-namespace TESTING
+namespace Testing
 {
     public class Testing_Architect : MonoBehaviour
     {
