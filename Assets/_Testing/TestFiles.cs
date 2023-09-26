@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestFiles : MonoBehaviour
 {
     private string fileName = "L_S";
+    //[SerializeField] private TextAsset fileName;      USE FOR TESTING PURPOSES !!
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +19,9 @@ public class TestFiles : MonoBehaviour
         List<string> lines = FileManager.ReadTextAsset(fileName, false);
 
         foreach (string line in lines)
+        {
             Debug.Log(line);
-
+        }
         yield return null;
     }
 }
