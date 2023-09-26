@@ -1,16 +1,16 @@
-﻿Narrator: “You decide to head into the kitchen for a quick snack…”
+﻿Narrator: "You decide to head into the kitchen for a quick snack.." playSong("Intro Song", -v, 1)
 
-Narrator: “You find a half eaten bag of chips and a bag of bread rolls”
+Narrator: "You find a half eaten bag of chips and a bag of bread rolls"
 
-Narrator: “You really should go to the store”
+Narrator: "You really should go to the store"
 
-Narrator: “Using your incredible cooking skills, you put the chips in the bread and topped it off with buffalo sauce”
+Narrator: "Using your incredible cooking skills, you put the chips in the bread and topped it off with buffalo sauce"
 
-Narrator: “It turns out to be not the worst thing you’ve eaten! You earn +1 Smarts”
+Narrator: "It turns out to be not the worst thing you’ve eaten! You earn +1 Smarts"
 
 
 
-Narrator: “You spot Luke out of the corner of your eye, seemingly yelling at something… Is that smoke?”
+Narrator: "You spot Luke out of the corner of your eye, seemingly yelling at something… Is that smoke?"
 
 Luke: "Dammit, Sunny! I told you to add water to it!"
 

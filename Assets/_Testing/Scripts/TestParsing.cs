@@ -7,18 +7,26 @@ namespace Testing
 {
     public class TestParsing : MonoBehaviour
     {
+        [SerializeField] private TextAsset file;
+
         // Start is called before the first frame update
         void Start()
         {
-            string line = "Speaker \"Dialogue Goes here!!!!\" Command(arguments here)";
-
-            DialogueParser.Parse(line);
+            SendFileToParse();
         }
 
-        // Update is called once per frame
-        void Update()
+        
+        void SendFileToParse()
         {
-            
+            List<string> lines = FileManager.ReadTextAsset("L_S");
+
+            foreach(string line in lines)
+            {
+                if (line == string.Empty)
+                    continue;
+
+                Dialogue_Line dL = DialogueParser.Parse(line);
+            }
         }
     }
 }

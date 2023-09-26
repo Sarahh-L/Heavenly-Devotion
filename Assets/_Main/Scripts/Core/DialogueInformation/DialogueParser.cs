@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using Testing;
 
 namespace Dialogue
 {
@@ -9,15 +10,16 @@ namespace Dialogue
     {
 
         // a word of any length so long as it is not proceeded by a white space
-        private const string commandRegexPattern = "\\w*[*\\s]\\(";   // \w identifies word character - * allows for any character, any time - [*\s] removes whitespace
+        private const string commandRegexPattern = "\\w*[*\\s]\\(";   // \w identifies word character  - * allows for any character, any time - [*\s] removes whitespace
 
         public static Dialogue_Line Parse(string rawLine)
         {
-            Debug.Log($"parsing line - '{rawLine}'"); 
+
+            Debug.Log($"Parsing line- '{rawLine}'");
 
             (string speaker, string dialogue, string commands) = RipContent(rawLine); 
 
-            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}' \nCommands = '{commands}'");
+            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommands = '{commands}'");
 
             return new Dialogue_Line(speaker, dialogue, commands);
 
@@ -49,7 +51,7 @@ namespace Dialogue
             }
 
         // Starts dialogue after the quotation mark, ends before the last quotation
-            // Debug.Log(rawLine.Substring(dialogueStart + 1, (dialogueEnd - dialogueStart) -1 ));
+            // Debug.Log(rawLine.Substring(dialogueStart + 1 (dialogueEnd - dialogueStart) -1 ));
 
 
             // Identify Command Pattern
