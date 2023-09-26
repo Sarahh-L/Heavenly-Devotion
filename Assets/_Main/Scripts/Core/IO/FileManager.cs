@@ -37,7 +37,7 @@ public class FileManager
         TextAsset asset = Resources.Load<TextAsset>(filePath);
         if (asset = null)
         {
-            Debug.LogError($"Asset not found '{filePath}'");
+            Debug.LogError($"Asset not found: '{filePath}'");
             return null;
         }
 
@@ -50,7 +50,7 @@ public class FileManager
         using (StringReader sr = new StringReader(asset.text))
         {
             // if line available, read next line
-            while (sr.Peek() >-1)
+            while (sr.Peek() > -1)
             {
                 string line = sr.ReadLine();
                 if (includeBlankLines || !string.IsNullOrWhiteSpace(line))
@@ -59,7 +59,6 @@ public class FileManager
         }
 
         return lines;
-
    }
 
 }
