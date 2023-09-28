@@ -1,28 +1,16 @@
-﻿Test Line "This is an example of a very long line that I think would be a real hit if you knew how to write it better. Seriously - this thing could go viral. All it needs is a little spit and grit and some good luck and this will break the internet faster than you can recite every word in the english dictionary!"
+﻿Narrator "You decide to head into the kitchen for a quick snack.." playSong("Intro Song" -v 1)
 
-John "Hello World!" list(items -f long), playSong("Intro Song" -v 1)
+Narrator "You find a half eaten bag of chips and a bag of bread rolls"
 
-setScene("Classroom" -s 5.5)
+Narrator "You really should go to the store"
 
-World "Hello, \"Quote Here\" right back at you!"
+Narrator "Using your incredible cooking skills, you put the chips in the bread and topped it off with buffalo sauce"
 
-narrator "And so ended the traditional 'Hello World' conversation." PlaySong(End, -p 0.5), list(players), saveGame(1 -g all -f simple)
-
-
-
-Narrator: "You decide to head into the kitchen for a quick snack.." playSong("Intro Song" -v 1)
-
-Narrator: "You find a half eaten bag of chips and a bag of bread rolls"
-
-Narrator: "You really should go to the store"
-
-Narrator: "Using your incredible cooking skills, you put the chips in the bread and topped it off with buffalo sauce"
-
-Narrator: "It turns out to be not the worst thing you’ve eaten! You earn +1 Smarts"
+Narrator "It turns out to be not the worst thing you’ve eaten! You earn +1 Smarts"
 
 
 
-Narrator: "You spot Luke out of the corner of your eye, seemingly yelling at something… Is that smoke?"
+Narrator "You spot Luke out of the corner of your eye, seemingly yelling at something… Is that smoke?"
 
 Luke: "Dammit, Sunny! I told you to add water to it!"
 
@@ -45,6 +33,6 @@ Sunny: "I mean, after all, if your taste in food is anything like your fashion s
 
 Luke: "Why you little. . ."
 
-Narrator: "Yikes... Talk about bad timing..."
-Narrator: "Luke looks like he's about to pummel Sunny, AND your kitchen may just burn down in the process.."
-Narrator: "Maybe you should say someting to break up this little debate?"
+Narrator "Yikes... Talk about bad timing..."
+Narrator "Luke looks like he's about to pummel Sunny, AND your kitchen may just burn down in the process.."
+Narrator "Maybe you should say someting to break up this little debate?"

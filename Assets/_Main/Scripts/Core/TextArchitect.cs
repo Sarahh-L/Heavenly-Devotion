@@ -24,7 +24,7 @@ public class TextArchitect
 
 // base speed of the text- one character per second
     public float speed { get { return  baseSpeed + speedMultiplier;} set {speedMultiplier = value;} }
-    private const float baseSpeed = 1;
+    private const float baseSpeed = .2f;
     private float speedMultiplier = 1;
 
 // speeds up how fast the text moves on click- double click increases speed

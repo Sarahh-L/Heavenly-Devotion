@@ -11,6 +11,23 @@ namespace Dialogue
         private Coroutine process = null;
 
         public bool isRunning => process != null;
+
+    // constructor for conversation manager
+        private TextArchitect architect = null;
+    // keypress
+        private bool userPrompt = false;
+
+
+        public ConversationManager(TextArchitect architect)
+        {
+            this.architect = architect;
+            dialogueSystem.onUserPrompt_Next += OnUserPrompt_Next;
+        }
+
+        private void OnUserPrompt_Next()
+        {
+            userPrompt = true;
+        }
         
 
         public void StartConversation(List<string> conversation)
@@ -51,14 +68,56 @@ namespace Dialogue
 
         }
 
+    // Dialogue architect
         IEnumerator Line_RunDialogue(Dialogue_Line line)
         {
-            yield return null;
+            // Show or hide speaker name if there is one present
+            if (line.hasSpeaker)
+                dialogueSystem.ShowSpeakerName(line.speaker);
+            else    
+                dialogueSystem.HideSpeakerName();
+
+            // Build Dialogue
+            architect.Build(line.dialogue);
+
+            yield return BuildDialogue(line.dialogue);
+
+            // wait for user input
+            yield return WaitForUserInput();
+
         }
 
         IEnumerator Line_RunCommands(Dialogue_Line line)
         {
+            Debug.Log(line.commands);
             yield return null;
+        }
+
+        IEnumerator BuildDialogue(string dialogue)
+        {
+            architect.Build(dialogue);
+
+             while(architect.isBuilding)
+            {
+                if (userPrompt)
+                {
+                    if(!architect.hurryUp)
+                        architect.hurryUp = true;
+                    else
+                        architect.Stop();       // supposed to be ForceComplete() but that doesn't exist
+
+                    userPrompt = false;
+                }
+                yield return null;
+            }
+        }
+
+        IEnumerator WaitForUserInput()
+        {
+            while(!userPrompt)
+                yield return null;
+                
+            userPrompt = false;
         }
     }
 }

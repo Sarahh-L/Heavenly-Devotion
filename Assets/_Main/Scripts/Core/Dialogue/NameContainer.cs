@@ -6,23 +6,27 @@ using TMPro;
 
 // The box that holds the name on screen. part of dialogue container
 
-
-public class NameContainer : MonoBehaviour
+namespace Dialogue
 {
-    [SerializeField] private GameObject root;
-    [SerializeField] private TextMeshProUGUI nameText;
+    [System.Serializable]
 
-
-    public void Show(string nameToShow = "")
+    public class NameContainer
     {
-        root.SetActive(true);
+        [SerializeField] private GameObject root;
+        [SerializeField] private TextMeshProUGUI nameText;
 
-        if (nameToShow != string.Empty)
-            nameText.text = nameToShow;
-    }
 
-    public void Hide()
-    {
-        root.SetActive(false);
+        public void Show(string nameToShow = "")
+        {
+            root.SetActive(true);
+
+            if (nameToShow != string.Empty)
+                nameText.text = nameToShow;
+        }
+
+        public void Hide()
+        {
+            root.SetActive(false);
+        }
     }
 }

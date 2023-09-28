@@ -10,7 +10,7 @@ namespace Dialogue
     {
 
         // a word of any length so long as it is not proceeded by a white space
-        private const string commandRegexPattern = "\\w*[*\\s]\\(";   // \w identifies word character  - * allows for any character, any time - [*\s] removes whitespace
+        private const string commandRegexPattern = "\\w*[^\\s]\\(";   // \w identifies word character  - * allows for any character, any time - [*\s] removes whitespace
 
         public static Dialogue_Line Parse(string rawLine)
         {
