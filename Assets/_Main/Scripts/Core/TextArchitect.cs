@@ -91,7 +91,6 @@ public class TextArchitect
         }
 
         OnComplete();
-
     }
 
     private void OnComplete()
@@ -152,6 +151,3 @@ public class TextArchitect
         }
     }
 }
-
-
-// 46:44
