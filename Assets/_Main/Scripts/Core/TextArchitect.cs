@@ -24,7 +24,7 @@ public class TextArchitect
 
 // base speed of the text- one character per second
     public float speed { get { return  baseSpeed + speedMultiplier;} set {speedMultiplier = value;} }
-    private const float baseSpeed = .2f;
+    private const float baseSpeed = .05f;
     private float speedMultiplier = 1;
 
 // speeds up how fast the text moves on click- double click increases speed
@@ -96,7 +96,22 @@ public class TextArchitect
 
     private void OnComplete()
     {
-        buildProcess= null; 
+        buildProcess= null;
+        hurryUp = false; 
+    }
+
+// forces text to stop on double click
+    public void ForceComplete()
+    {
+        switch(buildMethod)
+        {
+            case BuildMethod.typewriter:
+                tmpro.maxVisibleCharacters = tmpro.textInfo.characterCount;
+                break;  
+        }
+
+        Stop();
+        OnComplete();
     }
 
 // prepares method to avoid glitches
@@ -137,3 +152,6 @@ public class TextArchitect
         }
     }
 }
+
+
+// 46:44

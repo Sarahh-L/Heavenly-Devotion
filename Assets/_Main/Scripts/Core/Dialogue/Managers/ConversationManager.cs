@@ -74,8 +74,6 @@ namespace Dialogue
             // Show or hide speaker name if there is one present
             if (line.hasSpeaker)
                 dialogueSystem.ShowSpeakerName(line.speaker);
-            else    
-                dialogueSystem.HideSpeakerName();
 
             // Build Dialogue
             architect.Build(line.dialogue);
@@ -87,11 +85,13 @@ namespace Dialogue
 
         }
 
+
         IEnumerator Line_RunCommands(Dialogue_Line line)
         {
             Debug.Log(line.commands);
             yield return null;
         }
+
 
         IEnumerator BuildDialogue(string dialogue)
         {
@@ -104,7 +104,7 @@ namespace Dialogue
                     if(!architect.hurryUp)
                         architect.hurryUp = true;
                     else
-                        architect.Stop();       // supposed to be ForceComplete() but that doesn't exist
+                        architect.ForceComplete();       // supposed to be ForceComplete() but that doesn't exist
 
                     userPrompt = false;
                 }

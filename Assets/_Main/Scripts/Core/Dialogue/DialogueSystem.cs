@@ -12,7 +12,11 @@ namespace Dialogue
         private ConversationManager conversationManager;
         private TextArchitect architect;
 
-        public static DialogueSystem instance;
+        public static DialogueSystem instance
+        {
+            get; 
+            private set;
+        }
 
     // keypress
         public delegate void DialogueSystemEvent();
