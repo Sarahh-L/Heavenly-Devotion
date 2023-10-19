@@ -1,20 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class _MainMenu : MonoBehaviour
+
+namespace UnityEditor.UI
 {
-    public void Play()
+    public class _MainMenu : MonoBehaviour
     {
-        LoadScene = "HeavenlyDevotion";
-        SceneManager.LoadScene(LoadScene);
-    }
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
+        void OnMouseOver()
+        {
+            Debug.Log ("hee hoo peanut");
+        }
 
-    private string LoadScene;
+        // Update is called once per frame
+        void OnMouseExit()
+        {
+            Debug.Log ("nuh uh");
+        }
+
+        public void Play()
+        {
+            LoadScene = "HeavenlyDevotion";
+            SceneManager.LoadScene(LoadScene);
+            OnMouseOver();
+        }
+
+        public void Quit()
+        {
+            Application.Quit();
+        }
+
+        private string LoadScene;
+    }
 }
