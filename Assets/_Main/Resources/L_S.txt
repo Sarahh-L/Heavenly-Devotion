@@ -1,4 +1,4 @@
-﻿Narrator "You decide to head into the kitchen for a quick snack.." playSong("Intro Song" -v 1)
+﻿Narrator "You decide to head into the kitchen for a quick snack.." 
 
 "You find a half eaten bag of chips and a bag of bread rolls"
 
