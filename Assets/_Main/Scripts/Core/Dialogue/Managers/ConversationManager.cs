@@ -88,7 +88,7 @@ namespace Dialogue
 
         IEnumerator Line_RunCommands(Dialogue_Line line)
         {
-            Debug.Log(line.commands);
+            Debug.Log(line.commandData);
             yield return null;
         }
 

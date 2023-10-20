@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Testing;
+using Unity.Collections.LowLevel.Unsafe;
 
 namespace Dialogue
 {
@@ -9,11 +9,11 @@ namespace Dialogue
     {
        public string speaker;
        public string dialogue;
-       public string commands;
+       public DL_CommandData commandData;
 
        public bool hasDialogue => dialogue != string.Empty;
 
-       public bool hasCommands => commands != string.Empty;
+       public bool hasCommands => commandData != null;
 
        public bool hasSpeaker => speaker != string.Empty;
 
@@ -22,7 +22,7 @@ namespace Dialogue
        {
             this.speaker = speaker;
             this.dialogue = dialogue;
-            this.commands = commands;
+            this.commandData = (string.IsNullOrWhiteSpace(commands) ? null : new DL_CommandData(commands));
        }
     }
 }

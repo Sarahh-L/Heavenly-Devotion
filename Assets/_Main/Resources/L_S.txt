@@ -1,12 +1,12 @@
 ﻿Narrator "You decide to head into the kitchen for a quick snack.." 
 
-"You find a half eaten bag of chips and a bag of bread rolls"
+"You find a half eaten bag of chips and a bag of bread rolls" setMood(chill)
 
 "You really should go to the store. Too bad you died the last time you tried"
 
 "Using your incredible cooking skills, you put the chips in the bread and topped it off with buffalo sauce. . ."
 
-"It turns out to be not the worst thing you’ve eaten! You earn +1 Smarts"
+"It turns out to be not the worst thing you’ve eaten! You earn +1 Smarts" (setBackground(Room 1 -i "Diagonal Lines" -s 3.5), playVoice("e_d1_v2" -v 1.5))
 
 
 
