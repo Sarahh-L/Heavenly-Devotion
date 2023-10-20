@@ -17,18 +17,18 @@ namespace Dialogue
 
             Debug.Log($"Parsing line- '{rawLine}'");
 
-            (string speaker, string dialogue, string commandData) = RipContent(rawLine); 
+            (string speaker, string dialogue, string commands) = RipContent(rawLine); 
 
-            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommands = '{commandData}'");
+            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommands = '{commands}'");
 
-            return new Dialogue_Line(speaker, dialogue, commandData);
+            return new Dialogue_Line(speaker, dialogue, commands);
 
 
         } 
 
         private static (string, string, string) RipContent(string rawLine)
         {
-            string speaker = "", dialogue = "", commandData = "";     
+            string speaker = "", dialogue = "", commands = "";     
             int dialogueStart = -1;
             int dialogueEnd = -1;
             bool isEscaped = false;   
@@ -73,16 +73,16 @@ namespace Dialogue
                 speaker = rawLine.Substring(0, dialogueStart).Trim();
                 dialogue = rawLine.Substring(dialogueStart + 1, dialogueEnd - dialogueStart -1).Replace("\\\"", "\"");  // +1 bypasses quotation mark     replaces \\ with one quote
                 if (commandStart != -1)
-                    commandData = rawLine.Substring(commandStart).Trim();
+                    commands = rawLine.Substring(commandStart).Trim();
             }
             // command
             else if (commandStart != -1 && dialogueStart > commandStart)
-                commandData = rawLine;
+                commands = rawLine;
             //speaker
             else
                 speaker = rawLine;
 
-            return (speaker, dialogue, commandData);
+            return (speaker, dialogue, commands);
        }
     }
 }

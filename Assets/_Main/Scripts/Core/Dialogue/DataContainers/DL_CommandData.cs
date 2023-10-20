@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using System.IO;
 
-
-namespace Dialogue
-{
     public class DL_CommandData
     {
 
@@ -71,4 +69,3 @@ namespace Dialogue
             return argList.ToArray();
         }
     }
-}
