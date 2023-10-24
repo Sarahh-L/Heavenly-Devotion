@@ -17,18 +17,18 @@ namespace Dialogue
 
             Debug.Log($"Parsing line- '{rawLine}'");
 
-            (string speaker, string dialogue, string commands) = RipContent(rawLine); 
+            (string speaker, string dialogue/*, string commands*/) = RipContent(rawLine); 
 
-            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommands = '{commands}'");
+            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'");
 
-            return new Dialogue_Line(speaker, dialogue, commands);
+            return new Dialogue_Line(speaker, dialogue/*, commands*/);
 
 
         } 
 
-        private static (string, string, string) RipContent(string rawLine)
+        private static (string, string/*, string*/) RipContent(string rawLine)
         {
-            string speaker = "", dialogue = "", commands = "";     
+            string speaker = "", dialogue = ""/*, commands = ""*/;     
             int dialogueStart = -1;
             int dialogueEnd = -1;
             bool isEscaped = false;   
@@ -63,7 +63,7 @@ namespace Dialogue
                 commandStart = match.Index;
                 
                 if (dialogueStart == -1 && dialogueEnd == -1)
-                    return ("", "", rawLine.Trim());
+                    return ("", ""/*, rawLine.Trim()*/);
             }
 
         // If we get here- either have a dialogue or a multi-word argument in a commant. Differentiate command and dialogue.
@@ -72,17 +72,17 @@ namespace Dialogue
                 //valid dialogue
                 speaker = rawLine.Substring(0, dialogueStart).Trim();
                 dialogue = rawLine.Substring(dialogueStart + 1, dialogueEnd - dialogueStart -1).Replace("\\\"", "\"");  // +1 bypasses quotation mark     replaces \\ with one quote
-                if (commandStart != -1)
-                    commands = rawLine.Substring(commandStart).Trim();
+                //if (commandStart != -1)
+                    //commands = rawLine.Substring(commandStart).Trim();
             }
             // command
-            else if (commandStart != -1 && dialogueStart > commandStart)
-                commands = rawLine;
+            //else if (commandStart != -1 && dialogueStart > commandStart)
+                //commands = rawLine;
             //speaker
             else
                 speaker = rawLine;
 
-            return (speaker, dialogue, commands);
+            return (speaker, dialogue/*, commands*/);
        }
     }
 }

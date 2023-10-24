@@ -62,8 +62,8 @@ namespace Dialogue
                 if (line.hasDialogue)
                     yield return Line_RunDialogue(line);
 
-                if (line.hasCommands)
-                    yield return Line_RunCommands(line);
+                //if (line.hasCommands)
+                    //yield return Line_RunCommands(line);
             }
 
         }
@@ -86,11 +86,11 @@ namespace Dialogue
         }
 
 
-        IEnumerator Line_RunCommands(Dialogue_Line line)
+        /*IEnumerator Line_RunCommands(Dialogue_Line line)
         {
             Debug.Log(line.commandData);
             yield return null;
-        }
+        }*/
 
 
         IEnumerator BuildDialogue(string dialogue)

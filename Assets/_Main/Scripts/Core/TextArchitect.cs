@@ -2,10 +2,11 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
+namespace Dialogue{
 public class TextArchitect
 {
-    private TextMeshProUGUI tmpro_ui;
-    private TextMeshPro tmpro_world;
+    public TextMeshProUGUI tmpro_ui;
+    public TextMeshPro tmpro_world;
 
     public TMP_Text tmpro => tmpro_ui != null ? tmpro_ui : tmpro_world;
 
@@ -150,4 +151,5 @@ public class TextArchitect
             yield return new WaitForSeconds( 0.015f / speed);
         }
     }
+}
 }

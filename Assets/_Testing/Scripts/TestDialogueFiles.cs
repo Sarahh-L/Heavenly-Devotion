@@ -1,47 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Dialogue;
 
-public class TestDialogueFiles : MonoBehaviour
+namespace Testing
 {
-
-    [SerializeField] private TextAsset fileToRead = null;
-
-    // Start is called before the first frame update
-    void Start() => StartConversation();
-
-        
-    void StartConversation()
+    public class TestDialogueFiles : MonoBehaviour
     {
-        List<string> lines = FileManager.ReadTextAsset(fileToRead);
+        public string inputLine;
 
-        foreach (string line in lines)
+        void Start()
         {
-            if (string.IsNullOrWhiteSpace(line))
+            InputDecoder.CharacterList.Add(new Characters("L", "Luke", Color.white, "Luke.jpg"));
+
+            inputLine = "L \"this is some text\"";
+            InputDecoder.ParseInputLine(inputLine);
+
+            inputLine = "show background";
+            InputDecoder.ParseInputLine(inputLine);
+
+        }
+
+        void Update()
+        {
+
+        }
+
+        /*[SerializeField] private TextAsset fileToRead = null;
+        // Start is called before the first frame update
+        void Start() => StartConversation();
+        void StartConversation()
+        {
+            List<string> lines = FileManager.ReadTextAsset(fileToRead);
+            foreach (string line in lines)
             {
-                Debug.Log("Empty line or null");
-                continue;
-            }
-            Debug.Log(line);
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
 
-            Dialogue_Line dl = DialogueParser.Parse(line);
+                Dialogue_Line dl = DialogueParser.Parse(line);
 
-            if (dl.hasCommands)
-            {
-                Debug.Log($"number of lines: {dl.commandData.commands.Count}");
-
-                for (int i = 0; i < dl.commandData.commands.Count; i++)
+                /*for (int i = 0; i < dl.commandData.commands.Count; i++)
                 {
                     Debug.Log("dsfsduighg");
                     DL_CommandData.Command command = dl.commandData.commands[i];
                     Debug.Log($"Command [{i}] '{command.name}' has arguments [{string.Join(", ", command.arguments)}]");
-                }
-            }
-
-         
-        }
-
-        //DialogueSystem.instance.Say(lines);
+                }*/
+            //}
+            //DialogueSystem.instance.Say(lines);
+        //}
     }
 }
