@@ -5,7 +5,7 @@ using UnityEngine;
 namespace gdfsg{
 public class test : MonoBehaviour
 {
-    Character Luke;
+    //Character Luke;
     public GameObject characterNeutral;
     public GameObject characterMad;
     public GameObject characterHappy;
@@ -15,7 +15,7 @@ public class test : MonoBehaviour
 
     void Awake()
     {
-        Luke = Character.instance;
+        //Luke = Character.instance;
     }
 
     public void Update()

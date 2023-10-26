@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Testing;
+using stuff;
+using Unity.VisualScripting;
 
 public class Characters
 {
@@ -28,7 +30,6 @@ public class Characters
 
         CheckNames();
     }
-
     public void CheckNames()
     {
         if (this.fullName == null)

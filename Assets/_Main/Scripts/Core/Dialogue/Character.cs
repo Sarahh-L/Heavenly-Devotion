@@ -2,17 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace gdfsg{
+namespace stuff { 
     public class Character : MonoBehaviour
     {
-        public GameObject characterNeutral;
-        public GameObject characterMad;
-        public GameObject characterHappy;
-        public GameObject characterSad;
-        public GameObject characterConfused;
-        public GameObject characterMurder;
-
         public static Character instance;
+
+        //public Expressions[] expression;
+
+        //public int emotionState;
+
+        private GameObject Neutral;
+        private GameObject Mad;
+        private GameObject Happy;
+        private GameObject Sad;
+        private GameObject Confused;
+        private GameObject Murder;
+
+        public GameObject[] Luke;
+        public GameObject[] Hazel;
+        public GameObject[] Sunny;
+        public GameObject[] Tempest;
+        public GameObject[] Rot;
+        public GameObject[] Life;
+
+        //public string emotionName;
+        //internal static Characters emotion;
 
         void Awake()
         {
@@ -20,6 +34,11 @@ namespace gdfsg{
             ActiveCharacterNeutral();
         }
 
+        /*public Character (string emotionInput)
+        {
+            this.emotionName = emotionInput;
+        }*/
+        #region keycodes
         public void Update()
         {
             if (Input.GetKeyDown("d"))
@@ -47,72 +66,75 @@ namespace gdfsg{
                 ActiveCharacterMurder();
             }
         }
+        #endregion
 
-    // Neutral expression
+        #region Luke
+        // Neutral expression
         public void ActiveCharacterNeutral()
         {
-            characterNeutral.SetActive(true);
-            characterMad.SetActive(false);
-            characterHappy.SetActive(false);
-            characterSad.SetActive(false);
-            characterConfused.SetActive(false);
-            characterMurder.SetActive(false);
+            Luke[0].SetActive(true);
+            Luke[1].SetActive(false);
+            Luke[2].SetActive(false);
+            Luke[3].SetActive(false);
+            Luke[4].SetActive(false);
+            Luke[5].SetActive(false);
         }
 
     // Mad expression
         public void ActiveCharacterMad()
         {
-            characterNeutral.SetActive(false);
-            characterMad.SetActive(true);
-            characterHappy.SetActive(false);
-            characterSad.SetActive(false);
-            characterConfused.SetActive(false);
-            characterMurder.SetActive(false);
+            Luke[0].SetActive(false);
+            Luke[1].SetActive(true);
+            Luke[2].SetActive(false);
+            Luke[3].SetActive(false);
+            Luke[4].SetActive(false);
+            Luke[5].SetActive(false);
         }
 
     // Happy expression
         public void ActiveCharacterHappy()
         {
-            characterNeutral.SetActive(false);
-            characterMad.SetActive(false);
-            characterHappy.SetActive(true);
-            characterSad.SetActive(false);
-            characterConfused.SetActive(false);
-            characterMurder.SetActive(false);
+            Luke[0].SetActive(false);
+            Luke[1].SetActive(false);
+            Luke[2].SetActive(true);
+            Luke[3].SetActive(false);
+            Luke[4].SetActive(false);
+            Luke[5].SetActive(false);
         }
 
     // Sad expression
         public void ActiveCharacterSad()
         {
-            characterNeutral.SetActive(false);
-            characterMad.SetActive(false);
-            characterHappy.SetActive(false);
-            characterSad.SetActive(true);
-            characterConfused.SetActive(false);
-            characterMurder.SetActive(false);
+            Luke[0].SetActive(false);
+            Luke[1].SetActive(false);
+            Luke[2].SetActive(false);
+            Luke[3].SetActive(true);
+            Luke[4].SetActive(false);
+            Luke[5].SetActive(false);
         }
 
     // Confused expression
         public void ActiveCharacterConfused()
         {
-            characterNeutral.SetActive(false);
-            characterMad.SetActive(false);
-            characterHappy.SetActive(false);
-            characterSad.SetActive(false);
-            characterConfused.SetActive(true);
-            characterMurder.SetActive(false);
+            Luke[0].SetActive(false);
+            Luke[1].SetActive(false);
+            Luke[2].SetActive(false);
+            Luke[3].SetActive(false);
+            Luke[4].SetActive(true);
+            Luke[5].SetActive(false);
         }
 
     // Murderous intent
         public void ActiveCharacterMurder()
         {
-            characterNeutral.SetActive(false);
-            characterMad.SetActive(false);
-            characterHappy.SetActive(false);
-            characterSad.SetActive(false);
-            characterConfused.SetActive(false);
-            characterMurder.SetActive(true);
+            Luke[0].SetActive(false);
+            Luke[1].SetActive(false);
+            Luke[2].SetActive(false);
+            Luke[3].SetActive(false);
+            Luke[4].SetActive(false);
+            Luke[5].SetActive(true);
         }
+        #endregion
 
     }
 }

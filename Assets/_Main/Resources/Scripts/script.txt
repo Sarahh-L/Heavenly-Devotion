@@ -1,7 +1,9 @@
 Character(g, bruh, color=red, image=bruh)
 Character(l, Luke, color=white, image=luke)
+Character(n, gdggdfgdkfgjlrlgkj, color=white, image=gug)
 label start
 show background with Fade
+n "test lmao
 g "bruhhhh
 l "bruh please work im gonna sob
 show background with Fade

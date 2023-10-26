@@ -8,6 +8,8 @@ using UnityEngine.UI;
 using Testing;
 using Dialogue;
 using TMPro;
+using stuff;
+using UnityEngine.TextCore.Text;
 
 
 public class InputDecoder
@@ -47,6 +49,9 @@ public class InputDecoder
 
         if (args[0] == "jump")
             jumpTo(StringToParse);
+
+        //if (args[0] == "emotion")
+            //Emotion(StringToParse);
 
     }
     #endregion
@@ -170,6 +175,29 @@ public class InputDecoder
     }
     #endregion
 
+
+// here's the deal with this
+// you created a function that allows the user to see the emotion being called (like shortname)
+// you just need to call the emotions from the emotion array
+// you don't know how so ask around maybe
+
+    #region Emotion
+    /*public static List<stuff.Character> emotionList = new List<stuff.Character>();
+    public static void Emotion(string StringToParse)
+    {
+        string[] fuckit = { " ", " " };
+        string[] args = StringToParse.Split(fuckit, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (stuff.Character emotion in emotionList)
+        {
+            if (args[1] == emotion.emotionName)
+                SplitToSay(StringToParse, stuff.Character.emotion);
+        }
+
+    }*/
+
+    #endregion
+
     #region Clear screen function
 
     public static void ClearScreen()    //clrscr - Removes background image
@@ -249,7 +277,7 @@ public class InputDecoder
     public static List<string> Commands = new List<string>();
     public static void readScript(string file_path)
     {
-        TextAsset commandFile = Resources.Load(file_path) as TextAsset;
+        UnityEngine.TextAsset commandFile = Resources.Load(file_path) as UnityEngine.TextAsset;
         var commandArray = commandFile.text.Split('\n');
         foreach (var line in commandArray)
             Commands.Add(line);
