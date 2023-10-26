@@ -17,17 +17,34 @@ namespace gdfsg{
         void Awake()
         {
             instance = this;
+            ActiveCharacterNeutral();
         }
 
         public void Update()
         {
             if (Input.GetKeyDown("d"))
             {
+                ActiveCharacterNeutral();
+            }
+            if (Input.GetKeyDown("a"))
+            {
+                ActiveCharacterMad();
+            }
+            if (Input.GetKeyDown("s"))
+            {
+                ActiveCharacterConfused();
+            }
+            if (Input.GetKeyDown("e"))
+            {
                 ActiveCharacterHappy();
             }
-            else if (Input.GetKeyDown("a"))
+            if (Input.GetKeyDown("w"))
             {
                 ActiveCharacterSad();
+            }
+            if (Input.GetKeyDown("q"))
+            {
+                ActiveCharacterMurder();
             }
         }
 

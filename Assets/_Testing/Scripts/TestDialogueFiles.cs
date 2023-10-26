@@ -1,51 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Testing
 {
     public class TestDialogueFiles : MonoBehaviour
     {
-        public string inputLine;
-
         void Start()
         {
-            InputDecoder.CharacterList.Add(new Characters("L", "Luke", Color.white, "Luke.jpg"));
-
-            inputLine = "L \"this is some text\"";
-            InputDecoder.ParseInputLine(inputLine);
-
-            inputLine = "show background";
-            InputDecoder.ParseInputLine(inputLine);
-
+            InputDecoder.readScript("Scripts/script");
         }
 
         void Update()
         {
-
-        }
-
-        /*[SerializeField] private TextAsset fileToRead = null;
-        // Start is called before the first frame update
-        void Start() => StartConversation();
-        void StartConversation()
-        {
-            List<string> lines = FileManager.ReadTextAsset(fileToRead);
-            foreach (string line in lines)
+            // Hides active hierarchy
+            if (Input.GetKeyDown("h"))
             {
-                if (string.IsNullOrWhiteSpace(line))
-                    continue;
+                if (InputDecoder.InterfaceElements.activeInHierarchy)
+                    InputDecoder.InterfaceElements.SetActive(false);
+                
+                else
+                    InputDecoder.InterfaceElements.SetActive(true);
+            }
 
-                Dialogue_Line dl = DialogueParser.Parse(line);
+            if (InputDecoder.Commands[InputDecoder.CommandLine] != InputDecoder.lastCommand)
+            {
+                InputDecoder.lastCommand = InputDecoder.Commands[InputDecoder.CommandLine];
+                InputDecoder.PausedHere = false;
+                InputDecoder.ParseInputLine(InputDecoder.Commands[InputDecoder.CommandLine]);
+            }
 
-                /*for (int i = 0; i < dl.commandData.commands.Count; i++)
-                {
-                    Debug.Log("dsfsduighg");
-                    DL_CommandData.Command command = dl.commandData.commands[i];
-                    Debug.Log($"Command [{i}] '{command.name}' has arguments [{string.Join(", ", command.arguments)}]");
-                }*/
-            //}
-            //DialogueSystem.instance.Say(lines);
-        //}
+            if (!InputDecoder.PausedHere && InputDecoder.CommandLine < InputDecoder.Commands.Count - 1)
+                InputDecoder.CommandLine++;
+
+
+            if (InputDecoder.PausedHere && Input.GetKeyDown(KeyCode.Space) && InputDecoder.CommandLine < InputDecoder.Commands.Count - 1)
+                InputDecoder.CommandLine++;
+        }
     }
 }
