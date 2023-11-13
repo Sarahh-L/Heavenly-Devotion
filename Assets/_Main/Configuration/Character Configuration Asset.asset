@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde1d2ae61cd6974487522174703a367, type: 3}
+  m_Name: Character Configuration Asset
+  m_EditorClassIdentifier: 
+  characters:
+  - name: Luke
+    alias: l
+    characterType: 1
+    nameColor: {r: 0.1433175, g: 0.14297792, b: 0.4811321, a: 0}
+    dialogueColor: {r: 0.14509805, g: 0.14509805, b: 0.48235294, a: 0}
+    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    dialogueFont: {fileID: 11400000, guid: aa7e3fb6163876a42bb73cd62eebca15, type: 2}
+  - name: Narrator
+    alias: n
+    characterType: 0
+    nameColor: {r: 1, g: 1, b: 1, a: 0}
+    dialogueColor: {r: 1, g: 1, b: 1, a: 0}
+    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    dialogueFont: {fileID: 11400000, guid: aa7e3fb6163876a42bb73cd62eebca15, type: 2}
+  - name: Sunny
+    alias: s
+    characterType: 1
+    nameColor: {r: 1, g: 0.81777126, b: 0.4481132, a: 0}
+    dialogueColor: {r: 1, g: 0.81960785, b: 0.44705883, a: 0}
+    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    dialogueFont: {fileID: 11400000, guid: aa7e3fb6163876a42bb73cd62eebca15, type: 2}

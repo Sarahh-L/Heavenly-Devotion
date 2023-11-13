@@ -119,7 +119,7 @@ public class InputDecoder
         PictureInstance.transform.SetParent(canvas.transform, false);
         PictureInstance.GetComponent<ImageInstance>().FadeIn = FadeEffect;
         PictureInstance.GetComponent<Image>().color = Color.white;
-        PictureInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("Graphics/" + ImageToShow);
+        //PictureInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("Graphics/" + ImageToShow);
     }
 
     #endregion
@@ -185,8 +185,8 @@ public class InputDecoder
     /*public static List<stuff.Character> emotionList = new List<stuff.Character>();
     public static void Emotion(string StringToParse)
     {
-        string[] fuckit = { " ", " " };
-        string[] args = StringToParse.Split(fuckit, StringSplitOptions.RemoveEmptyEntries);
+        string[] emotionCommand = { " ", " " };
+        string[] args = StringToParse.Split(emotionCommand, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (stuff.Character emotion in emotionList)
         {
@@ -235,7 +235,7 @@ public class InputDecoder
         PictureInstance.transform.SetParent(canvas.transform, false);
         PictureInstance.GetComponent<ImageInstance>().FadeIn = FadeEffect;
         PictureInstance.GetComponent<Image>().color = Color.white;
-        PictureInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("Graphics/" + ImageToShow);
+        //PictureInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("Graphics/" + ImageToShow);
 
         foreach(Transform t in canvas.transform)
         {
