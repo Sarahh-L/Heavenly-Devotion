@@ -6,7 +6,7 @@ namespace stuff
 {
     public class CharSprite : Character
     {
-        public CharSprite(string name) : base(name)
+        public CharSprite(string name, CharacterConfigData config) : base(name, config)
         {
             Debug.Log($"Created Sprite Character: '{name}'");
         }

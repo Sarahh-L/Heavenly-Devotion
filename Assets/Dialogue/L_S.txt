@@ -1,0 +1,38 @@
+﻿Narrator "You decide to head into the kitchen for a quick snack.." 
+show background with Fade
+"You find a half eaten bag of chips and a bag of bread rolls"
+
+"You really should go to the store. Too bad you died the last time you tried"
+
+"Using your incredible cooking skills, you put the chips in the bread and topped it off with buffalo sauce. . ."
+
+"It turns out to be not the worst thing you’ve eaten! You earn +1 Smarts"
+
+
+
+Narrator "You spot Luke out of the corner of your eye, seemingly yelling at something… Is that smoke?"
+
+Luke "Dammit, Sunny! I told you to add water to it!"
+
+Sunny "And how was I supposed to know you needed water to make noodles?!"
+
+Luke "YOU ARE MEANT TO READ THE INSTRUCTIONS."
+"You know... /THE ONES ON THE SIDE OF THE BOX/."
+
+Sunny "Psh! Those are for amateurs! I’m a professional, and besides, I like my food a little burnt!"
+
+Luke "It is far from burnt- it’s charred, you /idiot/."
+
+Sunny "Charred, schmarred, all I know is that it tastes like perfection!"
+"You, dear boy, simply have horrible taste!"
+
+Luke "...Excuse you?"
+
+Sunny "You heard me! Why, I bet you couldn’t tell the difference between cow manure and a fresh apple pie!"
+"I mean, after all, if your taste in food is anything like your fashion sense, you have no say in what is acceptable."
+
+Luke "Why you little. . ."
+
+Narrator "Yikes... Talk about bad timing..."
+"Luke looks like he's about to pummel Sunny, AND your kitchen may just burn down in the process.."
+"Maybe you should say someting to break up this little debate?"

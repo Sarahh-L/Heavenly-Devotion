@@ -1,3 +1,4 @@
+using Dialogue;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,37 +9,54 @@ using UnityEngine.UIElements;
 namespace Testing
 {
     public class TestDialogueFiles : MonoBehaviour
-    {
-        void Start()
+    { 
+
+        [SerializeField] private TextAsset fileToRead = null;
+        /*void Start()
         {
-            InputDecoder.readScript("Scripts/script");
+
+            //InputDecoder.readScript("Scripts/script");
         }
 
         void Update()
         {
-            // Hides active hierarchy
-            if (Input.GetKeyDown("h"))
-            {
-                if (InputDecoder.InterfaceElements.activeInHierarchy)
-                    InputDecoder.InterfaceElements.SetActive(false);
-                
-                else
-                    InputDecoder.InterfaceElements.SetActive(true);
-            }
+            /* // Hides active hierarchy
+             if (Input.GetKeyDown("h"))
+             {
+                 if (InputDecoder.InterfaceElements.activeInHierarchy)
+                     InputDecoder.InterfaceElements.SetActive(false);
 
-            if (InputDecoder.Commands[InputDecoder.CommandLine] != InputDecoder.lastCommand)
-            {
-                InputDecoder.lastCommand = InputDecoder.Commands[InputDecoder.CommandLine];
-                InputDecoder.PausedHere = false;
-                InputDecoder.ParseInputLine(InputDecoder.Commands[InputDecoder.CommandLine]);
-            }
+                 else
+                     InputDecoder.InterfaceElements.SetActive(true);
+             }
 
-            if (!InputDecoder.PausedHere && InputDecoder.CommandLine < InputDecoder.Commands.Count - 1)
-                InputDecoder.CommandLine++;
+             if (InputDecoder.Commands[InputDecoder.CommandLine] != InputDecoder.lastCommand)
+             {
+                 InputDecoder.lastCommand = InputDecoder.Commands[InputDecoder.CommandLine];
+                 InputDecoder.PausedHere = false;
+                 InputDecoder.ParseInputLine(InputDecoder.Commands[InputDecoder.CommandLine]);
+             }
+
+             if (!InputDecoder.PausedHere && InputDecoder.CommandLine < InputDecoder.Commands.Count - 1)
+                 InputDecoder.CommandLine++;
 
 
-            if (InputDecoder.PausedHere && Input.GetKeyDown(KeyCode.Space) && InputDecoder.CommandLine < InputDecoder.Commands.Count - 1)
-                InputDecoder.CommandLine++;
+             if (InputDecoder.PausedHere && Input.GetKeyDown(KeyCode.Space) && InputDecoder.CommandLine < InputDecoder.Commands.Count - 1)
+                 InputDecoder.CommandLine++;
+         
+        }*/
+
+        void Start()
+        {
+            StartConversation();
+        }
+
+
+        void StartConversation()
+        {
+            List<string> lines = FileManager.ReadTextAsset(fileToRead);
+
+            DialogueSystem.instance.Say(lines);
         }
     }
 }

@@ -20,18 +20,18 @@ public class InputDecoder
         string withOutTabs = StringToParse.Replace("\t", "");
         StringToParse = withOutTabs;
 
-        if (StringToParse.StartsWith("\""))
+        /*if (StringToParse.StartsWith("\""))
         {
             Say(StringToParse);
-        }
+        }*/
 
         string[] SeparatingString = { " ", "'", "\"", "(", ")" };
         string[] args = StringToParse.Split(SeparatingString, StringSplitOptions.RemoveEmptyEntries);
-        foreach (Characters characters in CharacterList)
+        /*foreach (Characters characters in CharacterList)
         {
             if (args[0] == characters.shortName)
                 SplitToSay(StringToParse, characters);
-        }
+        }*/
         #endregion
 
         #region Commands
@@ -41,8 +41,8 @@ public class InputDecoder
         if (args[0] == "clrscr")
             ClearScreen();
 
-        if (args[0] == "Character")
-            CreateNewCharacter(StringToParse);
+        //if (args[0] == "Character")
+        //CreateNewCharacter(StringToParse);
 
         if (args[0] == "screen")
             ScreenClear(StringToParse);
@@ -51,13 +51,13 @@ public class InputDecoder
             jumpTo(StringToParse);
 
         //if (args[0] == "emotion")
-            //Emotion(StringToParse);
+        //Emotion(StringToParse);
 
     }
     #endregion
 
     #region Dialogue creation/spawning
-    public static void SplitToSay(string StringToParse, Characters characters)
+   /*public static void SplitToSay(string StringToParse, Characters characters)
     {
         int toQuote = StringToParse.IndexOf("\"") + 1;
         int endQuote = StringToParse.Length - 1;
@@ -82,7 +82,7 @@ public class InputDecoder
         DialogueTextObject.GetComponent<TextMeshProUGUI>().text = what;
         NameTextObject.GetComponent<TextMeshProUGUI>().text = who;
         PausedHere = true;
-    }
+    }*/
     #endregion
 
     #region Background creation/spawning
@@ -113,7 +113,7 @@ public class InputDecoder
         {
             ImageToShow = matches.Groups["ImageFileName"].ToString();
         }
-    
+
 
         GameObject PictureInstance = GameObject.Instantiate(ImageInst);
         PictureInstance.transform.SetParent(canvas.transform, false);
@@ -124,9 +124,10 @@ public class InputDecoder
 
     #endregion
 
+
     #region Character creation stuffs
 
-    public static List<Characters> CharacterList = new List<Characters>();
+    /*public static List<Characters> CharacterList = new List<Characters>();
     public static void CreateNewCharacter(string StringToParse)
     {
         string newCharacterShortName = null;
@@ -172,14 +173,14 @@ public class InputDecoder
         }
 
         CharacterList.Add(new Characters(newCharacterShortName, newCharacterFullName, newCharacterColor, newCharacterSideImage));
-    }
+    }*/
     #endregion
 
 
-// here's the deal with this
-// you created a function that allows the user to see the emotion being called (like shortname)
-// you just need to call the emotions from the emotion array
-// you don't know how so ask around maybe
+    // here's the deal with this
+    // you created a function that allows the user to see the emotion being called (like shortname)
+    // you just need to call the emotions from the emotion array
+    // you don't know how so ask around maybe
 
     #region Emotion
     /*public static List<stuff.Character> emotionList = new List<stuff.Character>();
@@ -204,8 +205,8 @@ public class InputDecoder
     {
         foreach (Transform t in canvas.transform)
             MonoBehaviour.Destroy(t.gameObject);
-        
-        InterfaceElements.SetActive(false);
+
+        //InterfaceElements.SetActive(false);
     }
 
     public static void ScreenClear(string StringToParse)
@@ -237,12 +238,12 @@ public class InputDecoder
         PictureInstance.GetComponent<Image>().color = Color.white;
         //PictureInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("Graphics/" + ImageToShow);
 
-        foreach(Transform t in canvas.transform)
+        foreach (Transform t in canvas.transform)
         {
             if (t != PictureInstance.transform)
                 MonoBehaviour.Destroy(t.gameObject, 3f);
 
-            InterfaceElements.SetActive(false);
+            //InterfaceElements.SetActive(false);
         }
     }
     #endregion
@@ -265,7 +266,7 @@ public class InputDecoder
             if (l.LabelName == tempStringSplit[1])
             {
                 CommandLine = l.LabelIndex;
-                PausedHere = false;
+                //PausedHere = false;
             }
         }
     }
@@ -275,14 +276,14 @@ public class InputDecoder
     #region LoadingScript
 
     public static List<string> Commands = new List<string>();
-    public static void readScript(string file_path)
+    /*public static void readScript(string file_path)
     {
         UnityEngine.TextAsset commandFile = Resources.Load(file_path) as UnityEngine.TextAsset;
         var commandArray = commandFile.text.Split('\n');
         foreach (var line in commandArray)
             Commands.Add(line);
 
-        for (int x = 0; x <Commands.Count; x++)
+        for (int x = 0; x < Commands.Count; x++)
         {
             if (Commands[x].StartsWith("label"))
             {
@@ -291,8 +292,24 @@ public class InputDecoder
                 Debug.Log("Label created" + x);
             }
         }
+    }*/
+
+    public static void ReadTextAsset(UnityEngine.TextAsset asset, bool includeBlankLines = true)
+    {
+        List<string> Commands = new List<string>();
+        using (StringReader sr = new StringReader(asset.text))
+        {
+            // if line available, read next line
+            while (sr.Peek() > -1)
+            {
+                string line = sr.ReadLine();
+                if (includeBlankLines || !string.IsNullOrWhiteSpace(line))
+                {
+                    Commands.Add(line);
+                }
+            }
+        }
     }
 
-
-    #endregion
-}
+        #endregion
+    }

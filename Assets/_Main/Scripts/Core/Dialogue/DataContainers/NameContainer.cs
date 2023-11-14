@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEditor.Rendering;
 
 // The box that holds the name on screen. part of dialogue container
 
@@ -28,5 +28,8 @@ namespace Dialogue
         {
             root.SetActive(false);
         }
+
+        public void SetNameColor(Color color) => nameText.color = color;
+        public void SetNameFont(TMP_FontAsset font) => nameText.font = font;
     }
 }

@@ -17,6 +17,22 @@ namespace stuff
             instance = this;
         }
 
+        public CharacterConfigData GetCharacterConfig(string characterName)
+        {
+            return config.GetConfig(characterName);
+        }
+
+        public Character GetCharacter(string characterName, bool createIfDoesNotExist = false)
+        {
+            if (characters.ContainsKey(characterName.ToLower()))
+                return characters[characterName.ToLower()];
+
+            else if (createIfDoesNotExist) 
+                return CreateCharacter(characterName);
+
+            return null;
+        }
+
         public Character CreateCharacter(string characterName)
         {
             if (characters.ContainsKey(characterName.ToLower()))
@@ -51,10 +67,10 @@ namespace stuff
             CharacterConfigData config = info.config;
 
             if (config.characterType == Character.CharacterType.Text)
-                return new CharText(info.name);
+                return new CharText(info.name, config);
 
             if (config.characterType == Character.CharacterType.Sprite || config.characterType == Character.CharacterType.SpriteSheet)
-                return new CharSprite(info.name);
+                return new CharSprite(info.name, config);
 
             return null;
         }
