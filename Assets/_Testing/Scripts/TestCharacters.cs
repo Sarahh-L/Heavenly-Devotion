@@ -8,7 +8,8 @@ namespace Testing
 {
     public class TestCharacters : MonoBehaviour
     {
-        // Start is called before the first frame update
+
+        /*// Start is called before the first frame update
         void Start()
         {
             StartCoroutine(Test());
@@ -17,9 +18,7 @@ namespace Testing
         IEnumerator Test()
         {
             Character Luke = CharacterManager.instance.CreateCharacter("Luke");
-            Character Narrator = CharacterManager.instance.CreateCharacter("Narrator");
             Character Bruh = CharacterManager.instance.CreateCharacter("Bruh");
-            Character Bruh1 = CharacterManager.instance.CreateCharacter("Bruh");
 
             List<string> lines = new List<string>()
             {
@@ -40,10 +39,11 @@ namespace Testing
         }
 
 
+
         // Update is called once per frame
         void Update()
         {
 
-        }
+        }*/
     }
 }

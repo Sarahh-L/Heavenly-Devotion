@@ -40,11 +40,11 @@ namespace Dialogue
                 DestroyImmediate(gameObject);
         }
 
-        bool _initialized = false;
+        bool initialized = false;
 
         private void Initialize()
         {
-            if (_initialized)
+            if (initialized)
                 return;
 
             architect = new TextArchitect(dialogueContainer.dialogueText);

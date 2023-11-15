@@ -1,4 +1,14 @@
-﻿Narrator "You decide to head into the kitchen for a quick snack.." 
+﻿Luke as ??? "joe mama"
+
+show guh with fade
+
+Luke as ??? at 1:0 "joe mama"
+
+Luke at 0.5:0.5 as Man "joe mama"
+
+Luke as ??? [0:Angle1, 1:happy] at 0 "joe mama"
+
+Narrator "You decide to head into the kitchen for a quick snack.." 
 show background with Fade
 "You find a half eaten bag of chips and a bag of bread rolls"
 

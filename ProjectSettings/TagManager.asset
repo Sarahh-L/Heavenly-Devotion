@@ -41,12 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BackgroundImages
-    uniqueID: 2671874479
-    locked: 0
-  - name: Sprite
-    uniqueID: 4171605333
-    locked: 0
-  - name: UI_Elements
-    uniqueID: 1072398419
+  - name: BackgroundLayers
+    uniqueID: 4217311083
     locked: 0

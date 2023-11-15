@@ -20,10 +20,10 @@ public class InputDecoder
         string withOutTabs = StringToParse.Replace("\t", "");
         StringToParse = withOutTabs;
 
-        /*if (StringToParse.StartsWith("\""))
+        if (StringToParse.StartsWith("\""))
         {
             Say(StringToParse);
-        }*/
+        }
 
         string[] SeparatingString = { " ", "'", "\"", "(", ")" };
         string[] args = StringToParse.Split(SeparatingString, StringSplitOptions.RemoveEmptyEntries);
@@ -57,7 +57,7 @@ public class InputDecoder
     #endregion
 
     #region Dialogue creation/spawning
-   /*public static void SplitToSay(string StringToParse, Characters characters)
+   public static void SplitToSay(string StringToParse, Characters characters)
     {
         int toQuote = StringToParse.IndexOf("\"") + 1;
         int endQuote = StringToParse.Length - 1;
@@ -65,29 +65,30 @@ public class InputDecoder
         Say(characters.fullName, StringToOutput);
     }
 
-    public static GameObject InterfaceElements = GameObject.Find("UI_Elements");
-    public static GameObject DialogueTextObject = GameObject.Find("DialogueText");
-    public static GameObject NameTextObject = GameObject.Find("NameText");
+    //public static GameObject InterfaceElements = GameObject.Find("UI_Elements");
+    //public static GameObject DialogueTextObject = GameObject.Find("DialogueText");
+    //public static GameObject NameTextObject = GameObject.Find("NameText");
     public static bool PausedHere = false;
 
     public static void Say(string what)
     {
-        if (!InterfaceElements.activeInHierarchy) InterfaceElements.SetActive(true);
-        DialogueTextObject.GetComponent<TextMeshProUGUI>().text = what;
+        //if (!InterfaceElements.activeInHierarchy) InterfaceElements.SetActive(true);
+        //DialogueTextObject.GetComponent<TextMeshProUGUI>().text = what;
         PausedHere = true;
     }
     public static void Say(string who, string what)
     {
-        if (!InterfaceElements.activeInHierarchy) InterfaceElements.SetActive(true);
-        DialogueTextObject.GetComponent<TextMeshProUGUI>().text = what;
-        NameTextObject.GetComponent<TextMeshProUGUI>().text = who;
+        //if (!InterfaceElements.activeInHierarchy) InterfaceElements.SetActive(true);
+        //DialogueTextObject.GetComponent<TextMeshProUGUI>().text = what;
+        //NameTextObject.GetComponent<TextMeshProUGUI>().text = who;
         PausedHere = true;
-    }*/
+    }
     #endregion
 
     #region Background creation/spawning
     // defines and finds background image
     private static GameObject Background = GameObject.Find("Background");
+    private static Image BackgroundImage = Background.GetComponent<Image>();
 
     // objects created for transition effect
     private static GameObject canvas = GameObject.Find("Transition");
@@ -119,7 +120,7 @@ public class InputDecoder
         PictureInstance.transform.SetParent(canvas.transform, false);
         PictureInstance.GetComponent<ImageInstance>().FadeIn = FadeEffect;
         PictureInstance.GetComponent<Image>().color = Color.white;
-        //PictureInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("Graphics/" + ImageToShow);
+        PictureInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("Graphics/" + ImageToShow);
     }
 
     #endregion
@@ -236,7 +237,7 @@ public class InputDecoder
         PictureInstance.transform.SetParent(canvas.transform, false);
         PictureInstance.GetComponent<ImageInstance>().FadeIn = FadeEffect;
         PictureInstance.GetComponent<Image>().color = Color.white;
-        //PictureInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("Graphics/" + ImageToShow);
+        PictureInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("Graphics/" + ImageToShow);
 
         foreach (Transform t in canvas.transform)
         {
@@ -276,14 +277,14 @@ public class InputDecoder
     #region LoadingScript
 
     public static List<string> Commands = new List<string>();
-    /*public static void readScript(string file_path)
+    public static void readScript(UnityEngine.TextAsset asset)
     {
-        UnityEngine.TextAsset commandFile = Resources.Load(file_path) as UnityEngine.TextAsset;
-        var commandArray = commandFile.text.Split('\n');
-        foreach (var line in commandArray)
-            Commands.Add(line);
+        UnityEngine.TextAsset commandFile = Resources.Load(asset.text) as UnityEngine.TextAsset;
+        //var commandArray = commandFile.text.Split('\n');
+       // foreach (var line in commandArray)
+           // Commands.Add(line);
 
-        for (int x = 0; x < Commands.Count; x++)
+        /*for (int x = 0; x < Commands.Count; x++)
         {
             if (Commands[x].StartsWith("label"))
             {
@@ -291,12 +292,12 @@ public class InputDecoder
                 labels.Add(new Label(labelSplit[1], x));
                 Debug.Log("Label created" + x);
             }
-        }
-    }*/
+        }*/
+    }
 
-    public static void ReadTextAsset(UnityEngine.TextAsset asset, bool includeBlankLines = true)
+    /*public static List<string> ReadTextAsset(TextAsset asset, bool includeBlankLines = true)
     {
-        List<string> Commands = new List<string>();
+        List<string> lines = new List<string>();
         using (StringReader sr = new StringReader(asset.text))
         {
             // if line available, read next line
@@ -305,11 +306,13 @@ public class InputDecoder
                 string line = sr.ReadLine();
                 if (includeBlankLines || !string.IsNullOrWhiteSpace(line))
                 {
-                    Commands.Add(line);
+                    lines.Add(line);
                 }
             }
         }
-    }
 
-        #endregion
-    }
+        return lines;
+    }*/
+
+    #endregion
+}
