@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using stuff;
 using Dialogue;
+using TMPro;
 
 namespace Testing
 {
     public class TestCharacters : MonoBehaviour
     {
+
+        public TMP_FontAsset tempFont;
 
         // Start is called before the first frame update
         void Start()
@@ -18,7 +21,7 @@ namespace Testing
         IEnumerator Test()
         {
             Character Luke = CharacterManager.instance.CreateCharacter("Luke");
-            Character Bruh = CharacterManager.instance.CreateCharacter("Bruh");
+            Character Sunny = CharacterManager.instance.CreateCharacter("Sunny");
 
             List<string> lines = new List<string>()
             {
@@ -29,13 +32,20 @@ namespace Testing
 
             yield return Luke.Say(lines);
 
+            Luke.SetDialogueColor(Color.red);
+            Luke.SetNameColor(Color.green);
+            Luke.SetNameFont(tempFont);
+            Luke.SetDialogueFont(tempFont);
+
+            yield return Luke.Say(lines);
+
             lines = new List<string>()
             {
                 "I am sunny",
                 "guh"
             };
 
-            yield return Bruh.Say(lines);
+            yield return Sunny.Say(lines);
         }
 
 

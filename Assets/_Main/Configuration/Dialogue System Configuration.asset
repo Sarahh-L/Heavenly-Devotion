@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterConfigurationAsset: {fileID: 11400000, guid: 1d7c7ff0a09039745bfc84d2efe7544d,
     type: 2}
-  defaultTextColor: {r: 1, g: 1, b: 1, a: 1}
+  defaultTextColor: {r: 0.754717, g: 0.16731933, b: 0.16731933, a: 1}
   defaultFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
