@@ -15,7 +15,7 @@ namespace Testing
         void Start()
         {
             StartConversation();
-            InputDecoder.readScript(fileToRead);
+            //InputDecoder.readScript(fileToRead);
         }
 
         void Update()
@@ -68,6 +68,7 @@ namespace Testing
                 }
             
             }*/
+
 
             DialogueSystem.instance.Say(lines);
         }

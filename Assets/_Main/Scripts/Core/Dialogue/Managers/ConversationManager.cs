@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using stuff;
 
 namespace Dialogue
 {
@@ -78,9 +79,7 @@ namespace Dialogue
                 dialogueSystem.ShowSpeakerName(line.speaker.displayName);
 
             // Build Dialogue
-            architect.Build(line.dialogue);
-
-            yield return BuildDialogue(line.dialogue);
+            yield return BuildLineSegments(line.dialogue);
 
             // wait for user input
             yield return WaitForUserInput();
@@ -94,12 +93,43 @@ namespace Dialogue
             yield return null;
         }*/
 
-
-        IEnumerator BuildDialogue(string dialogue)
+        IEnumerator BuildLineSegments(DL_DialogueData line)
         {
-            architect.Build(dialogue);
+            for (int i = 0; i < line.segments.Count; i++)
+            {
+                DL_DialogueData.Dialogue_Segment segment = line.segments[i];
 
-             while(architect.isBuilding)
+                yield return WaitForDialogueSegmentSignalToBeTriggered(segment);
+
+                yield return BuildDialogue(segment.dialogue, segment.appendText);
+            }
+        }
+
+        IEnumerator WaitForDialogueSegmentSignalToBeTriggered(DL_DialogueData.Dialogue_Segment segment)
+        {
+            switch(segment.startSignal)
+            {
+                case DL_DialogueData.Dialogue_Segment.StartSignal.A:
+                    yield return WaitForUserInput();
+                    break;
+                case DL_DialogueData.Dialogue_Segment.StartSignal.WA:
+                    yield return new WaitForSeconds(segment.signalDelay);
+                    break;
+            }
+        }
+
+
+        IEnumerator BuildDialogue(string dialogue, bool append = false)
+        {
+            // build dialogue
+            if (!append)
+                architect.Build(dialogue);
+
+            else
+                architect.Append(dialogue);
+
+            // wait for dialogue to complete
+            while(architect.isBuilding)
             {
                 if (userPrompt)
                 {

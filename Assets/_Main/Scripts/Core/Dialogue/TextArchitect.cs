@@ -2,7 +2,8 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
-namespace Dialogue{
+namespace Dialogue
+{
 public class TextArchitect
 {
     public TextMeshProUGUI tmpro_ui;

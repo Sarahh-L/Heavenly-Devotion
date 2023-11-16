@@ -25,9 +25,8 @@ namespace stuff
             this.config = config;
         }
 
-
         // makes dialogue a list
-        public Coroutine Say(string dialogue) => Say(new List<string> { dialogue });
+        public Coroutine Say(string dialogue) => Say(new List<string> {dialogue});
 
         public Coroutine Say(List<string> dialogue)
         {
@@ -43,61 +42,5 @@ namespace stuff
             Sprite,
             SpriteSheet
         }
-
-
-       /* public static Character instance;
-
-        //public Expressions[] expression;
-
-        //public int emotionState;
-
-        public GameObject[] characters;
-
-
-        //public string emotionName;
-        //internal static Characters emotion;
-
-        /*public Character (string emotionInput)
-        {
-            this.emotionName = emotionInput;
-        }
-        public void Start()
-        {
-            Debug.Log("your mom");
-            ActiveCharacter();
-        }
-
-     public void ActiveCharacter()
-        {
-            Debug.Log(":)");
-            if (Input.GetKeyDown("p"))
-            {
-                characters[0].SetActive(true);      // Luke
-                Debug.Log("Luke");
-            }
-            if (Input.GetKeyDown("o"))
-            {
-                characters[1].SetActive(true);      // Sunny
-                Debug.Log("Sunny");
-            }
-            if (Input.GetKeyDown("i"))
-            {
-                characters[2].SetActive(true);      // Hazel
-                Debug.Log("hazel");
-            }
-            if (Input.GetKeyDown("4"))
-            {
-                characters[3].SetActive(true);
-            }
-            if (Input.GetKeyDown("5"))
-            {
-                characters[4].SetActive(true);
-            }
-            if (Input.GetKeyDown("6"))
-            {
-                characters[5].SetActive(true);
-            }
-        }
-       */
     }
 }

@@ -24,7 +24,6 @@ namespace stuff
         {
             CharacterConfigData result = new CharacterConfigData();
 
-
             result.name = name;
             result.alias = alias;
             result.characterType = characterType;
@@ -47,8 +46,7 @@ namespace stuff
             get
             {
                 CharacterConfigData result = new CharacterConfigData();
-
-
+ 
                 result.name = "";
                 result.alias = "";
                 result.characterType = Character.CharacterType.Text;
