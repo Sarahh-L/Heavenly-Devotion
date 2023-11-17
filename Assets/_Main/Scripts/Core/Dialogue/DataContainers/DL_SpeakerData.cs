@@ -1,21 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEditor.Profiling;
 
-
-
+namespace Dialogue
+{
     public class DL_SpeakerData
     {
         public string name, castName;
+        public Vector2 castPosition;
 
         // name that will display in the dialogue box to show who is speaking
         public string displayName => (castName != string.Empty ? castName : name);
-
-        public Vector2 castPosition;
-        public List <(int layer, string expression)> CastExpressions { get; set; }
+        public List<(int layer, string expression)> CastExpressions { get; set; }
 
         private const string NameCastID = " as ";
         private const string PositionCastID = " at ";
@@ -26,23 +23,23 @@ using UnityEditor.Profiling;
 
         public DL_SpeakerData(string rawSpeaker)
         {
-            string pattern = @$"{NameCastID}|{PositionCastID}|{ExpressionCastID.Insert(ExpressionCastID.Length-1, @"\")}";
+            string pattern = @$"{NameCastID}|{PositionCastID}|{ExpressionCastID.Insert(ExpressionCastID.Length - 1, @"\")}";
             MatchCollection matches = Regex.Matches(rawSpeaker, pattern);
 
-           // populate this data to avoid null references to values
+            // populate this data to avoid null references to values
             castName = "";
             castPosition = Vector2.zero;
             CastExpressions = new List<(int layer, string expression)>();
 
 
-           // if no matches, the entire line is the speaker name
+            // if no matches, the entire line is the speaker name
             if (matches.Count == 0)
             {
                 name = rawSpeaker;
                 return;
             }
 
-           // otherwise, isolate speakername from casting data
+            // otherwise, isolate speakername from casting data
             int index = matches[0].Index;
 
             name = rawSpeaker.Substring(0, index);
@@ -52,6 +49,7 @@ using UnityEditor.Profiling;
                 Match match = matches[i];
 
                 int startIndex = 0, endIndex = 0;
+
                 if (match.Value == NameCastID)
                 {
                     startIndex = match.Index + NameCastID.Length;
@@ -75,18 +73,18 @@ using UnityEditor.Profiling;
 
                 else if (match.Value == ExpressionCastID)
                 {
-                    startIndex = match.Index +ExpressionCastID.Length;
+                    startIndex = match.Index + ExpressionCastID.Length;
                     endIndex = (i < matches.Count - 1) ? matches[i + 1].Index : rawSpeaker.Length;
                     string castExp = rawSpeaker.Substring(startIndex, endIndex - (startIndex + 1));
 
                     CastExpressions = castExp.Split(ExpressionLayerJoiner)
-                        .Select(x =>
-                        {
-                            var parts = x.Trim().Split(ExpressionLayerDelimiter);
-                            return (int.Parse(parts[0]), parts[1]);
-                        }).ToList();
+                    .Select(x =>
+                    {
+                        var parts = x.Trim().Split(ExpressionLayerDelimiter);
+                        return (int.Parse(parts[0]), parts[1]);
+                    }).ToList();
                 }
             }
         }
     }
-
+}

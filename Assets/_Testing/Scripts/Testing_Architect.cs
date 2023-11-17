@@ -5,7 +5,7 @@ using Dialogue;
 
 namespace Testing
 {
-    public class Testing_Architect : MonoBehaviour
+   /* public class Testing_Architect : MonoBehaviour
     {
         DialogueSystem ds;
         TextArchitect architect;
@@ -35,5 +35,5 @@ namespace Testing
                 architect.Build(lines[Random.Range(0, lines.Length)]);
             }
         }
-    }
+    }*/
 }

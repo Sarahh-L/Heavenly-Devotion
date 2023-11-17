@@ -51,8 +51,8 @@ namespace Dialogue
                     isEscaped = false;
             }
 
-        // Starts dialogue after the quotation mark, ends before the last quotation
-           //Debug.Log(rawLine.Substring(dialogueStart + 1 (dialogueEnd - dialogueStart) -1 ));
+            // Starts dialogue after the quotation mark, ends before the last quotation
+            //Debug.Log(rawLine.Substring(dialogueStart + 1(dialogueEnd - dialogueStart) - 1));
 
 
             // Identify Command Pattern

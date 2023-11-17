@@ -66,13 +66,18 @@ namespace stuff
         {
             CharacterConfigData config = info.config;
 
-            if (config.characterType == Character.CharacterType.Text)
-                return new CharText(info.name, config);
+            switch (info.config.characterType)
+            {
+                case Character.CharacterType.Text:
+                    return new CharText(info.name, config);
 
-            if (config.characterType == Character.CharacterType.Sprite || config.characterType == Character.CharacterType.SpriteSheet)
-                return new CharSprite(info.name, config);
+                case Character.CharacterType.Sprite:
+                case Character.CharacterType.SpriteSheet:
+                    return new CharSprite(info.name, config);
 
-            return null;
+                default:
+                    return null;
+            }
         }
 
         private class CharacterInfo

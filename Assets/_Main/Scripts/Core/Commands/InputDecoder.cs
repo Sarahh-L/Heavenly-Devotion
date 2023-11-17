@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -32,9 +32,9 @@ public class InputDecoder
             if (args[0] == characters.shortName)
                 SplitToSay(StringToParse, characters);
         }*/
-        #endregion
+        //#endregion
 
-        #region Commands
+       /* #region Commands
         if (args[0] == "show")
             showImage(StringToParse);
 
@@ -175,7 +175,7 @@ public class InputDecoder
 
         CharacterList.Add(new Characters(newCharacterShortName, newCharacterFullName, newCharacterColor, newCharacterSideImage));
     }*/
-    #endregion
+    //#endregion
 
 
     // here's the deal with this
@@ -202,7 +202,7 @@ public class InputDecoder
 
     #region Clear screen function
 
-    public static void ClearScreen()    //clrscr - Removes background image
+    /*public static void ClearScreen()    //clrscr - Removes background image
     {
         foreach (Transform t in canvas.transform)
             MonoBehaviour.Destroy(t.gameObject);
@@ -293,7 +293,7 @@ public class InputDecoder
                 Debug.Log("Label created" + x);
             }
         }*/
-    }
+   // }
 
     /*public static List<string> ReadTextAsset(TextAsset asset, bool includeBlankLines = true)
     {
@@ -315,4 +315,4 @@ public class InputDecoder
     }*/
 
     #endregion
-}
+//}

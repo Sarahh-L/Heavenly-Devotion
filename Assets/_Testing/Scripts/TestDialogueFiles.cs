@@ -37,8 +37,8 @@ namespace Testing
                 // InputDecoder.ParseInputLine(InputDecoder.Commands[InputDecoder.CommandLine]);
              //}
 
-             if (!InputDecoder.PausedHere && InputDecoder.CommandLine < InputDecoder.Commands.Count - 1)
-                 InputDecoder.CommandLine++;
+            // if (!InputDecoder.PausedHere && InputDecoder.CommandLine < InputDecoder.Commands.Count - 1)
+                 //InputDecoder.CommandLine++;
 
 
              //if (InputDecoder.PausedHere && Input.GetKeyDown(KeyCode.Space) && InputDecoder.CommandLine < InputDecoder.Commands.Count - 1)

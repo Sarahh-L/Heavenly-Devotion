@@ -32,9 +32,8 @@ namespace Testing
 
             yield return Luke.Say(lines);
 
-            Luke.SetDialogueColor(Color.red);
-            Luke.SetNameColor(Color.green);
-            Luke.SetNameFont(tempFont);
+            Luke.SetNameColor(Color.red);
+            Luke.SetDialogueColor(Color.blue);
             Luke.SetDialogueFont(tempFont);
 
             yield return Luke.Say(lines);
@@ -47,8 +46,6 @@ namespace Testing
 
             yield return Sunny.Say(lines);
         }
-
-
 
         // Update is called once per frame
         void Update()

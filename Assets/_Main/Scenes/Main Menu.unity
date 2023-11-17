@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f97436eab3145449b97ef0f4e2680eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transition: {fileID: 0}
+  transition: {fileID: 1588863905}
   transitionTime: 1
 --- !u!1 &330585543
 GameObject:
@@ -2166,6 +2166,12 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!95 &1588863905 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3641421200072024371, guid: dbad13da97325454d8e20e5997f6440b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2335517176358301460}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1633433186
 GameObject:
   m_ObjectHideFlags: 0
