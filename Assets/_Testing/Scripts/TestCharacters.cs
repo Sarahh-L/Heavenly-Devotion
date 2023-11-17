@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using stuff;
-using Dialogue;
 using TMPro;
+using Dialogue;
 
 namespace Testing
 {
     public class TestCharacters : MonoBehaviour
     {
-
+        [SerializeField] private TextAsset fileToRead = null;
         public TMP_FontAsset tempFont;
 
         // Start is called before the first frame update
@@ -45,6 +45,9 @@ namespace Testing
             };
 
             yield return Sunny.Say(lines);
+
+            List<string> Lines = FileManager.ReadTextAsset(fileToRead);
+            DialogueSystem.instance.Say(Lines);
         }
 
         // Update is called once per frame
