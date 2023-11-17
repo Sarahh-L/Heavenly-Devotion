@@ -53,11 +53,12 @@ namespace stuff
 
         private CharacterInfo GetCharacterInfo(string characterName)
         {
-            CharacterInfo result = new CharacterInfo();
+            CharacterInfo result = new CharacterInfo
+            {
+                name = characterName,
 
-            result.name = characterName;
-
-            result.config = config.GetConfig(characterName);
+                config = config.GetConfig(characterName)
+            };
 
             return result;
         }
