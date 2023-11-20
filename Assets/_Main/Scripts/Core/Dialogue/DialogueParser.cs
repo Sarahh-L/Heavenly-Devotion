@@ -15,7 +15,6 @@ namespace Dialogue
 
         public static Dialogue_Line Parse(string rawLine)
         {
-
             Debug.Log($"Parsing line- '{rawLine}'");
 
             (string speaker, string dialogue/*, string commands*/) = RipContent(rawLine); 
@@ -23,13 +22,12 @@ namespace Dialogue
             Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'");
 
             return new Dialogue_Line(speaker, dialogue/*, commands*/);
-
-
         } 
 
         private static (string, string/*, string*/) RipContent(string rawLine)
         {
-            string speaker = "", dialogue = ""/*, commands = ""*/;     
+            string speaker = "", dialogue = ""/*, commands = ""*/;    
+            
             int dialogueStart = -1;
             int dialogueEnd = -1;
             bool isEscaped = false;   

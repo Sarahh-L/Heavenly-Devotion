@@ -13,24 +13,45 @@ MonoBehaviour:
   m_Name: Character Configuration Asset
   m_EditorClassIdentifier: 
   characters:
-  - name: Luke
+  - name: Alexandria
+    alias: a
+    characterType: 1
+    nameColor: {r: 0.3200237, g: 0.18178178, b: 0.4056604, a: 1}
+    dialogueColor: {r: 0.32156864, g: 0.18431373, b: 0.40784314, a: 1}
+    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+  - name: Loki
     alias: l
     characterType: 1
-    nameColor: {r: 0.1433175, g: 0.14297792, b: 0.4811321, a: 1}
-    dialogueColor: {r: 0.14509805, g: 0.14509805, b: 0.48235294, a: 1}
+    nameColor: {r: 0.30965108, g: 0.4245283, b: 0.27033642, a: 1}
+    dialogueColor: {r: 0.30980393, g: 0.42745098, b: 0.27058825, a: 1}
     nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
     dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
-  - name: Narrator
-    alias: n
-    characterType: 0
-    nameColor: {r: 1, g: 1, b: 1, a: 1}
-    dialogueColor: {r: 1, g: 1, b: 1, a: 1}
-    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
-    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
-  - name: Sunny
+  - name: Shein
     alias: s
-    characterType: 0
-    nameColor: {r: 1, g: 0.81777126, b: 0.4481132, a: 1}
-    dialogueColor: {r: 1, g: 0.81960785, b: 0.44705883, a: 1}
+    characterType: 1
+    nameColor: {r: 0.5188679, g: 0.17185418, b: 0.15419188, a: 1}
+    dialogueColor: {r: 0.52156866, g: 0.17254902, b: 0.15686275, a: 1}
+    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+  - name: Mako
+    alias: m
+    characterType: 1
+    nameColor: {r: 0.20683517, g: 0.32523358, b: 0.5283019, a: 1}
+    dialogueColor: {r: 0.20784314, g: 0.3254902, b: 0.5294118, a: 1}
+    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+  - name: Scylla
+    alias: sc
+    characterType: 1
+    nameColor: {r: 0.15312387, g: 0.16547772, b: 0.3490566, a: 1}
+    dialogueColor: {r: 0.15686275, g: 0.16862746, b: 0.3529412, a: 1}
+    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+  - name: Teevee
+    alias: t
+    characterType: 1
+    nameColor: {r: 0.3773585, g: 0.13349947, b: 0.14356324, a: 1}
+    dialogueColor: {r: 0.38039216, g: 0.13725491, b: 0.14509805, a: 1}
     nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
     dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}

@@ -74,7 +74,7 @@ namespace Dialogue
 
         public void ShowSpeakerName(string speakerName = "")
         { 
-            if (speakerName!= "Narrator")
+            if (speakerName.ToLower() != "narrator")
                 dialogueContainer.nameContainer.Show(speakerName);
             else
                 HideSpeakerName();

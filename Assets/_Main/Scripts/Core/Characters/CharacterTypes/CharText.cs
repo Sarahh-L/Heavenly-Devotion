@@ -6,7 +6,7 @@ namespace stuff
 {
     public class CharText : Character
     {
-        public CharText(string name, CharacterConfigData config) : base(name, config)
+        public CharText(string name, CharacterConfigData config) : base(name, config, prefab: null)
         {
             Debug.Log($"Created Text Character: '{name}'");
         }
