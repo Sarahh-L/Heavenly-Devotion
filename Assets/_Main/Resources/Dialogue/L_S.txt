@@ -1,10 +1,10 @@
-﻿Luke "bruh.{a} bigger bruh"
+﻿Alexandria "bruh.{a} bigger bruh"
 "this{a} actually{a} works."
 
-Sunny "this ain't gonna work....{wa 1} wait {wa 2} wait a little longer {wa 3} just a liiiitle longer {wa 4} yea"
+Teevee "this ain't gonna work....{wa 1} wait {wa 2} wait a little longer {wa 3} just a liiiitle longer {wa 4} yea"
 "crazy"
 
-Luke as ??? "joe mama {a} Luke as ??? test" 
+Loki as ??? "joe mama {a} Luke as ??? test" 
 
 Luke as ??? at 1:0 "joe mama {a} Luke as ??? at 1:0 test"
 

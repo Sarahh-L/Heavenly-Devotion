@@ -97,6 +97,27 @@ namespace stuff
             yield return null;
         }
 
+        public virtual void SetPosition(Vector2 position)
+        {
+            (Vector2 minAnchorTarget, Vector2 maxAnchorTarget) = ConvertUITargetPositionToRelativeCharacterAnchorTargets(position);
+
+            root.anchorMin = minAnchorTarget;
+            root.anchorMax = maxAnchorTarget;
+        }
+
+        protected (Vector2, Vector2) ConvertUITargetPositionToRelativeCharacterAnchorTargets(Vector2 position)
+        {
+            Vector2 padding = root.anchorMax - root.anchorMin;
+
+            float maxX = 1f - padding.x;
+            float maxY = 1f - padding.y;
+
+            Vector2 minAnchorTarget = new Vector2(maxX * position.x, maxY * position.y);
+            Vector2 maxAnchorTarget = minAnchorTarget + padding;
+
+            return (minAnchorTarget, maxAnchorTarget);
+        }
+
         // Char config data
         public enum CharacterType
         {

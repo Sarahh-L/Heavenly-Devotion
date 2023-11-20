@@ -71,8 +71,8 @@ namespace Dialogue
                 //valid dialogue
                 speaker = rawLine.Substring(0, dialogueStart).Trim();
                 dialogue = rawLine.Substring(dialogueStart + 1, dialogueEnd - dialogueStart -1).Replace("\\\"", "\"");  // +1 bypasses quotation mark     replaces \\ with one quote
-                //if (commandStart != -1)
-                    //commands = rawLine.Substring(commandStart).Trim();
+                                                                                                                        //if (commandStart != -1)
+                                                                                                                        //commands = rawLine.Substring(commandStart).Trim();
             }
             // command
             //else if (commandStart != -1 && dialogueStart > commandStart)

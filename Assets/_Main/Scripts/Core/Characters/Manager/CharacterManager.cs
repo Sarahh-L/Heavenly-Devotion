@@ -1,6 +1,7 @@
 using Dialogue;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace stuff
@@ -12,6 +13,8 @@ namespace stuff
         private Dictionary<string, Character> characters = new Dictionary<string, Character>();
 
         private CharacterConfigSO config => DialogueSystem.instance.config.characterConfigurationAsset;
+
+        private const string CharacterCastingID = " as ";
 
         private const string CharacterNameID = "<charname>";
         private string characterRootPath => $"Characters/{CharacterNameID}";
@@ -57,18 +60,19 @@ namespace stuff
             characters.Add(characterName.ToLower(), character);
 
             return character;
-
         }
 
-        private CharacterInfo GetCharacterInfo(string characterName)
+        private CharacterInfo GetCharacterInfo(string name)
         {
             CharacterInfo result = new CharacterInfo();
+            
+            string[] nameData = name.Split(CharacterCastingID, System.StringSplitOptions.RemoveEmptyEntries);
+            result.name = nameData[0];
+            result.castingName = nameData.Length > 1 ? nameData[1] : result.name;
 
-            result.name = characterName;
+            result.config = config.GetConfig(result.castingName);
 
-            result.config = config.GetConfig(characterName);
-
-            result.prefab = GetPrefabForCharacter(characterName);
+            result.prefab = GetPrefabForCharacter(result.castingName);
           
             return result;
         }
@@ -102,6 +106,8 @@ namespace stuff
         private class CharacterInfo
         {
             public string name = "";
+
+            public string castingName = "";
 
             public CharacterConfigData config = null;
 
