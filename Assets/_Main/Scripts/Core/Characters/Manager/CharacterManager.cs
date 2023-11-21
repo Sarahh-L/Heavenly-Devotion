@@ -24,7 +24,7 @@ namespace stuff
         public RectTransform characterPanel => _characterpanel;
 
 
-        public void Awake()
+        private void Awake()
         {
             instance = this;
         }

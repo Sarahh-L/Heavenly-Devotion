@@ -84,7 +84,8 @@ namespace Dialogue
 
         public Coroutine Say(string speaker, string dialogue)
         {
-            List<string> conversation = new List<string>() { $"{speaker} \"{dialogue}\""};
+            string formattedDialogue = $"{speaker}: {dialogue}"; // Separate speaker and dialogue
+            List<string> conversation = new List<string>() { formattedDialogue };
             return Say(conversation);
         }
 

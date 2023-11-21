@@ -32,12 +32,12 @@ namespace stuff
             displayName = name;
             this.config = config;
 
-            if(prefab != null)
+            if (prefab != null)
             {
                 GameObject ob = Object.Instantiate(prefab, manager.characterPanel);
                 ob.SetActive(true);
                 root = ob.GetComponent<RectTransform>();
-                animator = root.GetComponentInChildren<Animator>(); 
+                animator = root.GetComponentInChildren<Animator>();
             }
         }
 

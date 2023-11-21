@@ -8,10 +8,12 @@ namespace Dialogue
     public class DL_SpeakerData
     {
         public string name, castName;
-        public Vector2 castPosition;
 
         // name that will display in the dialogue box to show who is speaking
-        public string displayName => (castName != string.Empty ? castName : name);
+        public string displayName => castName != string.Empty ? castName : name;
+
+        public Vector2 castPosition;
+
         public List<(int layer, string expression)> CastExpressions { get; set; }
 
         private const string NameCastID = " as ";
