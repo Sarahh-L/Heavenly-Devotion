@@ -2,7 +2,9 @@ using Dialogue;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace stuff 
 {
@@ -20,8 +22,10 @@ namespace stuff
 
         // Coroutines
         protected Coroutine co_revealing, co_hiding;
+        protected Coroutine co_moving;
         public bool isRevealing => co_revealing != null;
         public bool isHiding => co_hiding != null;
+        public bool isMoving => co_moving != null;
         public virtual bool isVisible => false;
 
 
@@ -35,6 +39,7 @@ namespace stuff
             if (prefab != null)
             {
                 GameObject ob = Object.Instantiate(prefab, manager.characterPanel);
+                ob.name = manager.FormatCharacterPath(manager.characterPrefabNameFormat, name);
                 ob.SetActive(true);
                 root = ob.GetComponent<RectTransform>();
                 animator = root.GetComponentInChildren<Animator>();
@@ -99,10 +104,53 @@ namespace stuff
 
         public virtual void SetPosition(Vector2 position)
         {
+            if (root == null)
+                return;
+
             (Vector2 minAnchorTarget, Vector2 maxAnchorTarget) = ConvertUITargetPositionToRelativeCharacterAnchorTargets(position);
 
             root.anchorMin = minAnchorTarget;
             root.anchorMax = maxAnchorTarget;
+        }
+
+        public virtual Coroutine MoveToPostiion(Vector2 position, float speed = 2f, bool smooth = false)
+        {
+            if (root == null)
+                return null;
+
+            if (isMoving)
+                manager.StopCoroutine(co_moving);
+
+            co_moving = manager.StartCoroutine(MovingToPosition(position, speed, smooth));
+
+            return co_moving;
+        }
+
+        private IEnumerator MovingToPosition(Vector2 position, float speed, bool smooth)
+        {
+            (Vector2 minAnchorTarget, Vector2 maxAnchorTarget) = ConvertUITargetPositionToRelativeCharacterAnchorTargets(position);
+            Vector2 padding = root.anchorMax - root.anchorMin;
+
+            while (root.anchorMin != minAnchorTarget || root.anchorMax != maxAnchorTarget)
+            {
+                root.anchorMin = smooth ?
+                    Vector2.Lerp(root.anchorMin, minAnchorTarget, speed * Time.deltaTime)
+                    : Vector2.MoveTowards(root.anchorMin, minAnchorTarget, speed * Time.deltaTime * 0.35f);
+
+                root.anchorMax = root.anchorMin + padding;
+
+                if (smooth && Vector2.Distance(root.anchorMin, minAnchorTarget) <= 0.001f)
+                {
+                    root.anchorMin = minAnchorTarget;
+                    root.anchorMax = maxAnchorTarget;
+                    break;
+                }
+
+                yield return null;
+            }
+
+            Debug.Log("done moving");
+            co_moving = null;
         }
 
         protected (Vector2, Vector2) ConvertUITargetPositionToRelativeCharacterAnchorTargets(Vector2 position)

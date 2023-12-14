@@ -28,57 +28,37 @@ namespace Testing
             //Character Alexandria = CharacterManager.instance.CreateCharacter("Alexandria");
             //Character Teevee = CharacterManager.instance.CreateCharacter("Teevee");
 
-            Character Alexandria = CreateCharacter("guh as Alexandria");
-            Character Alexandria1 = CreateCharacter("fgusdg as Alexandria");
+            Character Alexandria = CreateCharacter("Alexandria");
+            CharSprite Teevee = CreateCharacter("Teevee") as CharSprite;
+            Character Loki = CreateCharacter("Loki");
+            Character Scylla = CreateCharacter("Scylla");
+            Character Shein = CreateCharacter("Shein");
+            Character Mako = CreateCharacter("Mako");
 
-            Alexandria1.Hide();
-            yield return new WaitForSeconds(1);
-            Alexandria.Show();
-            yield return new WaitForSeconds(2);
-            Alexandria.Hide();
-            Alexandria1.Show();
-            Alexandria.Show();
-            Alexandria.SetPosition(Vector2.one);
+            Alexandria.SetPosition(Vector2.zero);
 
-            //Teevee.SetPosition(new Vector2(0.5f, 0.5f));
+            Sprite TeeveeSprite = Teevee.GetSprite("upset");
 
-            //yield return null;
-            //Character Teevee = CharacterManager.instance.CreateCharacter("Teevee");
+            Teevee.SetSprite(TeeveeSprite, 0);
 
-           /*List<string> lines = new List<string>()
-           {
-                "Hi there!",
-                "guguifgjh",
-                "this will work"
-           };
+            yield return Teevee.Show();
+           
+            yield return Teevee.MoveToPostiion(Vector2.one, smooth: true);
+            yield return Teevee.MoveToPostiion(Vector2.zero, smooth: true);
 
-            yield return Alexandria.Say(lines);*/
+            Teevee.SetNameColor(Color.black);
+            Teevee.SetDialogueColor(Color.blue);
+            Teevee.SetDialogueFont(tempFont);
 
-            //yield return Alexandria.Say(lines);
-          
+            yield return Alexandria.Say("testing testing");
+            yield return Teevee.Say("did it work?");
+            yield return Alexandria.Say("i think so");
 
-            Alexandria1.SetNameColor(Color.black);
-            Alexandria1.SetDialogueColor(Color.blue);
-            Alexandria1.SetDialogueFont(tempFont);
-           // Teevee.SetDialogueColor(Color.yellow);
+            yield return null;
 
-            //yield return Alexandria1.Say(lines);
-         //   yield return Teevee.Say(lines);
-
-         //   Alexandria.ResetConfigurationData();
-
-          //  yield return Alexandria.Say(lines);
-
-            //lines = new List<string>()
-            //{
-              //  "I am teevee",
-             //   "guh"
-            //}
-
-           // yield return Teevee.Say(lines);
 
             List<string> Lines = FileManager.ReadTextAsset(fileToRead);
-            Alexandria.Say(Lines);
+            Teevee.Say(Lines);
         }
 
         // Update is called once per frame

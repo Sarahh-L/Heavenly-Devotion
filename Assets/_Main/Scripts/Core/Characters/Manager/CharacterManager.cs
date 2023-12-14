@@ -17,8 +17,10 @@ namespace stuff
         private const string CharacterCastingID = " as ";
 
         private const string CharacterNameID = "<charname>";
-        private string characterRootPath => $"Characters/{CharacterNameID}";
-        private string characterPrefabPath => $"{characterRootPath}/Character-[{CharacterNameID}]";
+        public string characterRootPathFormat => $"Characters/{CharacterNameID}";
+        public string characterPrefabNameFormat => $"Characters - {CharacterNameID}";
+        public string characterPrefabPathFormat => $"{characterRootPathFormat}/Character-[{CharacterNameID}]";
+
 
         [SerializeField] private RectTransform _characterpanel = null;
         public RectTransform characterPanel => _characterpanel;
@@ -62,28 +64,30 @@ namespace stuff
             return character;
         }
 
-        private CharacterInfo GetCharacterInfo(string name)
+        private CharacterInfo GetCharacterInfo(string characterName)
         {
             CharacterInfo result = new CharacterInfo();
             
-            string[] nameData = name.Split(CharacterCastingID, System.StringSplitOptions.RemoveEmptyEntries);
+            string[] nameData = characterName.Split(CharacterCastingID, System.StringSplitOptions.RemoveEmptyEntries);
             result.name = nameData[0];
             result.castingName = nameData.Length > 1 ? nameData[1] : result.name;
 
             result.config = config.GetConfig(result.castingName);
 
             result.prefab = GetPrefabForCharacter(result.castingName);
+
+            result.rootCharacterFolder = FormatCharacterPath(characterRootPathFormat, result.castingName);
           
             return result;
         }
 
         private GameObject GetPrefabForCharacter(string characterName)
         {
-            string prefabPath = FormatCharacterPath(characterPrefabPath, characterName);
+            string prefabPath = FormatCharacterPath(characterPrefabPathFormat, characterName);
             return Resources.Load<GameObject>(prefabPath);
         }
 
-        private string FormatCharacterPath (string path, string characterName) => path.Replace(CharacterNameID, characterName);
+        public string FormatCharacterPath (string path, string characterName) => path.Replace(CharacterNameID, characterName);
 
         private Character CreateCharacterFromInfo(CharacterInfo info)
         {
@@ -96,7 +100,7 @@ namespace stuff
 
                 case Character.CharacterType.Sprite:
                 case Character.CharacterType.SpriteSheet:
-                    return new CharSprite(info.name, config, info.prefab);
+                    return new CharSprite(info.name, config, info.prefab, info.rootCharacterFolder);
 
                 default:
                     return null;
@@ -106,8 +110,9 @@ namespace stuff
         private class CharacterInfo
         {
             public string name = "";
-
             public string castingName = "";
+
+            public string rootCharacterFolder = "";
 
             public CharacterConfigData config = null;
 
