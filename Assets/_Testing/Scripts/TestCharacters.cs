@@ -28,37 +28,48 @@ namespace Testing
             //Character Alexandria = CharacterManager.instance.CreateCharacter("Alexandria");
             //Character Teevee = CharacterManager.instance.CreateCharacter("Teevee");
 
-            Character Alexandria = CreateCharacter("Alexandria");
+            CharSprite Alexandria = CreateCharacter("Alexandria") as CharSprite;
             CharSprite Teevee = CreateCharacter("Teevee") as CharSprite;
-            Character Loki = CreateCharacter("Loki");
-            Character Scylla = CreateCharacter("Scylla");
-            Character Shein = CreateCharacter("Shein");
-            Character Mako = CreateCharacter("Mako");
+            //Character Loki = CreateCharacter("Loki");
+            //Character Scylla = CreateCharacter("Scylla");
+            //Character Shein = CreateCharacter("Shein");
+            //Character Mako = CreateCharacter("Mako");
 
             Alexandria.SetPosition(Vector2.zero);
+            Teevee.SetPosition(new Vector2(0.5f, 0.5f));
 
-            Sprite TeeveeSprite = Teevee.GetSprite("upset");
+            Sprite AlexandriaUpsetSprite = Alexandria.GetSprite("Alexandria - Upset");
+            Sprite AlexandriaNeutralSprite = Alexandria.GetSprite("Alexandria - Neutral");
+            Sprite AlexandriaAngrySprite = Alexandria.GetSprite("Alexandria - Angry");
+            Sprite AlexandriaHappySprite = Alexandria.GetSprite("Alexandria - Happy");
+            Sprite TeeveeNeutralSprite = Teevee.GetSprite("Teevee - Upset");
 
-            Teevee.SetSprite(TeeveeSprite, 0);
+            yield return new WaitForSeconds(1);
+            Alexandria.SetSprite(AlexandriaUpsetSprite, 0);
+            yield return Alexandria.TransitionColor(Color.red, speed: 0.3f);
+            yield return Alexandria.TransitionColor(Color.blue);
+            yield return Alexandria.TransitionColor(Color.yellow);
+            yield return Alexandria.TransitionColor(Color.white);
 
-            yield return Teevee.Show();
-           
-            yield return Teevee.MoveToPostiion(Vector2.one, smooth: true);
-            yield return Teevee.MoveToPostiion(Vector2.zero, smooth: true);
+            yield return Alexandria.MoveToPostiion(Vector2.one, smooth: true);
+            yield return Alexandria.MoveToPostiion(Vector2.zero, smooth: true);
 
-            Teevee.SetNameColor(Color.black);
-            Teevee.SetDialogueColor(Color.blue);
-            Teevee.SetDialogueFont(tempFont);
+            Alexandria.SetSprite(AlexandriaNeutralSprite, 0);
+            yield return new WaitForSeconds(2);
+            Alexandria.SetSprite(AlexandriaHappySprite, 0);
+            yield return new WaitForSeconds(2);
+            Alexandria.SetSprite(AlexandriaAngrySprite, 0);
+            Teevee.SetSprite(TeeveeNeutralSprite, 0);
 
             yield return Alexandria.Say("testing testing");
-            yield return Teevee.Say("did it work?");
+            yield return Alexandria.Say("did it work?");
             yield return Alexandria.Say("i think so");
 
             yield return null;
 
 
             List<string> Lines = FileManager.ReadTextAsset(fileToRead);
-            Teevee.Say(Lines);
+            Alexandria.Say(Lines);
         }
 
         // Update is called once per frame

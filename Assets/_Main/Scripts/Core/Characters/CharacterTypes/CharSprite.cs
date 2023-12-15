@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,9 +16,10 @@ namespace stuff
 
         private string artAssetsDirectory = "";
 
+        public override bool isVisible => isRevealing || rootCG.alpha == 1 ;
         public CharSprite(string name, CharacterConfigData config, GameObject prefab, string rootAssetsFolder) : base(name, config, prefab)
         {
-            rootCG.alpha = 0;
+            rootCG.alpha = Enable_on_Start ? 1 : 0;
 
             artAssetsDirectory = rootAssetsFolder + "/Images";
 
@@ -56,13 +58,18 @@ namespace stuff
         public Sprite GetSprite(string spriteName)
         {
             if (config.characterType == CharacterType.SpriteSheet)
-            {
                 return null;
-            }
+  
             else
-            {
                 return Resources.Load<Sprite>($"{artAssetsDirectory}/{spriteName}");
-            }
+            
+        }
+        #region Sprite transition (spritesheet) ((unused))
+        /*public Coroutine TransitionSprite(Sprite sprite, int layer = 0, float speed = 1)
+        {
+            CharacterSpriteLayer spriteLayer = layers[layer];
+
+            return spriteLayer.TransitionSprite(sprite, speed);
         }
 
         public override IEnumerator ShowingOrHiding(bool show)
@@ -78,6 +85,31 @@ namespace stuff
 
             co_revealing = null;
             co_hiding = null;
+        }*/
+        #endregion
+
+        public override void SetColor(Color color)
+        {
+            base.SetColor(color);
+
+            foreach (CharacterSpriteLayer layer in layers)
+                layer.SetColor(color);
+
+        }
+
+        public override IEnumerator ChangingColor(Color color, float speed)
+        {
+            foreach(CharacterSpriteLayer layer in layers)
+                layer.TransitionColor(color, speed);
+
+            yield return null;
+
+            while(layers.Any(l => l.isChangingColor))
+                yield return null;
+            
+
+            co_changingColor = null;
+           
         }
     }
 }

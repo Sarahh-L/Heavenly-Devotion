@@ -12,7 +12,7 @@ namespace Dialogue
         private Coroutine process = null;
         public bool isRunning => process != null;
 
-    // constructor for conversation manager
+    // constructor for conversation characterManager
         private TextArchitect architect = null;
     // keypress
         private bool userPrompt = false;
