@@ -88,15 +88,19 @@ namespace stuff
         }*/
         #endregion
 
+        #region Sprite Color Changing
         public override void SetColor(Color color)
         {
             base.SetColor(color);
 
+            color = displayColor;
+
             foreach (CharacterSpriteLayer layer in layers)
+            {
+                layer.StopChangingColor();
                 layer.SetColor(color);
-
+            }
         }
-
         public override IEnumerator ChangingColor(Color color, float speed)
         {
             foreach(CharacterSpriteLayer layer in layers)
@@ -110,6 +114,42 @@ namespace stuff
 
             co_changingColor = null;
            
+        }
+        #endregion
+
+        #region Character Highlighting
+        public override IEnumerator Highlighting(bool highlight, float speedMultiplier)
+        {
+            Color targetColor = displayColor;
+
+            foreach(CharacterSpriteLayer layer in layers)
+                layer.TransitionColor(targetColor, speedMultiplier);
+
+            yield return null;
+
+            while (layers.Any(l => l.isChangingColor))
+                yield return null;
+
+            co_highlighting = null;
+        }
+        #endregion
+
+        public override IEnumerator FaceDirection(bool faceDefault, float speedMultiplier, bool immediate)
+        {
+            foreach(CharacterSpriteLayer layer in layers)
+            {
+                if(faceDefault)
+                    layer.FaceDefault(speedMultiplier, immediate);
+                else
+                    layer.FaceNotDefault(speedMultiplier, immediate);
+            }
+
+            yield return null;
+
+            while(layers.Any(l => l.isFlipping)) 
+                yield return null;
+
+            co_flipping = null;
         }
     }
 }

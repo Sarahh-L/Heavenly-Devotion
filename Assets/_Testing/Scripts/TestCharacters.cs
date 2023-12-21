@@ -36,40 +36,29 @@ namespace Testing
             //Character Mako = CreateCharacter("Mako");
 
             Alexandria.SetPosition(Vector2.zero);
-            Teevee.SetPosition(new Vector2(0.5f, 0.5f));
-
-            Sprite AlexandriaUpsetSprite = Alexandria.GetSprite("Alexandria - Upset");
-            Sprite AlexandriaNeutralSprite = Alexandria.GetSprite("Alexandria - Neutral");
-            Sprite AlexandriaAngrySprite = Alexandria.GetSprite("Alexandria - Angry");
-            Sprite AlexandriaHappySprite = Alexandria.GetSprite("Alexandria - Happy");
-            Sprite TeeveeNeutralSprite = Teevee.GetSprite("Teevee - Upset");
+            Teevee.SetPosition(new Vector2(1,0));
+            Teevee.SetSprite(Teevee.GetSprite("Teevee - Upset"), layer: 0);
 
             yield return new WaitForSeconds(1);
-            Alexandria.SetSprite(AlexandriaUpsetSprite, 0);
-            yield return Alexandria.TransitionColor(Color.red, speed: 0.3f);
-            yield return Alexandria.TransitionColor(Color.blue);
-            yield return Alexandria.TransitionColor(Color.yellow);
-            yield return Alexandria.TransitionColor(Color.white);
 
-            yield return Alexandria.MoveToPostiion(Vector2.one, smooth: true);
-            yield return Alexandria.MoveToPostiion(Vector2.zero, smooth: true);
+            Alexandria.UnHighlight();
+            yield return Teevee.Say("guhjsdfuhgofg");
 
-            Alexandria.SetSprite(AlexandriaNeutralSprite, 0);
-            yield return new WaitForSeconds(2);
-            Alexandria.SetSprite(AlexandriaHappySprite, 0);
-            yield return new WaitForSeconds(2);
-            Alexandria.SetSprite(AlexandriaAngrySprite, 0);
-            Teevee.SetSprite(TeeveeNeutralSprite, 0);
+            Teevee.UnHighlight();
+            Alexandria.Highlight();
+            yield return Alexandria.Say("bruh what makes no sense");
 
-            yield return Alexandria.Say("testing testing");
-            yield return Alexandria.Say("did it work?");
-            yield return Alexandria.Say("i think so");
+            Alexandria.UnHighlight();
+            Teevee.Highlight();
+            Teevee.SetSprite(Teevee.GetSprite("Teevee - Neutral"), layer: 0);
+            yield return Teevee.Say("AAAAAAAAAAAAAAAAAAAAA");
+
+            Teevee.UnHighlight();
+            Alexandria.Highlight();
+            Alexandria.SetSprite(Alexandria.GetSprite("Alexandria - Upset"), layer:0);
+            yield return Alexandria.Say("thats rude");
 
             yield return null;
-
-
-            List<string> Lines = FileManager.ReadTextAsset(fileToRead);
-            Alexandria.Say(Lines);
         }
 
         // Update is called once per frame

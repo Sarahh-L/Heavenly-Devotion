@@ -1,9 +1,11 @@
 using Dialogue;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 namespace stuff 
@@ -11,8 +13,10 @@ namespace stuff
     public abstract class Character
     {
 
-    #region Variables / Character characterManager / Dialogue system
+        #region Variables / Character characterManager / Dialogue system
         public const bool Enable_on_Start = true;
+        private const float Unhighlighted_Darken_Strength = 0.65f;
+        public const bool Default_Orientation = true;
 
         public string name = "";
         public string displayName = "";
@@ -20,24 +24,54 @@ namespace stuff
         public CharacterConfigData config;
         public Animator animator;
         public Color color { get; protected set; } = Color.white;
+        protected Color displayColor => highlighted ? highlightedColor : unhighlightedColor;
+        protected Color highlightedColor => color;
+        protected Color unhighlightedColor => new Color(color.r * Unhighlighted_Darken_Strength, color.g * Unhighlighted_Darken_Strength, color.b * Unhighlighted_Darken_Strength, color.a);
+        public bool highlighted { get; protected set; } = true;
+        protected bool facingDefault = Default_Orientation;
 
         protected CharacterManager characterManager => CharacterManager.instance;
 
         public DialogueSystem dialogueSystem => DialogueSystem.instance;
         #endregion
 
-    #region Coroutines
+        #region Coroutines
         protected Coroutine co_revealing, co_hiding;
         protected Coroutine co_moving;
         protected Coroutine co_changingColor;
+        protected Coroutine co_highlighting;
+        protected Coroutine co_flipping;
+
+        // Showing / hiding characters
+
         public bool isRevealing => co_revealing != null;
         public bool isHiding => co_hiding != null;
+
+        // Moving characters
+      
         public bool isMoving => co_moving != null;
+
+        // Change character colors
+        
         public bool isChangingColor => co_changingColor != null;
-        public virtual bool isVisible => false;
+
+        // Highlighting characters
+
+       
+        public bool isHighlighting => (highlighted && co_highlighting != null);
+        public bool isUnHighlighting => (!highlighted && co_highlighting != null);
+
+        // Character visibility
+        public virtual bool isVisible { get; set; }
+
+        // Flipping characters
+        
+        public bool isFacingDefault => facingDefault;
+        public bool isFacingNotDefault => !facingDefault;
+        public bool isFlipping => co_flipping != null;
         #endregion
 
-    #region Constructor
+        #region Constructor
         public Character(string name, CharacterConfigData config, GameObject prefab)
         {
             this.name = name;
@@ -55,7 +89,7 @@ namespace stuff
         }
         #endregion
 
-    #region Dialogue - Character text appearance / Display name
+        #region Dialogue - Character text appearance / Display name
         // makes dialogue a list
         public Coroutine Say(string dialogue) => Say(new List<string> { dialogue });
 
@@ -79,7 +113,7 @@ namespace stuff
         public void UpdateTextCustomizationsOnScreen() => dialogueSystem.ApplySpeakerDataToDialogueContainer(config);
         #endregion
 
-    #region Visibility Coroutines
+        #region Visibility Coroutines
         public virtual Coroutine Show()
         {
             if (isRevealing)
@@ -112,7 +146,7 @@ namespace stuff
         }
         #endregion
 
-    #region Sprite Movement
+        #region Sprite Movement
         public virtual void SetPosition(Vector2 position)
         {
             if (root == null)
@@ -178,7 +212,7 @@ namespace stuff
         }
         #endregion
 
-    #region Character color change
+        #region Character color change
         public virtual void SetColor (Color color)
         {
             this.color = color;
@@ -191,7 +225,7 @@ namespace stuff
             if (isChangingColor)
                 characterManager.StopCoroutine(co_changingColor);
 
-            co_changingColor = characterManager.StartCoroutine(ChangingColor(color,speed));
+            co_changingColor = characterManager.StartCoroutine(ChangingColor(displayColor,speed));
 
             return co_changingColor;
 
@@ -204,7 +238,80 @@ namespace stuff
         }
         #endregion
 
-    #region Char config data
+        #region Character Highlighting
+        public Coroutine Highlight(float speed = 1f)
+        {
+            if (isHighlighting)
+                return co_highlighting;
+
+            if (isUnHighlighting)
+                characterManager.StopCoroutine(co_highlighting);
+
+            highlighted = true;
+            co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
+
+            return co_highlighting;
+        }
+        public Coroutine UnHighlight(float speed = 1f)
+        {
+            if (isUnHighlighting)
+                return co_highlighting;
+
+            if (isHighlighting)
+                characterManager.StopCoroutine(co_highlighting);
+
+            highlighted = false;
+            co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
+
+            return co_highlighting;
+        }
+
+        public virtual IEnumerator Highlighting(bool highlight, float speedMultiplier)
+        {
+            Debug.Log("highlighting is not available on this character type!");
+            yield return null;
+        }
+        #endregion
+
+
+        #region Character Flipping
+        public Coroutine Flip(float speed = 1, bool immediate = false)
+        {
+            if (isFacingDefault)
+                return FaceNotDefault(speed, immediate);
+            else
+                return FaceDefault(speed, immediate);
+        }
+
+        public Coroutine FaceDefault(float speed = 1, bool immediate = false)
+        {
+            if (isFlipping)
+                characterManager.StopCoroutine(co_flipping);
+
+            facingDefault = true;
+            co_flipping = characterManager.StartCoroutine(FaceDirection(facingDefault, speed, immediate));
+        
+            return co_flipping;
+        }
+
+        public Coroutine FaceNotDefault(float speed = 1, bool immediate = false)
+        {
+            if (isFlipping)
+                characterManager.StopCoroutine(co_flipping);
+
+            facingDefault = false;
+            co_flipping = characterManager.StartCoroutine(FaceDirection(facingDefault, speed, immediate));
+
+            return co_flipping;
+        }
+
+        public virtual IEnumerator FaceDirection(bool faceDefault, float speedMultiplier, bool immediate)
+        {
+            Debug.Log("Cannot flip a character of this type");
+            yield return null;
+        }
+        #endregion
+        #region Char config data
         public enum CharacterType
         {
             Text,

@@ -17,18 +17,20 @@ namespace stuff
         private float transitionSpeedMultiplier = 1;
         public int layer { get; private set; } = 0;
         public Image renderer { get; private set; } = null;
-
         public CanvasGroup rendererCG => renderer.GetComponent<CanvasGroup>();
 
         private List<CanvasGroup> oldRenderers = new List<CanvasGroup>();
 
-        //private Coroutine co_transitioninglayer = null;
-        //private Coroutine co_levelingAlpha = null;
+        private Coroutine co_transitioninglayer = null;
+        private Coroutine co_levelingAlpha = null;
         private Coroutine co_changingColor = null;
+        private Coroutine co_flipping = null;
+        private bool isFacingDefault = Character.Default_Orientation;
 
-        //private bool isTransitioningLayer => co_transitioninglayer != null;
-        //private bool islevelingAlpha => co_levelingAlpha != null;
+        private bool isTransitioningLayer => co_transitioninglayer != null;
+        private bool islevelingAlpha => co_levelingAlpha != null;
         public bool isChangingColor => co_changingColor != null;
+        public bool isFlipping => co_flipping != null;
         #endregion
 
     #region Set sprite & render layer
@@ -45,7 +47,7 @@ namespace stuff
         #endregion
 
     #region Sprite Transitioning (spritesheet) ((unused))
-        /*public Coroutine TransitionSprite(Sprite sprite, float speed = 1)
+        public Coroutine TransitionSprite(Sprite sprite, float speed = 1)
         {
             if (sprite = renderer.sprite)
                 return null;
@@ -118,7 +120,7 @@ namespace stuff
             }
 
             co_transitioninglayer = null;
-        }*/
+        }
         #endregion
 
     #region Character color change
@@ -140,6 +142,16 @@ namespace stuff
             co_changingColor = characterManager.StartCoroutine(ChangingColor(color, speed));
 
             return co_changingColor;
+
+        }
+        public void StopChangingColor()
+        {
+            if (!isChangingColor)
+                return;
+
+            characterManager.StopCoroutine(co_changingColor);
+
+            co_changingColor = null;
         }
 
         private IEnumerator ChangingColor(Color color, float speedMultiplier)
@@ -168,5 +180,58 @@ namespace stuff
             co_changingColor = null;
         }
         #endregion
+
+        public Coroutine Flip(float speed = 1, bool immediate = false)
+        {
+            if (isFacingDefault)
+                return FaceNotDefault(speed, immediate);
+            else
+                return FaceDefault(speed, immediate);
+        }
+
+        public Coroutine FaceDefault(float speed = 1, bool immediate = false)
+        {
+            if (isFlipping)
+                characterManager.StopCoroutine(co_flipping);
+
+            isFacingDefault = true;
+            co_flipping = characterManager.StartCoroutine(FaceDirection(isFacingDefault, speed, immediate));
+
+            return co_flipping;
+        }
+
+        public Coroutine FaceNotDefault(float speed = 1, bool immediate = false)
+        {
+            if (isFlipping)
+                characterManager.StopCoroutine(co_flipping);
+
+            isFacingDefault = false;
+            co_flipping = characterManager.StartCoroutine(FaceDirection(isFacingDefault, speed, immediate));
+
+            return co_flipping;
+        }
+
+        private IEnumerator FaceDirection(bool faceDefault, float speedMultiplier, bool immediate)
+        {
+            float xScale = faceDefault ? 1 : -1;
+            Vector3 newScale = new Vector3(xScale, 1, 1);
+
+            if (!immediate)
+            {
+                Image newRenderer = CreateRenderer(renderer.transform.parent);
+
+                newRenderer.transform.localScale = newScale;
+
+                transitionSpeedMultiplier = speedMultiplier;
+                TryStartLevelingAlphas();
+
+                while (islevelingAlpha)
+                    yield return null;
+            }
+            else
+                renderer.transform.localScale = newScale;
+
+            co_flipping = null;
+        }
     }
 }
