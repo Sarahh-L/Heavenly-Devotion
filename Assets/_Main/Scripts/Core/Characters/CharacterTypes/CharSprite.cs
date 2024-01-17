@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,7 +64,7 @@ namespace stuff
             
         }
         #region Sprite transition (spritesheet) ((unused))
-        /*public Coroutine TransitionSprite(Sprite sprite, int layer = 0, float speed = 1)
+        public Coroutine TransitionSprite(Sprite sprite, int layer = 0, float speed = 1)
         {
             CharacterSpriteLayer spriteLayer = layers[layer];
 
@@ -85,7 +84,7 @@ namespace stuff
 
             co_revealing = null;
             co_hiding = null;
-        }*/
+        }
         #endregion
 
         #region Sprite Color Changing
@@ -134,11 +133,12 @@ namespace stuff
         }
         #endregion
 
+        #region Character Flipping
         public override IEnumerator FaceDirection(bool faceDefault, float speedMultiplier, bool immediate)
         {
-            foreach(CharacterSpriteLayer layer in layers)
+            foreach (CharacterSpriteLayer layer in layers)
             {
-                if(faceDefault)
+                if (faceDefault)
                     layer.FaceDefault(speedMultiplier, immediate);
                 else
                     layer.FaceNotDefault(speedMultiplier, immediate);
@@ -146,10 +146,25 @@ namespace stuff
 
             yield return null;
 
-            while(layers.Any(l => l.isFlipping)) 
+            while (layers.Any(l => l.isFlipping))
                 yield return null;
-
+            
             co_flipping = null;
+            Debug.Log("FaceDirection complete");
+        }
+        #endregion
+
+        public override void OnRecieveCastingExpression(int layer, string expression)
+        {
+            Sprite sprite = GetSprite(expression);
+
+            if (sprite == null)
+            {
+                Debug.LogWarning($"Sprite '{expression}' could not be found for character '{name}'");
+                return;
+            }
+
+            TransitionSprite(sprite,layer);
         }
     }
 }

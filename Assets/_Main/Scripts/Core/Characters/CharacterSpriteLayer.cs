@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace stuff
@@ -181,16 +180,9 @@ namespace stuff
         }
         #endregion
 
-        public Coroutine Flip(float speed = 1, bool immediate = false)
-        {
-            if (isFacingDefault)
-                return FaceNotDefault(speed, immediate);
-            else
-                return FaceDefault(speed, immediate);
-        }
-
         public Coroutine FaceDefault(float speed = 1, bool immediate = false)
         {
+            Debug.Log("FaceDefault started");
             if (isFlipping)
                 characterManager.StopCoroutine(co_flipping);
 
@@ -202,6 +194,7 @@ namespace stuff
 
         public Coroutine FaceNotDefault(float speed = 1, bool immediate = false)
         {
+            Debug.Log("FaceNotDefault started");
             if (isFlipping)
                 characterManager.StopCoroutine(co_flipping);
 
@@ -213,23 +206,27 @@ namespace stuff
 
         private IEnumerator FaceDirection(bool faceDefault, float speedMultiplier, bool immediate)
         {
-            float xScale = faceDefault ? 1 : -1;
-            Vector3 newScale = new Vector3(xScale, 1, 1);
+            Image newRenderer = CreateRenderer(renderer.transform.parent);
+            Vector3 currentScale = newRenderer.transform.localScale;
+            float currentX = System.Math.Abs(currentScale.x);
+            float xScale = faceDefault ? currentX : -currentX;
+            Vector3 newScale = new Vector3(xScale, currentScale.y, currentScale.z);
 
             if (!immediate)
             {
-                Image newRenderer = CreateRenderer(renderer.transform.parent);
-
                 newRenderer.transform.localScale = newScale;
-
                 transitionSpeedMultiplier = speedMultiplier;
+
                 TryStartLevelingAlphas();
 
                 while (islevelingAlpha)
                     yield return null;
             }
+
             else
+            {
                 renderer.transform.localScale = newScale;
+            }
 
             co_flipping = null;
         }

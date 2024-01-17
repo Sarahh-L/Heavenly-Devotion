@@ -14,9 +14,10 @@ namespace stuff
     {
 
         #region Variables / Character characterManager / Dialogue system
-        public const bool Enable_on_Start = true;
+        public const bool Enable_on_Start = false;
         private const float Unhighlighted_Darken_Strength = 0.65f;
         public const bool Default_Orientation = true;
+        public const string Animation_Refresh_Trigger = "Refresh";
 
         public string name = "";
         public string displayName = "";
@@ -29,6 +30,7 @@ namespace stuff
         protected Color unhighlightedColor => new Color(color.r * Unhighlighted_Darken_Strength, color.g * Unhighlighted_Darken_Strength, color.b * Unhighlighted_Darken_Strength, color.a);
         public bool highlighted { get; protected set; } = true;
         protected bool facingDefault = Default_Orientation;
+        public int priority { get; protected set; }
 
         protected CharacterManager characterManager => CharacterManager.instance;
 
@@ -158,7 +160,7 @@ namespace stuff
             root.anchorMax = maxAnchorTarget;
         }
 
-        public virtual Coroutine MoveToPostiion(Vector2 position, float speed = 2f, bool smooth = false)
+        public virtual Coroutine MoveToPostion(Vector2 position, float speed = 2f, bool smooth = false)
         {
             if (root == null)
                 return null;
@@ -273,10 +275,10 @@ namespace stuff
         }
         #endregion
 
-
         #region Character Flipping
         public Coroutine Flip(float speed = 1, bool immediate = false)
         {
+            Debug.Log("Flip started");
             if (isFacingDefault)
                 return FaceNotDefault(speed, immediate);
             else
@@ -311,6 +313,43 @@ namespace stuff
             yield return null;
         }
         #endregion
+
+        #region Character Priority
+        public void SetPriority(int priority, bool autoSortCharactersOnUI = true)
+        {
+            this.priority = priority;
+
+            if (autoSortCharactersOnUI)
+                characterManager.SortCharacters();
+        }
+        #endregion
+
+        #region Character Animation
+
+        // Trigger anim state
+        public void Animate(string animation)
+        {
+            animator.SetTrigger(animation);
+        }
+
+        // Bool anim state
+        public void Animate(string animation, bool state)
+        {
+            animator.SetBool(animation, state);
+            animator.SetTrigger(Animation_Refresh_Trigger);
+        }
+        #endregion
+
+        public virtual void OnSort(int sortingindex)
+        {
+            return;
+        }
+
+        public virtual void OnRecieveCastingExpression(int layer, string expression)
+        {
+            return;
+        }
+
         #region Char config data
         public enum CharacterType
         {

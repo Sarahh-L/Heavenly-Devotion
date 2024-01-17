@@ -37,9 +37,12 @@ namespace Testing
 
             Alexandria.SetPosition(Vector2.zero);
             Teevee.SetPosition(new Vector2(1,0));
-            Teevee.SetSprite(Teevee.GetSprite("Teevee - Upset"), layer: 0);
 
             yield return new WaitForSeconds(1);
+
+            yield return Teevee.Flip();
+
+            yield return Alexandria.Flip(0.3f);
 
             Alexandria.UnHighlight();
             yield return Teevee.Say("guhjsdfuhgofg");

@@ -28,8 +28,8 @@ namespace Dialogue
         {
             userPrompt = true;
         }
-        
 
+        #region Conversation runner
         public Coroutine StartConversation(List<string> conversation)
         {
             StopConversation();
@@ -48,7 +48,6 @@ namespace Dialogue
             dialogueSystem.StopCoroutine(process);
             process = null;
         }
-
 
         IEnumerator RunningConversation(List<string> conversation)
         {
@@ -69,14 +68,14 @@ namespace Dialogue
             }
 
         }
+        #endregion
 
-    // Dialogue architect
+        #region Dialogue architect
         IEnumerator Line_RunDialogue(Dialogue_Line line)
         {
             // Show or hide speaker name if there is one present
             if (line.hasSpeaker)
-                dialogueSystem.ShowSpeakerName(line.speaker.displayName);
-
+                HandleSpeakerLogic(line.speakerData);
             // Build Dialogue
             yield return BuildLineSegments(line.dialogue);
 
@@ -84,14 +83,46 @@ namespace Dialogue
             yield return WaitForUserInput();
 
         }
+        #endregion
 
+        #region Character spawning- Sprite / name handling
+        private void HandleSpeakerLogic(DL_SpeakerData speakerData)
+        {
+            bool characterMustBeCreated = (speakerData.makeCharacterEnter || speakerData.isCastingPosition || speakerData.isCastingExpressions);
 
+            Character character = CharacterManager.instance.GetCharacter(speakerData.name, createIfDoesNotExist: characterMustBeCreated);
+
+            // Forces character to enter the screen
+            if (speakerData.makeCharacterEnter && (!character.isVisible && !character.isRevealing))
+                character.Show();
+            // add character name to UI
+            dialogueSystem.ShowSpeakerName(speakerData.displayName);
+
+            // custmize dialogue for this character- if applicable
+            DialogueSystem.instance.ApplySpeakerDataToDialogueContainer(speakerData.name);
+
+            // Cast position
+            if (speakerData.isCastingPosition)
+                character.MoveToPostion(speakerData.castPosition);
+
+            // Cast expression
+            if (speakerData.isCastingExpressions)
+            {
+                foreach (var ce in speakerData.CastExpressions)
+                    character.OnRecieveCastingExpression(ce.layer, ce.expression);
+            }
+        }
+        #endregion
+
+        #region Unused command system starter
         /*IEnumerator Line_RunCommands(Dialogue_Line line)
         {
             Debug.Log(line.commandData);
             yield return null;
         }*/
+        #endregion
 
+        #region Line building / appending
         IEnumerator BuildLineSegments(DL_DialogueData line)
         {
             for (int i = 0; i < line.segments.Count; i++)
@@ -142,7 +173,9 @@ namespace Dialogue
                 yield return null;
             }
         }
+        #endregion
 
+        #region User input
         IEnumerator WaitForUserInput()
         {
             while(!userPrompt)
@@ -150,5 +183,6 @@ namespace Dialogue
                 
             userPrompt = false;
         }
+        #endregion
     }
 }
