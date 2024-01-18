@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using stuff;
-using TMPro;
+using Characters;
+using TMPro;    
 using Dialogue;
 
 namespace Testing

@@ -5,7 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace stuff
+namespace Characters
 {
     [System.Serializable]
     public class CharacterConfigData

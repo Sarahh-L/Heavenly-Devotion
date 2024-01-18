@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using stuff;
+using Characters;
+using Commands;
 
 namespace Dialogue
 {
@@ -63,8 +64,12 @@ namespace Dialogue
                 if (line.hasDialogue)
                     yield return Line_RunDialogue(line);
 
-                //if (line.hasCommands)
-                    //yield return Line_RunCommands(line);
+                if (line.hasCommands)
+                    yield return Line_RunCommands(line);
+
+                if (line.hasDialogue)
+                    // wait for user input
+                    yield return WaitForUserInput();
             }
 
         }
@@ -78,10 +83,76 @@ namespace Dialogue
                 HandleSpeakerLogic(line.speakerData);
             // Build Dialogue
             yield return BuildLineSegments(line.dialogue);
+        }
+        #endregion
 
-            // wait for user input
-            yield return WaitForUserInput();
+        #region Command architect
+        IEnumerator Line_RunCommands(Dialogue_Line line)
+        {
+            List<DL_CommandData.Command> commands = line.commandData.commands;
 
+            foreach(DL_CommandData.Command command in commands)
+            {
+                if (command.waitForCompletion || command.name =="wait")
+                    yield return CommandManager.instance.Execute(command.name, command.arguments);
+                else
+                    CommandManager.instance.Execute(command.name, command.arguments);
+            }
+            yield return null;
+        }
+
+        #endregion
+
+        #region Line building / appending
+        IEnumerator BuildLineSegments(DL_DialogueData line)
+        {
+            for (int i = 0; i < line.segments.Count; i++)
+            {
+                DL_DialogueData.Dialogue_Segment segment = line.segments[i];
+
+                yield return WaitForDialogueSegmentSignalToBeTriggered(segment);
+
+                yield return BuildDialogue(segment.dialogue, segment.appendText);
+            }
+        }
+
+        IEnumerator WaitForDialogueSegmentSignalToBeTriggered(DL_DialogueData.Dialogue_Segment segment)
+        {
+            switch (segment.startSignal)
+            {
+                case DL_DialogueData.Dialogue_Segment.StartSignal.A:
+                    yield return WaitForUserInput();
+                    break;
+                case DL_DialogueData.Dialogue_Segment.StartSignal.WA:
+                    yield return new WaitForSeconds(segment.signalDelay);
+                    break;
+            }
+        }
+
+
+        IEnumerator BuildDialogue(string dialogue, bool append = false)
+        {
+            // build dialogue
+            if (!append)
+                architect.Build(dialogue);
+
+            else
+                architect.Append(dialogue);
+
+            // wait for dialogue to complete
+            while (architect.isBuilding)
+            {
+                if (userPrompt)
+                {
+                    if (!architect.hurryUp)
+                        architect.hurryUp = true;
+                    else
+                        architect.ForceComplete();
+
+                    userPrompt = false;
+                }
+                yield return null;
+            }
         }
         #endregion
 
@@ -110,67 +181,6 @@ namespace Dialogue
             {
                 foreach (var ce in speakerData.CastExpressions)
                     character.OnRecieveCastingExpression(ce.layer, ce.expression);
-            }
-        }
-        #endregion
-
-        #region Unused command system starter
-        /*IEnumerator Line_RunCommands(Dialogue_Line line)
-        {
-            Debug.Log(line.commandData);
-            yield return null;
-        }*/
-        #endregion
-
-        #region Line building / appending
-        IEnumerator BuildLineSegments(DL_DialogueData line)
-        {
-            for (int i = 0; i < line.segments.Count; i++)
-            {
-                DL_DialogueData.Dialogue_Segment segment = line.segments[i];
-
-                yield return WaitForDialogueSegmentSignalToBeTriggered(segment);
-
-                yield return BuildDialogue(segment.dialogue, segment.appendText);
-            }
-        }
-
-        IEnumerator WaitForDialogueSegmentSignalToBeTriggered(DL_DialogueData.Dialogue_Segment segment)
-        {
-            switch(segment.startSignal)
-            {
-                case DL_DialogueData.Dialogue_Segment.StartSignal.A:
-                    yield return WaitForUserInput();
-                    break;
-                case DL_DialogueData.Dialogue_Segment.StartSignal.WA:
-                    yield return new WaitForSeconds(segment.signalDelay);
-                    break;
-            }
-        }
-
-
-        IEnumerator BuildDialogue(string dialogue, bool append = false)
-        {
-            // build dialogue
-            if (!append)
-                architect.Build(dialogue);
-
-            else
-                architect.Append(dialogue);
-
-            // wait for dialogue to complete
-            while(architect.isBuilding)
-            {
-                if (userPrompt)
-                {
-                    if(!architect.hurryUp)
-                        architect.hurryUp = true;
-                    else
-                        architect.ForceComplete();
-
-                    userPrompt = false;
-                }
-                yield return null;
             }
         }
         #endregion

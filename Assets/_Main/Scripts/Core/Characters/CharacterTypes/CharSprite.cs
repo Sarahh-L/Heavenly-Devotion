@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace stuff
+namespace Characters
 {
     public class CharSprite : Character
     {
@@ -164,7 +164,7 @@ namespace stuff
                 return;
             }
 
-            TransitionSprite(sprite,layer);
+            TransitionSprite(sprite, layer);
         }
     }
 }

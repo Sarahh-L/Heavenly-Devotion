@@ -1,6 +1,24 @@
-﻿Alexandria "bruh.{a} bigger bruh"
+﻿
 
-enter Alexandria as ??? [Alexandria - Upset] "this{a} actually{a} works."
+
+		DOES NOT WORK		50:04 e 13 p 2	wait(1), CreateCharacter(Alexandria -e true), CreateCharacter(Teevee), CreateCharacter(Loki -e true -i true)
+
+MoveCharacter(Alexandria -x 0 -spd 0.75 -s false)
+
+Narrator "Showing Characters"
+
+print_1p("this is a command running straight from a script")
+
+random line of dialogue lmao
+Alexandria "command(arguments go here)"
+Alexandria "(thought bubble)"
+Alexandria "Dialogueeee" command(args)
+command(more args), argCom(and anotherrrr)
+command("and another")
+
+Alexandria "bruh.{a} bigger bruh"
+
+enter Alexandria as ??? [Upset] "this{a} actually{a} works."
 
 enter Teevee "this ain't gonna work....{wa 1} wait {wa 2} wait a little longer {wa 3} just a liiiitle longer {wa 4} yea"
 "crazy"

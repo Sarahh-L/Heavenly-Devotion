@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEditor.Rendering;
-using stuff;
+using Characters;
 
 // The box that holds the name on screen. part of dialogue container
 

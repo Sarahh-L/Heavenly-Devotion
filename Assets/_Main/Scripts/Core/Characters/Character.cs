@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
-namespace stuff 
+namespace Characters 
 {
     public abstract class Character
     {

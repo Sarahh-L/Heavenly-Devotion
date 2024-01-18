@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using stuff;
+using Characters;
 
 namespace Dialogue
 {
@@ -9,8 +9,6 @@ namespace Dialogue
     {
         public List<Dialogue_Segment> segments;
         private const string segmentIdentifierPattern = @"\{[a]\}|\{w[a]\s\d*\.?\d*\}";
-
-        public bool hasDialogue => segments.Count > 0;
 
         public DL_DialogueData(string rawDialogue)
         {

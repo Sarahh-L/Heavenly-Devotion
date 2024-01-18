@@ -1,20 +1,24 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using System.IO;
 
+namespace Commands
+{
     public class DL_CommandData
     {
-
         public List<Command> commands;
         private const char commandSplitter_ID = ',';
         private const char argumentContainer_ID = '(';
+        private const string waitCommand_ID = "[wait]";
+
 
         public struct Command
         {
             public string name;
             public string[] arguments;
+            public bool waitForCompletion;
         }
 
         public DL_CommandData(string rawCommands)
@@ -32,6 +36,16 @@ using System.IO;
                 Command command = new Command();
                 int index = cmd.IndexOf(argumentContainer_ID);
                 command.name = cmd.Substring(0, index).Trim();
+
+                if (command.name.ToLower().StartsWith(waitCommand_ID))
+                {
+                    command.name = command.name.Substring(waitCommand_ID.Length);
+                    command.waitForCompletion = true;
+                }
+
+                else
+                    command.waitForCompletion = false;
+
                 command.arguments = GetArgs(cmd.Substring(index + 1, cmd.Length - index - 2));
                 result.Add(command);
             }
@@ -69,4 +83,4 @@ using System.IO;
             return argList.ToArray();
         }
     }
-    */
+}

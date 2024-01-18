@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace stuff
+namespace Characters
 {
     public class CharText : Character
     {

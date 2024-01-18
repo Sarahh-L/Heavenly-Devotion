@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using stuff;
+using Characters;
 using TMPro;
 
 namespace Dialogue

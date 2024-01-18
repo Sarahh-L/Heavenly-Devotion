@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using UnityEngine;
 
-namespace stuff
+namespace Characters
 {
     public class CharacterManager : MonoBehaviour
     {
