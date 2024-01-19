@@ -1,27 +1,26 @@
-﻿
+﻿wait(5), CreateCharacter(Alexandria -e true), CreateCharacter(Shein), CreateCharacter(Loki -e true)
+
+[wait]MoveCharacter(Alexandria 0 0.5 0.1)
+MoveCharacter(Loki -x 1 -y 1 -spd 1 -i false)
+
+Hide(Alexandria Shein Loki -spd 0.6)
+
+Alexandria "Now you see me {wa 1} Now you don't!"
+
+Show(Alexandria Shein Loki -spd 0.7)
+
+MoveCharacter(Shein 0.1 -spd 0.5 -i true) 
+
+Hide(Alexandria -i true)
+
+Loki "bruh"
+
+Shein "what"
+
+MoveCharacter(Shein 0.5 -spd 0.8)
+
+MoveCharacter(Alexandria 1 0.5 -i true), wait (3), MoveCharacter(Alexandria 0 0.5 -i true)
+Alexandria "Snapping to positions"
 
 
-		DOES NOT WORK		50:04 e 13 p 2	wait(1), CreateCharacter(Alexandria -e true), CreateCharacter(Teevee), CreateCharacter(Loki -e true -i true)
-
-MoveCharacter(Alexandria -x 0 -spd 0.75 -s false)
-
-Narrator "Showing Characters"
-
-print_1p("this is a command running straight from a script")
-
-random line of dialogue lmao
-Alexandria "command(arguments go here)"
-Alexandria "(thought bubble)"
-Alexandria "Dialogueeee" command(args)
-command(more args), argCom(and anotherrrr)
-command("and another")
-
-Alexandria "bruh.{a} bigger bruh"
-
-enter Alexandria as ??? [Upset] "this{a} actually{a} works."
-
-enter Teevee "this ain't gonna work....{wa 1} wait {wa 2} wait a little longer {wa 3} just a liiiitle longer {wa 4} yea"
-"crazy"
-
-Loki as ??? "joe mama {a} Luke as ??? test" 
 

@@ -116,7 +116,7 @@ namespace Characters
         #endregion
 
         #region Visibility Coroutines
-        public virtual Coroutine Show()
+        public virtual Coroutine Show(float speedMultiplier = 1f)
         {
             if (isRevealing)
                 return co_revealing;
@@ -124,12 +124,12 @@ namespace Characters
             if (isHiding)
                 characterManager.StopCoroutine(co_hiding);
 
-            co_revealing = characterManager.StartCoroutine(ShowingOrHiding(true));
+            co_revealing = characterManager.StartCoroutine(ShowingOrHiding(true, speedMultiplier));
 
             return co_revealing;
         }
 
-        public virtual Coroutine Hide()
+        public virtual Coroutine Hide(float speedMultiplier = 1f)
         {
             if (isHiding)
                 return co_hiding;
@@ -137,11 +137,11 @@ namespace Characters
             if (isRevealing)
                 characterManager.StopCoroutine(co_revealing);
 
-            co_hiding = characterManager.StartCoroutine(ShowingOrHiding(false));
+            co_hiding = characterManager.StartCoroutine(ShowingOrHiding(false, speedMultiplier));
 
             return co_hiding;
         }
-        public virtual IEnumerator ShowingOrHiding(bool show)
+        public virtual IEnumerator ShowingOrHiding(bool show, float speedMultiplier)
         {
             Debug.Log("Show/Hide can not be called from a base character type.");
             yield return null;
@@ -340,6 +340,8 @@ namespace Characters
         }
         #endregion
 
+        #region Character Expression
+
         public virtual void OnSort(int sortingindex)
         {
             return;
@@ -349,6 +351,7 @@ namespace Characters
         {
             return;
         }
+        #endregion
 
         #region Char config data
         public enum CharacterType

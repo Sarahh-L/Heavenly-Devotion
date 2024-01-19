@@ -1,28 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using System;
 using Characters;
 using System.Linq;
-using Unity.VisualScripting;
 
 namespace Commands
 {
     public class CMD_DatabaseExtension_Characters : CMD_DatabaseExtension
     {
         private static string[] Param_Enable => new string[] { "-e", "-enable" };
-        private static string[] Param_Immediate => new string[] { "-i", "-immediate" };
+        private static string[] Param_Immediate => new string[] { "-i", "-immediate" };     // Specify within the MoveCharacter command - will not work for CreateCharacter
         private static string[] Param_Speed => new string[] { "-spd", "-speed" };
-        private static string[] Param_Smooth => new string[] { "-s", "-smoothing" };
+        private static string[] Param_Smooth => new string[] { "-s", "-smooth" };
         private static string Param_XPos => "-x";
         private static string Param_YPos => "-y";
         new public static void Extend(CommandDatabase database)
         {
             database.AddCommand("createcharacter", new Action<string[]>(CreateCharacter));
+            database.AddCommand("movecharacter", new Func<string[], IEnumerator>(MoveCharacter));
             database.AddCommand("show", new Func<string[], IEnumerator>(ShowAll));
             database.AddCommand("hide", new Func<string[], IEnumerator>(HideAll));
-            database.AddCommand("movecharacter", new Func<string[], IEnumerator>(MoveCharacter));
         }
 
         #region Create character
@@ -43,7 +41,7 @@ namespace Commands
             if (!enable)
                 return;
 
-            if (immediate)
+            else if (immediate)
                 character.isVisible = true;
             else
                 character.Show();
@@ -55,7 +53,7 @@ namespace Commands
             string characterName = data[0];
             Character character = CharacterManager.instance.GetCharacter(characterName);
 
-            if (character != null)
+            if (character == null)
                 yield break;
 
             float x = 0, y = 0;
@@ -85,7 +83,10 @@ namespace Commands
             if (immediate)
                 character.SetPosition(position);
             else
+            {
+                CommandManager.instance.AddTerminationActionToCurrentProcess(() => { character?.SetPosition(position); });
                 yield return character.MoveToPostion(position, speed, smoothing);
+            }
         }
 
         #region Show characters
@@ -93,6 +94,7 @@ namespace Commands
         {
             List<Character> characters = new List<Character>();
             bool immediate = false;
+            float speed = 1f;
 
             foreach (string s in data)
             {
@@ -108,18 +110,26 @@ namespace Commands
             var parameters = ConvertDataToParameters(data);
 
             parameters.TryGetValue(Param_Immediate, out immediate, defaultValue: false);
+            parameters.TryGetValue(Param_Speed, out speed, defaultValue: 1f);
 
-            foreach(Character character in characters)
+            // Call the logic on all the characters
+            foreach (Character character in characters)
             {
                 if (immediate)
                     character.isVisible = true;
                 else
-                    character.Show();
+                    character.Show(speed);
             }
 
             if(!immediate)
             {
-                while (characters.Any(c => c.isRevealing))
+                CommandManager.instance.AddTerminationActionToCurrentProcess(() =>
+                {
+                    foreach(Character character in characters)
+                        character.isVisible = true;
+                });
+
+                while(characters.Any(c => c.isRevealing))
                     yield return null;
             }
         }
@@ -130,6 +140,7 @@ namespace Commands
         {
             List<Character> characters = new List<Character>();
             bool immediate = false;
+            float speed = 1f;
 
             foreach (string s in data)
             {
@@ -145,17 +156,24 @@ namespace Commands
             var parameters = ConvertDataToParameters(data);
 
             parameters.TryGetValue(Param_Immediate, out immediate, defaultValue: false);
+            parameters.TryGetValue(Param_Speed, out speed, defaultValue: 1f);
 
             foreach (Character character in characters)
             {
                 if (immediate)
                     character.isVisible = false;
                 else
-                    character.Hide();
+                    character.Hide(speed);
             }
 
             if (!immediate)
             {
+                CommandManager.instance.AddTerminationActionToCurrentProcess(() =>
+                {
+                    foreach (Character character in characters)
+                        character.isVisible = false;
+                });
+
                 while (characters.Any(c => c.isHiding))
                     yield return null;
             }

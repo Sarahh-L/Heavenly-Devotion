@@ -3,16 +3,22 @@ using System.Reflection;
 using System.Linq;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Events;
 
 namespace Commands
 {
     public class CommandManager : MonoBehaviour
     {
+        private const char Sub_Command_Identifier = '.';
         public static CommandManager instance { get; private set; }
-        private static Coroutine process = null;
-        public static bool isRunningProcess => process != null;
 
         private CommandDatabase database;
+        //private Dictionary<string, CommandDatabase> subDatabases;
+
+        private List<CommandProcess> activeProcesses = new List<CommandProcess>();
+        private CommandProcess topProcess => activeProcesses.Last();
+
         private void Awake()
         {
             if (instance == null)
@@ -34,8 +40,10 @@ namespace Commands
                 DestroyImmediate(gameObject);
         }
 
-        public Coroutine Execute(string commandName, params string[] args)
+        public CoroutineWrapper Execute(string commandName, params string[] args)
         {
+            //if (commandName.Contains(Sub_Command_Identifier))
+               // return ExecuteSubCommand(commandName, args);
             Delegate command = database.GetCommand(commandName);
 
             if (command == null)
@@ -44,28 +52,70 @@ namespace Commands
             return StartProcess(commandName, command, args);
         }
 
-        private Coroutine StartProcess(string commandName, Delegate command, string[] args)
+        //private CoroutineWrapper ExecuteSubCommand(string commandName, string[] args)
+        //{
+
+        //}
+
+        private CoroutineWrapper StartProcess(string commandName, Delegate command, string[] args)
         {
-            StopCurrentProcess();
+            System.Guid processID = System.Guid.NewGuid();
+            CommandProcess cmd = new CommandProcess(processID, commandName, command, null, args, null);
+            activeProcesses.Add(cmd);
+            
+            Coroutine co = StartCoroutine(RunningProcess(cmd));
 
-            process = StartCoroutine(RunningProcess(command, args));
+            cmd.runningProcess = new CoroutineWrapper(this, co);
 
-            return process;
+            return cmd.runningProcess;
         }
 
-        private void StopCurrentProcess()
+        public void StopCurrentProcess()
         {
-            if (process != null)
-                StopCoroutine(process);
-
-            process = null;
+            if (topProcess != null)
+                KillProcess(topProcess);
         }
 
-        private IEnumerator RunningProcess(Delegate command, string[] args)
+        public void StopAllProcesses()
         {
-            yield return WaitingForProcessToComplete(command, args);
+            foreach (var c in activeProcesses)
+            {
+                if (c.runningProcess != null && !c.runningProcess.isDone)
+                    c.runningProcess.Stop();
 
-            process = null;
+                c.onTerminateAction?.Invoke();
+            }
+
+            activeProcesses.Clear();
+        }
+
+        private IEnumerator RunningProcess(CommandProcess process)
+        {
+            yield return WaitingForProcessToComplete(process.command, process.args);
+
+            KillProcess(process);
+        }
+
+        public void KillProcess(CommandProcess cmd)
+        {
+            activeProcesses.Remove(cmd);
+
+            if (cmd.runningProcess != null && !cmd.runningProcess.isDone)
+                cmd.runningProcess.Stop();
+
+            cmd.onTerminateAction?.Invoke();
+            
+        }
+
+        public void AddTerminationActionToCurrentProcess(UnityAction action)
+        {
+            CommandProcess process = topProcess;
+            if (process == null)
+                return;
+
+            process.onTerminateAction = new UnityEvent();
+            process.onTerminateAction.AddListener(action);
+
         }
 
         private IEnumerator WaitingForProcessToComplete(Delegate command, string[] args)

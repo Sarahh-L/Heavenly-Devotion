@@ -1,9 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Dialogue;
-using System.ComponentModel;
-using System.Net.Http.Headers;
 
 namespace Commands
 {
@@ -13,11 +8,13 @@ namespace Commands
 
         private Dictionary<string, string> parameters = new Dictionary<string, string>();
 
+        private List<string> unlabeledParameters = new List<string>();
+
         public CommandParameters(string[] parameterArray)
         {
             for (int i = 0; i < parameterArray.Length; i++)
             {
-                if (parameterArray[i].StartsWith(Parameter_Identifier))
+                if (parameterArray[i].StartsWith(Parameter_Identifier) && !float.TryParse(parameterArray[i], out _))
                 {
                     string pName = parameterArray[i];
                     string pValue = "";
@@ -30,6 +27,8 @@ namespace Commands
 
                     parameters.Add(pName, pValue);
                 }
+                else
+                    unlabeledParameters.Add(parameterArray[i]);
             }
         }
 
@@ -43,6 +42,17 @@ namespace Commands
                 {
                     if (TryCastParameter(parameterValue, out value))
                         return true;
+                }
+
+            }
+            // if we reach here, no match was found in the identified parameters, so search unlabeled ones if present
+
+            foreach (string parameterName in unlabeledParameters)
+            {
+                if (TryCastParameter(parameterName, out value))
+                {
+                    unlabeledParameters.Remove(parameterName);
+                    return true;
                 }
             }
 

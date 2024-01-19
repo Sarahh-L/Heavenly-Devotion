@@ -63,7 +63,7 @@ namespace Characters
                 return Resources.Load<Sprite>($"{artAssetsDirectory}/{spriteName}");
             
         }
-        #region Sprite transition (spritesheet) ((unused))
+        #region Sprite transition (spritesheet)
         public Coroutine TransitionSprite(Sprite sprite, int layer = 0, float speed = 1)
         {
             CharacterSpriteLayer spriteLayer = layers[layer];
@@ -71,14 +71,14 @@ namespace Characters
             return spriteLayer.TransitionSprite(sprite, speed);
         }
 
-        public override IEnumerator ShowingOrHiding(bool show)
+        public override IEnumerator ShowingOrHiding(bool show, float speedMultiplier = 1f)
         {
             float targetAlpha = show ? 1f : 0;
             CanvasGroup self = rootCG;
 
             while (self.alpha != targetAlpha)
             {
-                self.alpha = Mathf.MoveTowards(self.alpha, targetAlpha, 3f * Time.deltaTime);
+                self.alpha = Mathf.MoveTowards(self.alpha, targetAlpha, 3f * Time.deltaTime * speedMultiplier);
                 yield return null;
             }
 
