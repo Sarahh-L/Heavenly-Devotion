@@ -117,12 +117,18 @@ namespace Characters
         #endregion
 
         #region Character Highlighting
-        public override IEnumerator Highlighting(bool highlight, float speedMultiplier)
+        public override IEnumerator Highlighting(float speedMultiplier, bool immediate = false)
         {
             Color targetColor = displayColor;
 
             foreach(CharacterSpriteLayer layer in layers)
-                layer.TransitionColor(targetColor, speedMultiplier);
+            {
+                if (immediate)
+                    layer.SetColor(displayColor);
+                else
+                    layer.TransitionColor(targetColor, speedMultiplier);
+            }
+                
 
             yield return null;
 
@@ -134,14 +140,14 @@ namespace Characters
         #endregion
 
         #region Character Flipping
-        public override IEnumerator FaceDirection(bool faceDefault, float speedMultiplier, bool immediate)
+        public override IEnumerator FaceDirection(bool faceLeft, float speedMultiplier, bool immediate)
         {
             foreach (CharacterSpriteLayer layer in layers)
             {
-                if (faceDefault)
-                    layer.FaceDefault(speedMultiplier, immediate);
+                if (faceLeft)
+                    layer.FaceLeft(speedMultiplier, immediate);
                 else
-                    layer.FaceNotDefault(speedMultiplier, immediate);
+                    layer.FaceRight(speedMultiplier, immediate);
             }
 
             yield return null;
@@ -150,10 +156,10 @@ namespace Characters
                 yield return null;
             
             co_flipping = null;
-            Debug.Log("FaceDirection complete");
         }
         #endregion
 
+        #region Character Expression Changing
         public override void OnRecieveCastingExpression(int layer, string expression)
         {
             Sprite sprite = GetSprite(expression);
@@ -166,5 +172,6 @@ namespace Characters
 
             TransitionSprite(sprite, layer);
         }
+        #endregion
     }
 }

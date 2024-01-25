@@ -1,7 +1,5 @@
 using Dialogue;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using UnityEngine;
 
@@ -10,6 +8,8 @@ namespace Characters
     public class CharacterManager : MonoBehaviour
     {
         public static CharacterManager instance { get; private set; }
+
+        public Character[] allCharacters => characters.Values.ToArray();
 
         private Dictionary<string, Character> characters = new Dictionary<string, Character>();
 
@@ -47,6 +47,9 @@ namespace Characters
 
             return null;
         }
+
+        // Character specific commands
+        public bool HasCharacter(string characterName) => characters.ContainsKey(characterName.ToLower());
 
         public Character CreateCharacter(string characterName, bool revealAfterCreation = false)
         {

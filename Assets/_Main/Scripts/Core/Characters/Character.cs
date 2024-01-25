@@ -29,7 +29,7 @@ namespace Characters
         protected Color highlightedColor => color;
         protected Color unhighlightedColor => new Color(color.r * Unhighlighted_Darken_Strength, color.g * Unhighlighted_Darken_Strength, color.b * Unhighlighted_Darken_Strength, color.a);
         public bool highlighted { get; protected set; } = true;
-        protected bool facingDefault = Default_Orientation;
+        protected bool facingLeft = Default_Orientation;
         public int priority { get; protected set; }
 
         protected CharacterManager characterManager => CharacterManager.instance;
@@ -68,8 +68,8 @@ namespace Characters
 
         // Flipping characters
         
-        public bool isFacingDefault => facingDefault;
-        public bool isFacingNotDefault => !facingDefault;
+        public bool isFacingLeft => facingLeft;
+        public bool isFacingRight => !facingLeft;
         public bool isFlipping => co_flipping != null;
         #endregion
 
@@ -241,7 +241,7 @@ namespace Characters
         #endregion
 
         #region Character Highlighting
-        public Coroutine Highlight(float speed = 1f)
+        public Coroutine Highlight(float speed = 1f, bool immediate = false)
         {
             if (isHighlighting)
                 return co_highlighting;
@@ -250,11 +250,11 @@ namespace Characters
                 characterManager.StopCoroutine(co_highlighting);
 
             highlighted = true;
-            co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
+            co_highlighting = characterManager.StartCoroutine(Highlighting(speed, immediate));
 
             return co_highlighting;
         }
-        public Coroutine UnHighlight(float speed = 1f)
+        public Coroutine UnHighlight(float speed = 1f, bool immediate = false)
         {
             if (isUnHighlighting)
                 return co_highlighting;
@@ -263,12 +263,12 @@ namespace Characters
                 characterManager.StopCoroutine(co_highlighting);
 
             highlighted = false;
-            co_highlighting = characterManager.StartCoroutine(Highlighting(highlighted, speed));
+            co_highlighting = characterManager.StartCoroutine(Highlighting(speed, immediate));
 
             return co_highlighting;
         }
 
-        public virtual IEnumerator Highlighting(bool highlight, float speedMultiplier)
+        public virtual IEnumerator Highlighting(float speedMultiplier, bool immediate = false)
         {
             Debug.Log("highlighting is not available on this character type!");
             yield return null;
@@ -278,36 +278,35 @@ namespace Characters
         #region Character Flipping
         public Coroutine Flip(float speed = 1, bool immediate = false)
         {
-            Debug.Log("Flip started");
-            if (isFacingDefault)
-                return FaceNotDefault(speed, immediate);
+            if (isFacingLeft)
+                return FaceRight(speed, immediate);
             else
-                return FaceDefault(speed, immediate);
+                return FaceLeft(speed, immediate);
         }
 
-        public Coroutine FaceDefault(float speed = 1, bool immediate = false)
+        public Coroutine FaceLeft(float speed = 1, bool immediate = false)
         {
             if (isFlipping)
                 characterManager.StopCoroutine(co_flipping);
 
-            facingDefault = true;
-            co_flipping = characterManager.StartCoroutine(FaceDirection(facingDefault, speed, immediate));
+            facingLeft = true;
+            co_flipping = characterManager.StartCoroutine(FaceDirection(facingLeft, speed, immediate));
         
             return co_flipping;
         }
 
-        public Coroutine FaceNotDefault(float speed = 1, bool immediate = false)
+        public Coroutine FaceRight(float speed = 1, bool immediate = false)
         {
             if (isFlipping)
                 characterManager.StopCoroutine(co_flipping);
 
-            facingDefault = false;
-            co_flipping = characterManager.StartCoroutine(FaceDirection(facingDefault, speed, immediate));
+            facingLeft = false;
+            co_flipping = characterManager.StartCoroutine(FaceDirection(facingLeft, speed, immediate));
 
             return co_flipping;
         }
 
-        public virtual IEnumerator FaceDirection(bool faceDefault, float speedMultiplier, bool immediate)
+        public virtual IEnumerator FaceDirection(bool faceLeft, float speedMultiplier, bool immediate)
         {
             Debug.Log("Cannot flip a character of this type");
             yield return null;

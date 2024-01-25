@@ -24,7 +24,8 @@ namespace Characters
         private Coroutine co_levelingAlpha = null;
         private Coroutine co_changingColor = null;
         private Coroutine co_flipping = null;
-        private bool isFacingDefault = Character.Default_Orientation;
+
+        private bool isFacingLeft = Character.Default_Orientation;
 
         private bool isTransitioningLayer => co_transitioninglayer != null;
         private bool islevelingAlpha => co_levelingAlpha != null;
@@ -180,49 +181,55 @@ namespace Characters
         }
         #endregion
 
-        public Coroutine FaceDefault(float speed = 1, bool immediate = false)
+    #region Character Flipping
+        public Coroutine Flip(float speed = 1, bool immediate = false)
         {
-            Debug.Log("FaceDefault started");
+            if (isFacingLeft)
+                return FaceRight(speed, immediate);
+            else
+                return FaceLeft(speed, immediate);
+        }
+
+        public Coroutine FaceLeft(float speed = 1, bool immediate = false)
+        {
             if (isFlipping)
                 characterManager.StopCoroutine(co_flipping);
 
-            isFacingDefault = true;
-            co_flipping = characterManager.StartCoroutine(FaceDirection(isFacingDefault, speed, immediate));
+            isFacingLeft = true;
+            co_flipping = characterManager.StartCoroutine(FaceDirection(isFacingLeft, speed, immediate));
 
             return co_flipping;
         }
 
-        public Coroutine FaceNotDefault(float speed = 1, bool immediate = false)
+        public Coroutine FaceRight(float speed = 1, bool immediate = false)
         {
-            Debug.Log("FaceNotDefault started");
             if (isFlipping)
                 characterManager.StopCoroutine(co_flipping);
 
-            isFacingDefault = false;
-            co_flipping = characterManager.StartCoroutine(FaceDirection(isFacingDefault, speed, immediate));
+            isFacingLeft = false;
+            co_flipping = characterManager.StartCoroutine(FaceDirection(isFacingLeft, speed, immediate));
 
             return co_flipping;
         }
 
-        private IEnumerator FaceDirection(bool faceDefault, float speedMultiplier, bool immediate)
+        private IEnumerator FaceDirection(bool faceLeft, float speedMultiplier, bool immediate)
         {
-            Image newRenderer = CreateRenderer(renderer.transform.parent);
-            Vector3 currentScale = newRenderer.transform.localScale;
-            float currentX = System.Math.Abs(currentScale.x);
-            float xScale = faceDefault ? currentX : -currentX;
-            Vector3 newScale = new Vector3(xScale, currentScale.y, currentScale.z);
+            float xScale = faceLeft ? 1 : -1;
+            Vector3 newScale = new Vector3(xScale, 1, 1);
 
             if (!immediate)
             {
-                newRenderer.transform.localScale = newScale;
-                transitionSpeedMultiplier = speedMultiplier;
+                Image newRenderer = CreateRenderer(renderer.transform.parent);
 
+                newRenderer.transform.localScale = newScale;
+
+                transitionSpeedMultiplier = speedMultiplier;
                 TryStartLevelingAlphas();
 
                 while (islevelingAlpha)
                     yield return null;
-            }
 
+            }
             else
             {
                 renderer.transform.localScale = newScale;
@@ -230,5 +237,6 @@ namespace Characters
 
             co_flipping = null;
         }
+        #endregion
     }
 }
