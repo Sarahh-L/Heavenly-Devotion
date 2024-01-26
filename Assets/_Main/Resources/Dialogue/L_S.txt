@@ -1,24 +1,27 @@
-﻿CreateCharacter(Alexandria -e true), CreateCharacter(Shein -e true), CreateCharacter(Loki -e true)
+﻿CreateCharacter(Alexandria -e true)
 
-wait(1)
+wait(5)
 
-[wait]Shein.Flip(-i true)
+Alexandria "Ah, greetings"
 
-wait(1)
+sdfsdsdf
+dfsdfsdaf
+sadfsadfs
 
-[wait]Alexandria.SetSprite(Upset -spd 0.75)
+Alexandria.SetSprite(Mad -spd 0.75)
 
-[wait]Alexandria.SetPosition(1), [wait]Alexandria.SetPosition(0)
+wait(2)
+...
 
-wait(1)
+[wait]Alexandria.SetSprite(Upset)
 
-[wait]Unhighlight(Alexandria Shein), wait(1), [wait]Highlight(Alexandria Shein), wait(1)
-wait(1)
+wait(2)
 
-Loki.Show(-i true), wait(0.5)
+[wait]Alexandria.SetSprite(Happy)
 
+wait(2)
 
-[wait]Highlight(Alexandria -o true), wait(1), [wait]Unhighlight(Alexandria -o true), wait(1)
+[wait]Alexandria.SetSprite(Neutral)
 
 
 
