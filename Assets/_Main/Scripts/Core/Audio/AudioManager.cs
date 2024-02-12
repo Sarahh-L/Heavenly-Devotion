@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +6,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     private const string sfx_parent_name = "sfx";
+    private const string sfx_name_format = "sfx - [{0}]";
     public static AudioManager instance { get; private set; }
 
     public AudioMixerGroup musicMixer;
@@ -33,8 +33,58 @@ public class AudioManager : MonoBehaviour
         sfxRoot.SetParent(transform);
 
     }
-    public void PlaySoundEffect(string filepath)
+    public AudioSource PlaySoundEffect(string filePath, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false)
     {
+        AudioClip clip = Resources.Load<AudioClip>(filePath);
 
+        if (clip == null)
+        {
+            Debug.LogError($"Could not load audio file '{filePath}'.");
+            return null;
+        }
+
+        return PlaySoundEffect(clip, mixer, volume, pitch, loop);
     }
+
+    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false)
+    {
+        AudioSource effectSource = new GameObject(string.Format(sfx_name_format, clip.name)).AddComponent<AudioSource>();
+        effectSource.transform.SetParent(sfxRoot);
+        effectSource.transform.position = sfxRoot.position;
+
+        effectSource.clip = clip;
+
+        if (mixer == null)
+            mixer = sfxMixer;
+
+        effectSource.outputAudioMixerGroup = mixer;
+        effectSource.volume = volume;
+        effectSource.spatialBlend = 0;
+        effectSource.pitch = pitch;
+        effectSource.loop = loop;
+
+        effectSource.Play();
+
+        if (!loop)
+            Destroy(effectSource.gameObject, (clip.length / pitch) + 1);
+
+        return effectSource;
+    }
+
+    public void StopSoundEffect(AudioClip clip) => StopSoundEffect(clip.name);
+    public void StopSoundEffect(string soundName)
+    {
+        soundName = soundName.ToLower();
+
+        AudioSource[] sources = sfxRoot.GetComponentsInChildren<AudioSource>();
+        foreach(var source in sources)
+        {
+            if (source.clip.name == soundName)
+            {
+                Destroy(source.gameObject);
+                return;
+            }
+        }
+    }
+
 }
