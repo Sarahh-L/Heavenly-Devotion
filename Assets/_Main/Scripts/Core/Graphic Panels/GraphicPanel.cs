@@ -9,13 +9,16 @@ public class GraphicPanel
     public GameObject rootPanel;
     private List<GraphicLayer> layers = new List<GraphicLayer> ();
 
-    public GraphicLayer GetLayer(int layerDepth)
+    public GraphicLayer GetLayer(int layerDepth, bool createIfDoesNotExist = false)
     {
         for (int i = 0; i < layers.Count; i++)
         {
             if (layers[i].layerDepth == layerDepth)
                 return layers[i];
         }
+
+        if (createIfDoesNotExist )
+            return CreateLayer(layerDepth);
 
         return null;
     }
@@ -33,6 +36,26 @@ public class GraphicPanel
         rect.offsetMin = Vector2.zero;
         rect.offsetMax = Vector2.one;
 
-        // e 14 p 1  14:16
+        layer.panel = panel.transform;
+        layer.layerDepth = layerDepth;
+
+        // finds / adds layers
+        int index = layers.FindIndex(l =>l.layerDepth > layerDepth);
+        if (index == -1)
+            layers.Add(layer);
+        else
+            layers.Insert(index, layer);
+
+        // sorts items in hierarchy
+        for (int i = 0; i < layers.Count; i++) 
+            layers[i].panel.SetSiblingIndex(layers[i].layerDepth);
+
+        return layer;
+    }
+
+    public void Clear(float transitionSpeed = 1, Texture blendTexture = null, bool immediate = false)
+    {
+        foreach (var layer in layers)
+            layer.Clear(transitionSpeed, blendTexture, immediate);
     }
 }

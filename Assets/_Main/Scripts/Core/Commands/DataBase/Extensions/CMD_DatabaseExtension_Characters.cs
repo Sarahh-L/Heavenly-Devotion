@@ -55,22 +55,22 @@ namespace Commands
             string characterName = data[0];
             bool enable = false;
             bool immediate = false;
-
             var parameters = ConvertDataToParameters(data);
 
             parameters.TryGetValue(Param_Enable, out enable, defaultValue: false);
             parameters.TryGetValue(Param_Immediate, out immediate, defaultValue: false);
-
+ 
 
             Character character = CharacterManager.instance.CreateCharacter(characterName);
 
             if (!enable)
                 return;
-
             else if (immediate)
+            {
                 character.isVisible = true;
-            else
                 character.Show();
+            }
+
         }
         #endregion
 

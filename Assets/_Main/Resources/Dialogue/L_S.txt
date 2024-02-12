@@ -1,4 +1,16 @@
-﻿CreateCharacter(Alexandria -e true)
+﻿wait(1)
+
+SetLayerMedia(background barracks -blend hurricane -spd 0.7 -i true), SetLayerMedia(background 1 SpaceshipInterior)
+
+CreateCharacter(Alexandria -e true -i true), CreateCharacter(Loki), CreateCharacter(Shein)
+
+Alexandria "Welcome to the barracks!"
+
+"swaggy"
+
+ClearLayerMedia(background -b hypno) 
+
+"Cinematic should be clear!"
 
 wait(5)
 
@@ -23,25 +35,23 @@ wait(2)
 
 [wait]Alexandria.SetSprite(Neutral)
 
-
-
-
-
-MoveCharacter(Loki -x 1 -y 1 -spd 1 -i false)
+MoveCharacter(Loki -x 1 -y 1 -spd 1 -i false), Hide(Alexandria -spd 0.5)
 
 Alexandria "Now you see me {wa 1} Now you don't!"
 
-Show(Alexandria Shein Loki -spd 0.7)
+Show(Alexandria Shein Loki -spd 0.7), MoveCharacter(Shein -spd 0.5 -i true) 
 
-MoveCharacter(Shein 0.1 -spd 0.5 -i true) 
+wait(1)
 
-Hide(Alexandria -i true)
+[wait]Shein.Flip(-i true), Hide(Alexandria -i true)
 
 Loki "bruh"
 
 Shein "what"
 
-MoveCharacter(Shein 0.5 -spd 0.8)
+wait(2)
+
+[wait]Shein.Flip(-i true), MoveCharacter(Shein 0.5 -spd 0.8)
 
 MoveCharacter(Alexandria 1 0.5 -i true), wait (3), MoveCharacter(Alexandria 0 0.5 -i true)
 Alexandria "Snapping to positions"
