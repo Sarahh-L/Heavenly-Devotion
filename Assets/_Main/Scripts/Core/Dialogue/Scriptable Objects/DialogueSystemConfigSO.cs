@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Characters;
 using TMPro;
+using UnityEngine.Rendering;
 
 namespace Dialogue
 {
@@ -14,5 +13,9 @@ namespace Dialogue
 
         public Color defaultTextColor = Color.white;    
         public TMP_FontAsset defaultFont;
+
+        public float defaultNameFontSize = 22;
+        public float defaultDialogueFontSize = 18;
+        
     }
 }

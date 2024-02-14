@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using Characters;
 
 namespace Dialogue
@@ -15,6 +14,8 @@ namespace Dialogue
         public DialogueContainer dialogueContainer = new DialogueContainer();
         private ConversationManager conversationManager;
         private TextArchitect architect;
+
+        [SerializeField] private CanvasGroup mainCanvas;
 
         public static DialogueSystem instance
         {
@@ -30,6 +31,7 @@ namespace Dialogue
         public bool isRunningConversation => conversationManager.isRunning;
 
         public DialogueContinuePrompt prompt;
+        private CanvasGroupController cgController;
 
         private void Awake()
         {
@@ -42,15 +44,18 @@ namespace Dialogue
                 DestroyImmediate(gameObject);
         }
 
-        bool initialized = false;
+        bool _initialized = false;
 
         private void Initialize()
         {
-            if (initialized)
+            if (_initialized)
                 return;
 
             architect = new TextArchitect(dialogueContainer.dialogueText);
             conversationManager = new ConversationManager(architect);
+
+            cgController = new CanvasGroupController(this, mainCanvas);
+            dialogueContainer.Initialize();
         }
 
         public void OnUserPrompt_Next()
@@ -70,8 +75,10 @@ namespace Dialogue
         {
             dialogueContainer.SetDialogueColor(config.dialogueColor);
             dialogueContainer.SetDialogueFont(config.dialogueFont);
+            dialogueContainer.SetDialogueFontSize(config.dialogueFontSize);
             dialogueContainer.nameContainer.SetNameColor(config.nameColor);
             dialogueContainer.nameContainer.SetNameFont(config.nameFont);
+            dialogueContainer.nameContainer.SetNameFontSize(config.nameFontSize);
         }
 
         public void ShowSpeakerName(string speakerName = "")
@@ -86,8 +93,7 @@ namespace Dialogue
 
         public Coroutine Say(string speaker, string dialogue)
         {
-            string formattedDialogue = $"{speaker}: {dialogue}"; // Separate speaker and dialogue
-            List<string> conversation = new List<string>() { formattedDialogue };
+            List<string> conversation = new List<string>() { $"{speaker} \"{dialogue}\"" };
             return Say(conversation);
         }
 
@@ -95,5 +101,10 @@ namespace Dialogue
         {
             return conversationManager.StartConversation(conversation);
         }
+
+        public bool isVisible => cgController.isVisible;
+        public Coroutine Show(float speed = 1f, bool immediate = false) => cgController.Show(speed, immediate);
+
+        public Coroutine Hide(float speed = 1f, bool immediate = false) => cgController.Hide(speed, immediate);
     }
 }

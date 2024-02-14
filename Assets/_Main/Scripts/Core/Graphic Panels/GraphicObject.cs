@@ -9,6 +9,7 @@ public class GraphicObject
 {
     #region const string
     private const string name_format = " Graphic - [{0}]";
+    private const string default_ui_material = "Default UI Material";
     private const string material_path = "Materials/layerTransitionMaterial";
     private const string material_field_color =         "_Color";
     private const string material_field_maintex =       "_MainTex";
@@ -119,15 +120,23 @@ public class GraphicObject
         bool isBlending = blend != null;
         bool fadingIn = target > 0;
 
+        if (renderer.material.name == default_ui_material)
+        {
+            Texture tex = renderer.material.GetTexture(material_field_maintex);
+            renderer.material = GetTransitionMaterial();
+            renderer.material.SetTexture(material_field_maintex, tex);
+        }
+
         renderer.material.SetTexture(material_field_blendtex, blend);
         renderer.material.SetFloat(material_field_alpha, isBlending ? 1 : fadingIn ? 0 : 1);
         renderer.material.SetFloat(material_field_blend, isBlending ? fadingIn ? 0 : 1 : 1);
+
 
         string opacityParam = isBlending ? material_field_blend : material_field_alpha;
 
         while (renderer.material.GetFloat(opacityParam) != target)
         {
-            float opacity = Mathf.MoveTowards(renderer.material.GetFloat(opacityParam), target, speed * Time.deltaTime);
+            float opacity = Mathf.MoveTowards(renderer.material.GetFloat(opacityParam), target, speed * GraphicPanelManager.Default_Transition_Speed * Time.deltaTime);
             renderer.material.SetFloat(opacityParam, opacity);
             yield return null;
         }
@@ -138,7 +147,11 @@ public class GraphicObject
         if (target == 0)
             Destroy();
         else
+        {
             DestroyBackgroundGraphicOnLayer();
+            renderer.texture = renderer.material.GetTexture(material_field_maintex);
+            renderer.material = null;
+        }
     }
 
     #endregion

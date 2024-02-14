@@ -2,13 +2,17 @@
 
 SetLayerMedia(background barracks -blend hurricane -spd 0.7 -i true), SetLayerMedia(background 1 SpaceshipInterior)
 
-CreateCharacter(Alexandria -e true -i true), CreateCharacter(Loki), CreateCharacter(Shein)
+CreateCharacter(Alexandria -e true -i true), CreateCharacter(Loki), CreateCharacter(Shein), CreateCharacter(Mako -e true -i true), MoveCharacter(Mako 1 0.5 -i true)
 
 Alexandria "Welcome to the barracks!"
 
 "swaggy"
+HideDB()
 
 ClearLayerMedia(background -b hypno) 
+
+wait(2)
+
 
 "Cinematic should be clear!"
 
@@ -30,14 +34,20 @@ wait(2)
 wait(2)
 
 [wait]Alexandria.SetSprite(Happy)
+Alexandria.Animate(hop)
+[wait]Mako.SetSprite(Happy)
 
 wait(2)
 
 [wait]Alexandria.SetSprite(Neutral)
 
+[wait]HideUI(-spd 0.1)
+
 MoveCharacter(Loki -x 1 -y 1 -spd 1 -i false), Hide(Alexandria -spd 0.5)
 
 Alexandria "Now you see me {wa 1} Now you don't!"
+
+[wait]ShowUI(-i true)
 
 Show(Alexandria Shein Loki -spd 0.7), MoveCharacter(Shein -spd 0.5 -i true) 
 
