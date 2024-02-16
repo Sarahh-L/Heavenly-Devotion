@@ -3,10 +3,11 @@
 playsfx(sparkle)
 playsong("space")
 narrator "guh"
+narrator "auto enable"
 
-<mainChar> "My name is <mainChar>. {wa 2} what time is it?"
+<mainChar> "tag manager testing <mainChar>. {wa 1} what time is it?"
 
-Narrator "The time is <time> and you are only level fghseuiogrhfgfjghkdjfhgkdhgkdfhjjjjjjjjjjjjjjghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh <playerLevel>"
+Narrator "The time is <time> and you are only level fghseuiogrhfgfjghkdjfhgkdhgkdfhjjjjjjjjjjjjjjghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh <playerLevel>"
 
 stopsfx(sparkle)
 
@@ -16,7 +17,7 @@ CreateCharacter(Alexandria -e true -i true), CreateCharacter(Loki), CreateCharac
 
 Alexandria "Welcome to the barracks!"
 
-"swaggy"
+"hide dialogue box"
 HideDB()
 
 ClearLayerMedia(background -b hypno) 
@@ -24,15 +25,11 @@ ClearLayerMedia(background -b hypno)
 wait(2)
 
 
-"Cinematic should be clear!"
+"dialogue box return- and the cinematic should be clear!"
 
 wait(5)
 
 Alexandria "Ah, greetings"
-
-sdfsdsdf
-dfsdfsdaf
-sadfsadfs
 
 Alexandria.SetSprite(Mad -spd 0.75)
 
@@ -44,9 +41,10 @@ wait(2)
 wait(2)
 
 [wait]Alexandria.SetSprite(Happy)
-[wait]Alexandria.Animate(-a Shiver -st true)
+Alexandria "hop!"
+[wait]Alexandria.Animate(-a Hop), [wait]Alexandria.Animate(-a Hop)
 [wait]Mako.SetSprite(Happy)
-[wait]Mako.Animate(-a Shiver -st true)
+[wait]Mako.Animate(-a Shiver -st true), [wait]Mako.Animate(-a Shiver -st true)
 
 wait(2)
 
@@ -54,28 +52,26 @@ wait(2)
 
 [wait]HideUI(-spd 0.1)
 
-MoveCharacter(Loki -x 1 -y 1 -spd 1 -i false), Hide(Alexandria -spd 0.5)
-
-Alexandria "Now you see me {wa 1} Now you don't!"
-
+MoveCharacter(Loki -x 1 -y 1 -spd 1 -i false)
 [wait]ShowUI(-i true)
 
-Show(Alexandria Shein Loki -spd 0.7), MoveCharacter(Shein -spd 0.5 -i true) 
-
-wait(1)
-
-[wait]Shein.Flip(-i true), Hide(Alexandria -i true)
-
-Loki "bruh"
-
-Shein "what"
-
+narrator " auto off- dialogue skipping"
+[wait]Alexandria.SetSprite(Happy)
 wait(2)
+[wait]Alexandria.SetSprite(Upset)
+Alexandria "dfdrgsdg"
+Alexandria "dfdrsdgergdg"
+Alexandria "dfdrasrfawetgawgsdg"
+Alexandria "dfdrgasdfawesdg"
+Alexandria "dfdrgefwegersdg"
+Alexandria "dfdrgsdg"
+Alexandria "dfdrsdgergdg"
+Alexandria "dfdrasrfawetgawgsdg"
+Alexandria "dfdrgasdfawesdg"
+Alexandria "dfdrgefwegersdg"
+Alexandria "skipping complete!"
 
-[wait]Shein.Flip(-i true), MoveCharacter(Shein 0.5 -spd 0.8)
 
-MoveCharacter(Alexandria 1 0.5 -i true), wait (3), MoveCharacter(Alexandria 0 0.5 -i true)
-Alexandria "Snapping to positions"
 
 
 
