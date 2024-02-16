@@ -70,6 +70,9 @@ namespace Commands
             // Try to get the blending texture for the media is we are using one
             parameters.TryGetValue(param_blendtex, out blendTexName);
 
+            pathToGraphic = FilePaths.GetPathToResources(FilePaths.resources_backgroundImages, mediaName);
+            graphic = Resources.Load<Texture>(pathToGraphic);
+
             // Run logic
             pathToGraphic = GetpathToGraphic(FilePaths.resources_backgroundImages, mediaName);
             graphic = Resources.Load<Texture>(pathToGraphic);

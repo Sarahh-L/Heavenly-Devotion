@@ -13,6 +13,7 @@ namespace Commands
         private static string[] Param_Immediate => new string[] { "-i", "-immediate" };     // Specify within the MoveCharacter command - will not work for CreateCharacter
         private static string[] Param_Speed => new string[] { "-spd", "-speed" };
         private static string[] Param_Smooth => new string[] { "-s", "-smooth" };
+        private static string[] Param_State => new string[] { "-st", "-state" };
         private static string Param_XPos => "-x";
         private static string Param_YPos => "-y";
         new public static void Extend(CommandDatabase database)
@@ -40,6 +41,7 @@ namespace Commands
             CommandDatabase spriteCommands = CommandManager.instance.CreateSubDatabase(CommandManager.Database_Characters_Sprite);
             spriteCommands.AddCommand("setsprite", new Func<string[], IEnumerator>(SetSprite));
             spriteCommands.AddCommand("flip", new Func<string[], IEnumerator>(Flip));
+            spriteCommands.AddCommand("animate", new Func<string[], IEnumerator>(Animate));
         }
 
         #region Sorting characters
@@ -597,5 +599,49 @@ namespace Commands
             }
         }
         #endregion
+
+        public static IEnumerator Animate(string[] data)
+        {
+            Character character = CharacterManager.instance.GetCharacter(data[0], createIfDoesNotExist: false) as Character;
+            int layer = 0;
+            string spriteName;
+            bool state = false;
+            string animation;
+            float speed;
+
+            if (character == null || data.Length < 2)
+                yield break;
+
+            // Grab the extra parameters
+            var parameters = ConvertDataToParameters(data, startingIndex: 1);
+
+            // Try to get the sprite name
+            parameters.TryGetValue(new string[] { "-s", "-sprite" }, out spriteName);
+            // Try to get the layer
+            parameters.TryGetValue(new string[] { "-l", "-layer" }, out layer, defaultValue: 0);
+            // Try to get the animation
+            parameters.TryGetValue(new string[] { "-a", "-animation" }, out animation);
+            // try to get smoothing
+            parameters.TryGetValue(Param_State, out state, defaultValue: false);
+
+            //character.animator.SetTrigger(animation);
+            //character.animator.SetBool(animation, state);
+            // Try to get the transition speed
+            bool specifiedSpeed = parameters.TryGetValue(Param_Speed, out speed, defaultValue: 0.1f);
+
+            if (!specifiedSpeed)
+                parameters.TryGetValue(Param_State,out state, defaultValue: true);
+
+            if (state)
+                character.Animate(animation, state);
+
+            else
+            {
+                CommandManager.instance.AddTerminationActionToCurrentProcess(() => { character?.Animate(animation, state); });
+                yield return character.Animate(animation, state);
+            }
+
+            yield return null;
+        }
     }
 }

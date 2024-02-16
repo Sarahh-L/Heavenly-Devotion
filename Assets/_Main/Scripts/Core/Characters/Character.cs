@@ -3,10 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 namespace Characters 
 {
@@ -326,16 +323,22 @@ namespace Characters
         #region Character Animation
 
         // Trigger anim state
-        public void Animate(string animation)
+        public Coroutine Animate(string animation)
         {
             animator.SetTrigger(animation);
+
+            //return Animate(animation);
+            return null;
         }
 
         // Bool anim state
-        public void Animate(string animation, bool state)
+        public Coroutine Animate(string animation, bool state)
         {
             animator.SetBool(animation, state);
             animator.SetTrigger(Animation_Refresh_Trigger);
+
+            //return Animate(animation, state);
+            return null;
         }
         #endregion
 

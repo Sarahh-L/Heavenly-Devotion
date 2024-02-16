@@ -1,5 +1,11 @@
 ﻿wait(1)
 
+playsfx(sparkle)
+playsong("space")
+narrator "guh"
+
+stopsfx(sparkle)
+
 SetLayerMedia(background barracks -blend hurricane -spd 0.7 -i true), SetLayerMedia(background 1 SpaceshipInterior)
 
 CreateCharacter(Alexandria -e true -i true), CreateCharacter(Loki), CreateCharacter(Shein), CreateCharacter(Mako -e true -i true), MoveCharacter(Mako 1 0.5 -i true)
@@ -34,8 +40,9 @@ wait(2)
 wait(2)
 
 [wait]Alexandria.SetSprite(Happy)
-Alexandria.Animate(hop)
+[wait]Alexandria.Animate(-a Shiver -st true)
 [wait]Mako.SetSprite(Happy)
+[wait]Mako.Animate(-a Shiver -st true)
 
 wait(2)
 

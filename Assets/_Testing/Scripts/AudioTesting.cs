@@ -16,17 +16,13 @@ namespace Testing
 
         IEnumerator Running()
         {
-            CharSprite Alexandria = CreateCharacter("Alexandria") as CharSprite;
-            Character Me = CreateCharacter("Me");
-            Alexandria.Show();
+            AudioManager.instance.PlayTrack("Audio/Music/Fly Me To The moon", volumeCap: 0.9f);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(3);
 
-            AudioManager.instance.PlaySoundEffect("Audio/SFX/sparkle",loop: true);
-            yield return Me.Say("bro shut up");
-            yield return new WaitForSeconds(1f);
-            Alexandria.Animate("Hop");
-            AudioManager.instance.StopSoundEffect("sparkle");
+            AudioManager.instance.PlayTrack("Audio/Music/space", volumeCap: 0.6f);
+
+            yield return null;
         }
     }
 }

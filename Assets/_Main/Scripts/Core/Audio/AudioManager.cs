@@ -7,7 +7,10 @@ public class AudioManager : MonoBehaviour
 {
     private const string sfx_parent_name = "sfx";
     private const string sfx_name_format = "sfx - [{0}]";
+    public const float track_transition_speed = 1;
     public static AudioManager instance { get; private set; }
+
+    public Dictionary <int, AudioChannel> channels = new Dictionary<int, AudioChannel>();
 
     public AudioMixerGroup musicMixer;
     public AudioMixerGroup sfxMixer;
@@ -33,6 +36,7 @@ public class AudioManager : MonoBehaviour
         sfxRoot.SetParent(transform);
 
     }
+    #region Sound effect
     public AudioSource PlaySoundEffect(string filePath, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false)
     {
         AudioClip clip = Resources.Load<AudioClip>(filePath);
@@ -70,7 +74,7 @@ public class AudioManager : MonoBehaviour
 
         return effectSource;
     }
-
+    //--------------------------------------------------------------------------------------------------------------------------\\
     public void StopSoundEffect(AudioClip clip) => StopSoundEffect(clip.name);
     public void StopSoundEffect(string soundName)
     {
@@ -86,5 +90,70 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region Music / ambiance
+    public AudioTrack PlayTrack(string filepath, int channel = 0, bool loop = true, float startingVolume = 0f, float volumeCap = 1f, float pitch = 1f)
+    {
+        AudioClip clip = Resources.Load<AudioClip>(filepath);
+
+        if (clip == null)
+        {
+            Debug.LogError($"Could not load audio file '{filepath}'. Please make sure this exists in the resources directory!");
+            return null;
+        }
+
+        return PlayTrack(clip, channel, loop, startingVolume, volumeCap, pitch, filepath);
+    }
+
+    public AudioTrack PlayTrack(AudioClip clip, int channel = 0, bool loop = true, float startingVolume = 0f, float volumeCap = 1f, float pitch = 1f, string filePath = "")
+    {
+        AudioChannel audioChannel = TryGetChannel(channel, createIfDoesNotExist: true);
+        AudioTrack track = audioChannel.PlayTrack(clip, loop, startingVolume, volumeCap, pitch, filePath);
+        return track;
+    }
+
+    public AudioChannel TryGetChannel(int channelNumber, bool createIfDoesNotExist = false)
+    {
+        AudioChannel channel = null;
+
+        if (channels.TryGetValue(channelNumber, out channel))
+        {
+            return channel;
+        }
+
+        else if (createIfDoesNotExist)
+        {
+            channel = new AudioChannel(channelNumber);
+            channels.Add(channelNumber, channel);
+            return channel;
+        }
+        return null;
+    }
+
+    public void StopTrack(int channel)
+    {
+        AudioChannel c = TryGetChannel(channel, createIfDoesNotExist: false);
+
+        if (c == null)
+            return;
+
+        c.StopTrack();
+    }
+
+    public void StopTrack(string trackName)
+    {
+        trackName = trackName.ToLower();
+
+        foreach (var channel in channels.Values)
+        {
+            if (channel.activeTrack != null && channel.activeTrack.name.ToLower() == trackName)
+            {
+                channel.StopTrack();
+                return;
+            }
+        }
+    }
+    #endregion
 
 }
