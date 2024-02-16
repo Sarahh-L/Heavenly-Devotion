@@ -14,15 +14,19 @@ namespace Dialogue
         public bool isRunning => process != null;
 
     // constructor for conversation characterManager
-        private TextArchitect architect = null;
+        public TextArchitect architect = null;
     // keypress
         private bool userPrompt = false;
+
+        private TagManager tagManager;
 
 
         public ConversationManager(TextArchitect architect)
         {
             this.architect = architect;
             dialogueSystem.onUserPrompt_Next += OnUserPrompt_Next;
+
+            tagManager = new TagManager();
         }
 
         private void OnUserPrompt_Next()
@@ -137,6 +141,8 @@ namespace Dialogue
                 yield return BuildDialogue(segment.dialogue, segment.appendText);
             }
         }
+        // autoreader fixer for waiting
+        public bool isWaitingOnAutoTimer { get; private set; } = false;
 
         IEnumerator WaitForDialogueSegmentSignalToBeTriggered(DL_DialogueData.Dialogue_Segment segment)
         {
@@ -146,14 +152,19 @@ namespace Dialogue
                     yield return WaitForUserInput();
                     break;
                 case DL_DialogueData.Dialogue_Segment.StartSignal.WA:
+                    isWaitingOnAutoTimer = true;
                     yield return new WaitForSeconds(segment.signalDelay);
+                    isWaitingOnAutoTimer = false;
+                    break;
+                default:
                     break;
             }
         }
 
-
         IEnumerator BuildDialogue(string dialogue, bool append = false)
         {
+            dialogue = tagManager.Inject(dialogue);
+
             // build dialogue
             if (!append)
                 architect.Build(dialogue);
@@ -188,8 +199,9 @@ namespace Dialogue
             // Forces character to enter the screen
             if (speakerData.makeCharacterEnter && (!character.isVisible && !character.isRevealing))
                 character.Show();
+
             // add character name to UI
-            dialogueSystem.ShowSpeakerName(speakerData.displayName);
+            dialogueSystem.ShowSpeakerName(tagManager.Inject(speakerData.displayName));
 
             // custmize dialogue for this character- if applicable
             DialogueSystem.instance.ApplySpeakerDataToDialogueContainer(speakerData.name);

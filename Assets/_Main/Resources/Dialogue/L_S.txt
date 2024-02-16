@@ -4,6 +4,10 @@ playsfx(sparkle)
 playsong("space")
 narrator "guh"
 
+<mainChar> "My name is <mainChar>. {wa 2} what time is it?"
+
+Narrator "The time is <time> and you are only level fghseuiogrhfgfjghkdjfhgkdhgkdfhjjjjjjjjjjjjjjghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh <playerLevel>"
+
 stopsfx(sparkle)
 
 SetLayerMedia(background barracks -blend hurricane -spd 0.7 -i true), SetLayerMedia(background 1 SpaceshipInterior)

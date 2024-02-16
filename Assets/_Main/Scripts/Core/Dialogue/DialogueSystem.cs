@@ -14,6 +14,7 @@ namespace Dialogue
         public DialogueContainer dialogueContainer = new DialogueContainer();
         private ConversationManager conversationManager;
         private TextArchitect architect;
+        private AutoReader autoReader;
 
         [SerializeField] private CanvasGroup mainCanvas;
 
@@ -56,9 +57,20 @@ namespace Dialogue
 
             cgController = new CanvasGroupController(this, mainCanvas);
             dialogueContainer.Initialize();
+
+            if (TryGetComponent(out autoReader))
+                autoReader.Initialize(conversationManager);
         }
 
         public void OnUserPrompt_Next()
+        {
+            onUserPrompt_Next?.Invoke();        // ? - if null, nothing will trigger
+
+            if (autoReader != null && autoReader.isOn)
+                autoReader.Disable();
+        }
+
+        public void OnSystemPrompt_Next()
         {
             onUserPrompt_Next?.Invoke();        // ? - if null, nothing will trigger
         }
@@ -73,12 +85,17 @@ namespace Dialogue
 
         public void ApplySpeakerDataToDialogueContainer(CharacterConfigData config)
         {
+            // set dialogue details
             dialogueContainer.SetDialogueColor(config.dialogueColor);
             dialogueContainer.SetDialogueFont(config.dialogueFont);
-            dialogueContainer.SetDialogueFontSize(config.dialogueFontSize);
+            float fontSize = this.config.defaultDialogueFontSize * this.config.dialogueFontScale * config.dialogueFontScale;
+            dialogueContainer.SetDialogueFontSize(fontSize);
+            
+            // set name details
             dialogueContainer.nameContainer.SetNameColor(config.nameColor);
             dialogueContainer.nameContainer.SetNameFont(config.nameFont);
-            dialogueContainer.nameContainer.SetNameFontSize(config.nameFontSize);
+            fontSize = this.config.defaultNameFontSize * config.nameFontScale;
+            dialogueContainer.nameContainer.SetNameFontSize(fontSize);
         }
 
         public void ShowSpeakerName(string speakerName = "")
