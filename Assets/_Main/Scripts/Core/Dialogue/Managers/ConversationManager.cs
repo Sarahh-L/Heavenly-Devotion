@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Characters;
 using Commands;
+using Dialogue.LogicalLines     // Input panel
 
 namespace Dialogue
 {
@@ -19,6 +20,7 @@ namespace Dialogue
         private bool userPrompt = false;
 
         private TagManager tagManager;
+        private LogicalLineManager logicalLineManager;
 
 
         public ConversationManager(TextArchitect architect)
@@ -27,6 +29,7 @@ namespace Dialogue
             dialogueSystem.onUserPrompt_Next += OnUserPrompt_Next;
 
             tagManager = new TagManager();
+            logicalLineManager = new LogicalLineManager();
         }
 
         private void OnUserPrompt_Next()
