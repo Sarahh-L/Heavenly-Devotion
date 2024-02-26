@@ -22,6 +22,9 @@ namespace Dialogue
         private TagManager tagManager;
         private LogicalLineManager logicalLineManager;
 
+        private ConversationQueue conversationQueue;
+        public Conversation conversation => (conversationQueue.IsEmpty() ? null : conversationQueue.top);
+
 
         public ConversationManager(TextArchitect architect)
         {
@@ -30,6 +33,7 @@ namespace Dialogue
 
             tagManager = new TagManager();
             logicalLineManager = new LogicalLineManager();
+            conversationQueue = new ConversationQueue();
         }
 
         private void OnUserPrompt_Next()
@@ -37,12 +41,20 @@ namespace Dialogue
             userPrompt = true;
         }
 
+        #region Conversation Queue (choices)
+        public void Enqueue (Conversation conversation) => conversationQueue.Enqueue(conversation);
+        public void EnqueuePriority (Conversation conversation) => conversationQueue.EnqueuePriority(conversation);
+
+        #endregion
+
         #region Conversation runner
-        public Coroutine StartConversation(List<string> conversation)
+        public Coroutine StartConversation(Conversation conversation)
         {
             StopConversation();
 
-            process = dialogueSystem.StartCoroutine(RunningConversation(conversation));
+            Enqueue(conversation);
+
+            process = dialogueSystem.StartCoroutine(RunningConversation());
 
             return process;
         }
@@ -57,15 +69,20 @@ namespace Dialogue
             process = null;
         }
 
-        IEnumerator RunningConversation(List<string> conversation)
+        IEnumerator RunningConversation()
         {
-            for (int i = 0; i < conversation.Count; i++)
+            while (!conversationQueue.IsEmpty())
             {
+                Conversation currentConversation = conversation;
+                string rawLine = currentConversation.Currentlines();
                 // don't show blank lines or try to run logic through them
-                if (string.IsNullOrWhiteSpace(conversation[i]))
+                if (string.IsNullOrWhiteSpace(rawLine))
+                {
+                    TryAdvanceConversation(currentConversation);
                     continue;
+                }
 
-                Dialogue_Line line = DialogueParser.Parse(conversation[i]);
+                Dialogue_Line line = DialogueParser.Parse(rawLine);
 
                 if (logicalLineManager.TryGetLogic(line, out Coroutine logic))
                 {
@@ -91,8 +108,20 @@ namespace Dialogue
                         CommandManager.instance.StopAllProcesses();
                     }
                 }
+
+                TryAdvanceConversation(currentConversation);
             }
 
+            process = null;
+
+        }
+
+        private void TryAdvanceConversation(Conversation conversation)
+        {
+            conversation.IncrementProgress();
+
+            if (conversation.HasReachedEnd())
+                conversationQueue.Dequeue();
         }
         #endregion
 

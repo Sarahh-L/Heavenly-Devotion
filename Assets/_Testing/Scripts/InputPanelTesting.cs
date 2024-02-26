@@ -1,30 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Characters;
 
-public class InputPanelTesting : MonoBehaviour
+namespace Testing
 {
-    public InputPanel inputPanel;
-    // Start is called before the first frame update
-    void Start()
+    public class InputPanelTesting : MonoBehaviour
     {
-        StartCoroutine(Running());
-    }
+        ChoicePanel panel;
+        // Start is called before the first frame update
+        void Start()
+        {
+            panel = ChoicePanel.instance;
+            StartCoroutine(Running());
+        }
 
-    IEnumerator Running()
-    {
-        Character Alexandria = CharacterManager.instance.CreateCharacter("Alexandria", revealAfterCreation: true);
+        IEnumerator Running()
+        {
+            panel = ChoicePanel.instance;
 
-        yield return Alexandria.Say("Hi, whats your name");
+            string[] choices = new string[]
+            {
+                "nuh uh",
+                "yuh huh",
+                "possibly",
+                "no"
+            };
 
-        inputPanel.Show("What is your name?");
+            panel.Show("Your mom?", choices);
 
-        while (inputPanel.isWaitingOnUserInput)
-            yield return null;
+            while (panel.isWaitingOnUserchoice)
+                yield return null;
 
-        string characterName = inputPanel.lastInput;
+            var decision = panel.lastDecision;
 
-        yield return Alexandria.Say($"swaggy, {characterName}");
+            Debug.Log($"Made choice {decision.answerIndex} '{decision.choices[decision.answerIndex]}'");
+        }
+
     }
 }
