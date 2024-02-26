@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Characters;
 using Commands;
-using Dialogue.LogicalLines     // Input panel
+using Dialogue.LogicalLines;    // Input panel
 
 namespace Dialogue
 {
@@ -67,21 +67,29 @@ namespace Dialogue
 
                 Dialogue_Line line = DialogueParser.Parse(conversation[i]);
 
-                // show dialogue
-                if (line.hasDialogue)
-                    yield return Line_RunDialogue(line);
-
-                if (line.hasCommands)
-                    yield return Line_RunCommands(line);
-
-
-                // wait for user input if dialogue was in this line
-                if (line.hasDialogue)
+                if (logicalLineManager.TryGetLogic(line, out Coroutine logic))
                 {
-                    // wait for user input
-                    yield return WaitForUserInput();
+                    yield return logic;
+                }
 
-                    CommandManager.instance.StopAllProcesses();
+                else
+                {
+                    // show dialogue
+                    if (line.hasDialogue)
+                        yield return Line_RunDialogue(line);
+
+                    if (line.hasCommands)
+                        yield return Line_RunCommands(line);
+
+
+                    // wait for user input if dialogue was in this line
+                    if (line.hasDialogue)
+                    {
+                        // wait for user input
+                        yield return WaitForUserInput();
+
+                        CommandManager.instance.StopAllProcesses();
+                    }
                 }
             }
 

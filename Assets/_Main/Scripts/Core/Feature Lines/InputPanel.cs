@@ -1,4 +1,4 @@
-using Systems.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,14 +7,24 @@ using TMPro;
 public class InputPanel : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private CanvasGroup CanvasGroup;
+    public static InputPanel instance { get; private set; }
+
+    [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private Button acceptButton;
     [SerializeField] private TMP_InputField inputField;
 
     private CanvasGroupController cg;
+
+    public string lastInput { get; private set; } = string.Empty;
+
+    public bool isWaitingOnUserInput { get; private set; }
     #endregion
 
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         cg = new CanvasGroupController(this, canvasGroup);
@@ -23,7 +33,7 @@ public class InputPanel : MonoBehaviour
         SetCanvasState(active: false);
         acceptButton.gameObject.SetActive(false);
 
-        inputField.onValueChange.AddListener(OnInputChanged);
+        inputField.onValueChanged.AddListener(OnInputChanged);
         acceptButton.onClick.AddListener(OnAcceptInput);
     }
 
@@ -33,12 +43,14 @@ public class InputPanel : MonoBehaviour
         inputField.text = string.Empty;
         cg.Show();
         SetCanvasState(active: true);
+        isWaitingOnUserInput = true;
     }
 
     public void Hide()
     {
         cg.Hide();
         SetCanvasState(active: false);
+        isWaitingOnUserInput = false;
     }
 
     public void OnAcceptInput()

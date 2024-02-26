@@ -1,21 +1,40 @@
-using Systems.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection;
+using System.Linq;
+using System;
 
 namespace Dialogue.LogicalLines
 {
     public class LogicalLineManager
     {
-        private DialogueSystem dialogueSystem => dialogueSystem.instance;
+        private DialogueSystem dialogueSystem => DialogueSystem.instance;
         private List<ILogicalLine> logicalLines = new List<ILogicalLine>();
 
-        public bool TryGetLogic(Dialogue_Line line out Coroutine logic)
+        public LogicalLineManager() => LoadLogicalLines();
+
+        private void LoadLogicalLines()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Type[] lineTypes = assembly.GetTypes()
+                                        .Where(t => typeof(ILogicalLine).IsAssignableFrom(t) && !t.IsInterface)
+                                        .ToArray();
+
+            foreach (Type lineType in lineTypes)
+            {
+                ILogicalLine line = (ILogicalLine)Activator.CreateInstance(lineType);
+                logicalLines.Add(line);
+            }
+        }
+
+        public bool TryGetLogic(Dialogue_Line line, out Coroutine logic)
         {
             foreach (var logicalLine in logicalLines)
             {
                 if (logicalLine.Matches(line))
                 {
-                    logic = dialogueSystem.StartCoroutine(logicalLine.Execute());
+                    logic = dialogueSystem.StartCoroutine(logicalLine.Execute(line));
                     return true;
                 }
             }

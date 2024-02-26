@@ -7,6 +7,7 @@ namespace Dialogue
 {
     public class DL_SpeakerData
     {
+        public string rawData { get; private set; } = string.Empty;
         public string name, castName;
 
         // name that will display in the dialogue box to show who is speaking
@@ -45,6 +46,7 @@ namespace Dialogue
         }
         public DL_SpeakerData(string rawSpeaker)
         {
+            rawData = rawSpeaker;
             rawSpeaker = ProcessKeywords(rawSpeaker);
 
             string pattern = @$"{NameCastID}|{PositionCastID}|{ExpressionCastID.Insert(ExpressionCastID.Length - 1, @"\")}";

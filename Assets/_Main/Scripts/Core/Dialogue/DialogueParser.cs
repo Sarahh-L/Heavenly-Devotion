@@ -22,7 +22,7 @@ namespace Dialogue
 
             Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommand = '{commands}'");
 
-            return new Dialogue_Line(speaker, dialogue, commands);
+            return new Dialogue_Line(rawLine, speaker, dialogue, commands);
         } 
 
         private static (string, string, string) RipContent(string rawLine)

@@ -5,7 +5,9 @@ playsong("space")
 narrator "guh"
 narrator "auto enable"
 
-<mainChar> "tag manager testing <mainChar>. {wa 1} what time is it?"
+input "Type Your Name"
+
+<mainChar> "tag manager testing <input>. {wa 1} what time is it?"
 
 Narrator "The time is <time> and you are only level fghseuiogrhfgfjghkdjfhgkdhgkdfhjjjjjjjjjjjjjjghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh <playerLevel>"
 
