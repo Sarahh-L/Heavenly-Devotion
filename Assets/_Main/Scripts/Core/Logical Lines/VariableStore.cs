@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using static VariableStore;
 
 public class VariableStore
 {
     private const string default_database_name = "Default";
     private const char database_variable_relational_id = '.';
+    public static readonly string regex_variable_ids = @"[!]?\$[a-zA-Z0-9_.]+";
+    public const char variable_id = '$';
 
     #region Variables
     public class Database
@@ -149,6 +150,7 @@ public class VariableStore
     }
     #endregion
 
+
     #region Extract Value
     private static (string[], Database, string) ExtractInfo(string name)
     {
@@ -159,6 +161,15 @@ public class VariableStore
         return (parts, db, variableName);
     }
     #endregion
+
+    public static bool HasVariable(string name)
+    {
+        string[] parts = name.Split(database_variable_relational_id);
+        Database db = parts.Length > 1 ? GetDatabase(parts[0]) : defaultDatabase;
+        string variableName = parts.Length > 1 ? parts[1] : parts[0];
+
+        return db.variables.ContainsKey(variableName);
+    }
 
     #region Printing
     public static void PrintAllDatabases()

@@ -164,7 +164,7 @@ namespace Commands
 
             if (sound == null)
             {
-                Debug.Log($"Was not able to load voice '{filepath}'.");
+                Debug.Log($"Was not able to load track '{filepath}'.");
                 return;
             }
 

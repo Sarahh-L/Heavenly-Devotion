@@ -600,6 +600,7 @@ namespace Commands
         }
         #endregion
 
+        #region Character animation
         public static IEnumerator Animate(string[] data)
         {
             Character character = CharacterManager.instance.GetCharacter(data[0], createIfDoesNotExist: false) as Character;
@@ -643,5 +644,6 @@ namespace Commands
 
             yield return null;
         }
+        #endregion
     }
 }
