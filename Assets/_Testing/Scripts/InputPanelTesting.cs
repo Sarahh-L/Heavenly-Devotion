@@ -28,7 +28,7 @@ namespace Testing
 
             panel.Show("Your mom?", choices);
 
-            while (panel.isWaitingOnUserchoice)
+            while (panel.isWaitingOnUserChoice)
                 yield return null;
 
             var decision = panel.lastDecision;

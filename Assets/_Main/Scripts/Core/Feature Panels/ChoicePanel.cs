@@ -25,7 +25,7 @@ public class ChoicePanel : MonoBehaviour
 
     public ChoicePanelDecision lastDecision { get; private set; }
 
-    public bool isWaitingOnUserchoice { get; private set; } = false;
+    public bool isWaitingOnUserChoice { get; private set; } = false;
 
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class ChoicePanel : MonoBehaviour
     {
         lastDecision = new ChoicePanelDecision(question, choices);
 
-        isWaitingOnUserchoice = true;
+        isWaitingOnUserChoice = true;
 
         cg.Show();
         cg.SetInteractableState(active: true);
@@ -117,7 +117,7 @@ public class ChoicePanel : MonoBehaviour
             return;
 
         lastDecision.answerIndex = index;
-        isWaitingOnUserchoice = false;
+        isWaitingOnUserChoice = false;
         Hide();
     }
 

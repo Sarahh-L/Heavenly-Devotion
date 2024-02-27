@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using System;
+
+using static Dialogue.LogicalLines.LogicalLineUtilities.Encapsulation;
 
 namespace Dialogue.LogicalLines
 {
     public class LL_Choice : ILogicalLine
     {
         public string keyword => "choice";
-        private const char encapsulation_start = "{";
-        private const char encapsulation_end = "}";
-        private const char choice_identifier = "-";
+        private const char choice_identifier = '-';
 
         public IEnumerator Execute(Dialogue_Line line)
         {
-           RawChoiceData data = RipChoiceData();
+            var currentConversation = DialogueSystem.instance.conversationManager.conversation;
+            var progress = DialogueSystem.instance.conversationManager.conversationProgress;
+            EncapsulatedData data = RipEncapsulationData(currentConversation, progress, ripHeaderandEncapsulators: true);
            List<Choice> choices = GetChoicesFromData(data);
         
-            string title = line.dialogueData.rawData;
+            string title = line.dialogue.rawData;
             ChoicePanel panel = ChoicePanel.instance;
-            string[] choiceTitle = choices.Select (c => c.title).ToArray();
+            string[] choiceTitles = choices.Select(c => c.title).ToArray();
 
             panel.Show(title, choiceTitles);
 
@@ -35,38 +38,10 @@ namespace Dialogue.LogicalLines
 
         public bool Matches(Dialogue_Line line)
         {
+            return (line.hasSpeaker && line.speakerData.name.ToLower() == keyword);
         }
 
-        private RawChoiceData RipChoiceData()
-        {
-            Conversation currentConversation = DialogueSystem.instance.conversationManager.conversation;
-            int currentProgress = DialogueSystem.instance.conversationManager.conversationProgress;
-            int encapsulateDepth = 0;
-            RawChoiceData data = new RawChoiceData { lines = new List<string>(), endingIndex = 0};
-            for (int i = currentProgress; i < currentConversation.Count; i++)
-            {
-                string line = currentConversation.GetLines()[i];
-                data.lines.Add(line);
-
-                if (IsEncapsulationStart(line))
-                {
-                    encapsulateDepth++;
-                    continue;
-                }
-
-                if (IsEncapsulationEnd(line))
-                {
-                    encapsulateDepth--;
-                    if (encapsulateDepth == 0)
-                    {
-                        data.endingIndex = i;
-                        break;
-                    }
-                }
-            }
-        }
-
-        private List<Choice> GetChoicesFromData(RawChoiceData data)
+        private List<Choice> GetChoicesFromData(EncapsulatedData data)
         {
             List<Choice> choices = new List<Choice>();
             int encapsulateDepth = 0;
@@ -132,16 +107,7 @@ namespace Dialogue.LogicalLines
             choice.resultLines.Add(line);
         }
 
-        private bool IsEncapsulationStart(string line) => line.Trim().StartsWith(encapsulation_start);
-        private bool IsEncapsulationEnd(string line) => line.Trim().StartsWith(encapsulation_end);
-
         private bool IsChoiceStart(string line) => line.Trim().StartsWith(choice_identifier);
-
-        private struct RawChoiceData
-        {
-            public List<string> lines;
-            public int endingIndex;
-        }
 
         private struct Choice
         {

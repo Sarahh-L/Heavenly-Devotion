@@ -18,6 +18,8 @@ public class FilePaths
     public static readonly string resources_music = $"{resources_audio}Music/";
     public static readonly string resources_ambiance = $"{resources_audio}Ambiance/";
 
+    public static readonly string resources_dialogueFiles = $"Dialogue Files/";
+
     public static string GetPathToResources(string defaultpath, string resourceName)
     {
         if (resourceName.StartsWith(home_directory_symbol)) 

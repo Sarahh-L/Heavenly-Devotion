@@ -13,8 +13,8 @@ namespace Dialogue
             this.progress = progress;
         }
 
-        public int Getprogress() => progress;
-        public void Setprogress(int value) => progress = value;
+        public int GetProgress() => progress;
+        public void SetProgress(int value) => progress = value;
 
         public void IncrementProgress() => progress++;
         public int Count => lines.Count;

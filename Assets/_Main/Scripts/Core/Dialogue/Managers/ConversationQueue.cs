@@ -29,5 +29,7 @@ namespace Dialogue
         }
 
         public bool IsEmpty() => conversationQueue.Count == 0;
+
+        public void Clear() => conversationQueue.Clear();
     }
 }

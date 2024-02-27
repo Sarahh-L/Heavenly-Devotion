@@ -1,4 +1,31 @@
-﻿wait(1)
+﻿enter Alexandria " ya like jazz?"
+
+choice "Do you like jazz?"
+{
+	-Nah
+		Alexandria "but why :("
+		<mainChar> "it's dumb"
+		Alexandria "bruh"
+		Load(Test)
+	-Sure
+		Alexandria "Awesome! {wa 0.5} i really like jazz, too!"
+		"it's nice sounding"
+		"... except when it's not"
+		Load(Test -enqueue true)
+	-What
+	Alexandria "do you.... not know what jazz is?"
+	choice "Do you know what jazz is?"
+	{
+		-Not really
+			Alexandria "... that's sad"
+		-Uh, of course! (lie)
+			Alexandria "oh, thank goodness!"
+			"I would have been very disappointed"
+	}
+	<mainChar> "it's an interesting genre"
+	Alexandria "I suppose"
+
+}
 
 playsfx(sparkle)
 playsong("space")

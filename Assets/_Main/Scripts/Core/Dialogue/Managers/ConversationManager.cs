@@ -19,7 +19,6 @@ namespace Dialogue
     // keypress
         private bool userPrompt = false;
 
-        private TagManager tagManager;
         private LogicalLineManager logicalLineManager;
 
         private ConversationQueue conversationQueue;
@@ -32,7 +31,6 @@ namespace Dialogue
             this.architect = architect;
             dialogueSystem.onUserPrompt_Next += OnUserPrompt_Next;
 
-            tagManager = new TagManager();
             logicalLineManager = new LogicalLineManager();
             conversationQueue = new ConversationQueue();
         }
@@ -52,6 +50,7 @@ namespace Dialogue
         public Coroutine StartConversation(Conversation conversation)
         {
             StopConversation();
+            conversationQueue.Clear();
 
             Enqueue(conversation);
 
@@ -215,7 +214,7 @@ namespace Dialogue
 
         IEnumerator BuildDialogue(string dialogue, bool append = false)
         {
-            dialogue = tagManager.Inject(dialogue);
+            dialogue = TagManager.Inject(dialogue);
 
             // build dialogue
             if (!append)
@@ -253,7 +252,7 @@ namespace Dialogue
                 character.Show();
 
             // add character name to UI
-            dialogueSystem.ShowSpeakerName(tagManager.Inject(speakerData.displayName));
+            dialogueSystem.ShowSpeakerName(TagManager.Inject(speakerData.displayName));
 
             // custmize dialogue for this character- if applicable
             DialogueSystem.instance.ApplySpeakerDataToDialogueContainer(speakerData.name);
