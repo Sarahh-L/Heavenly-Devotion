@@ -7,7 +7,7 @@ public class TagManager
 {
     private static readonly Dictionary<string, Func<string>> tags = new Dictionary<string, Func<string>>()
     {
-        {"<mainChar>",         () => "Avira" },
+        {"<mainChar>",          () => "Avira" },
         { "<time>",             () => DateTime.Now.ToString("hh:mm tt") },
         { "<playerLevel>",      () => "15"},
         { "<input>",            () => InputPanel.instance.lastInput},
@@ -49,7 +49,16 @@ public class TagManager
         for (int i = matchesList.Count - 1; i >= 0; i--)
         {
             var match = matchesList[i];
-            string variableName = match.Value.TrimStart(VariableStore.variable_id);
+            string variableName = match.Value.TrimStart(VariableStore.variable_id), "!";
+            bool negate = match.Value.StartsWith("!");
+
+            bool endsInIllegalCharacter = variableName.EndsWith(VariableStore.database_variable_relational_id);
+            if (endsInIllegalCharacter)
+                variableName = variableName.SubString(0, variableName.Length - 1);
+
+            if (negate && variableValue is bool)
+                variableValue = !(bool)variableValue;
+
 
             if (!VariableStore.TryGetValue(variableName, out var variableValue))
             {
@@ -58,6 +67,8 @@ public class TagManager
             }
 
             int lengthToBeRemoved = match.Index + match.Length > value.Length ? value.Length - match.Index : match.Length;
+            if (endsInIllegalCharacter)
+                lengthToBeRemoved -= 1;
 
             value = value.Remove(match.Index, lengthToBeRemoved);
             value = value.Insert(match.Index, variableValue.ToString());
