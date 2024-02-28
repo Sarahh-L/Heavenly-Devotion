@@ -11,27 +11,28 @@ namespace Dialogue.LogicalLines
     public class LL_Condition : ILogicalLine
     {
         public string keyword => "if";
-        private const string else = "else";
+        private const string ELSE = "else";
         private readonly string[] containers = new string[] { "(", ")" };
 
         public IEnumerator Execute(Dialogue_Line line)
         {
             string rawCondition = ExtractCondition(line.rawData.Trim());
-            bool conditionResult = EvaluateCondition(rawCondition);
+            bool conditionResult = EvaluateConditions(rawCondition);
+            
 
             Conversation currentConversation = DialogueSystem.instance.conversationManager.conversation;
-            int currentProgress = DialogueSystem.instabce.conversationManager.conversationProgress;
+            int currentProgress = DialogueSystem.instance.conversationManager.conversationProgress;
 
-            EncapsulatedData ifData = RipEncapsulationData(currentConversation, currentProgress, false);
+            EncapsulatedData ifData = RipEncapsulationData(currentConversation, currentProgress, false, parentStartingIndex: currentConversation.fileStartIndex);
             EncapsulatedData elseData = new EncapsulatedData();
         
             if (ifData.endingIndex + 1 < currentConversation.Count)
             {
                 string nextLine = currentConversation.GetLines()[ifData.endingIndex + 1].Trim();
-                if (nextLine == else)
+                if (nextLine == ELSE)
                 {
-                    elseData = RipEncapsulationData(currentConversation, ifData.endingIndex + 1, false);
-                    ifData.endingIndex = elseData.endingIndex
+                    elseData = RipEncapsulationData(currentConversation, ifData.endingIndex + 1, false, parentStartingIndex: currentConversation.fileStartIndex);
+                    ifData.endingIndex = elseData.endingIndex;
                 }
             }
 
@@ -41,8 +42,8 @@ namespace Dialogue.LogicalLines
             
             if (!selData.isNull && selData.lines.Count > 0)
             {
-                currentConversation newConversation = new currentConversation(selData.lines);
-                DialogueSystem.instance.conversationManager.conversation.EnqueuePriority(newConversation);
+                Conversation newConversation = new Conversation(selData.lines, file: currentConversation.file, fileStartIndex: selData.startingIndex, fileEndIndex: selData.endingIndex);
+                DialogueSystem.instance.conversationManager.EnqueuePriority(newConversation);
             }
 
             yield return null;

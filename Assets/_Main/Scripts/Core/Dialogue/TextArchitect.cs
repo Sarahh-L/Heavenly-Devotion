@@ -26,8 +26,8 @@ namespace Dialogue
         public Color textColor { get { return tmpro.color; } set {tmpro.color = value; } }
     
     // base speed of the text- one character per second
-        public float speed { get { return  baseSpeed + speedMultiplier;} set {speedMultiplier = value;} }
-        private const float baseSpeed = .05f;
+        public float speed { get { return baseSpeed * speedMultiplier; } set {speedMultiplier = value; } }
+        private const float baseSpeed = 1;
         private float speedMultiplier = 1;
     
     // speeds up how fast the text moves on click- double click increases speed

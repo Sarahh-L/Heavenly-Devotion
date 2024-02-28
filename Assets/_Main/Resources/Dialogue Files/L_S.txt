@@ -6,7 +6,6 @@ choice "Do you like jazz?"
 		Alexandria "but why :("
 		<mainChar> "it's dumb"
 		Alexandria "bruh"
-		Load(Test)
 	-Sure
 		Alexandria "Awesome! {wa 0.5} i really like jazz, too!"
 		"it's nice sounding"

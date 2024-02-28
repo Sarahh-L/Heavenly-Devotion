@@ -71,7 +71,7 @@ namespace Dialogue
 
             public enum StartSignal { NONE, A, WA }
 
-            public bool appendText => startSignal == StartSignal.A || startSignal == StartSignal.WA;
+            public bool appendText => (startSignal == StartSignal.A || startSignal == StartSignal.WA);
         }
     }
 }

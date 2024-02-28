@@ -29,6 +29,8 @@ namespace Characters
         protected bool facingLeft = Default_Orientation;
         public int priority { get; protected set; }
 
+        public Vector2 targetPosition { get; private set; }
+
         protected CharacterManager characterManager => CharacterManager.instance;
 
         public DialogueSystem dialogueSystem => DialogueSystem.instance;
@@ -155,6 +157,8 @@ namespace Characters
 
             root.anchorMin = minAnchorTarget;
             root.anchorMax = maxAnchorTarget;
+
+            targetPosition = position;
         }
 
         public virtual Coroutine MoveToPostion(Vector2 position, float speed = 2f, bool smooth = false)
@@ -166,6 +170,8 @@ namespace Characters
                 characterManager.StopCoroutine(co_moving);
 
             co_moving = characterManager.StartCoroutine(MovingToPosition(position, speed, smooth));
+
+            targetPosition = position;
 
             return co_moving;
         }

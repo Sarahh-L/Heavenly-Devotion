@@ -99,11 +99,14 @@ namespace Dialogue
         }
 
         public void ShowSpeakerName(string speakerName = "")
-        { 
+        {
             if (speakerName.ToLower() != "narrator")
                 dialogueContainer.nameContainer.Show(speakerName);
             else
+            {
                 HideSpeakerName();
+                dialogueContainer.nameContainer.nameText.text = "";
+            }
         }
 
         public void HideSpeakerName() => dialogueContainer.nameContainer.Hide();
@@ -114,9 +117,9 @@ namespace Dialogue
             return Say(conversation);
         }
 
-        public Coroutine Say(List<string> lines)
+        public Coroutine Say(List<string> lines, string filePath = "")
         {
-            Conversation conversation = new Conversation(lines);
+            Conversation conversation = new Conversation(lines, file: filePath);
             return conversationManager.StartConversation(conversation);
         }
 

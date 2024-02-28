@@ -150,7 +150,6 @@ public class VariableStore
     }
     #endregion
 
-
     #region Extract Value
     private static (string[], Database, string) ExtractInfo(string name)
     {

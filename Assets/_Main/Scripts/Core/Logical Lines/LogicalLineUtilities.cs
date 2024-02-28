@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Runtime.CompilerServices;
-using UnityEngine.Rendering;
 using System;
 
 namespace Dialogue.LogicalLines
@@ -28,13 +26,14 @@ namespace Dialogue.LogicalLines
             public static bool IsEncapsulationStart(string line) => line.Trim().StartsWith(encapsulation_start);
             public static bool IsEncapsulationEnd(string line) => line.Trim().StartsWith(encapsulation_end);
 
-            public static EncapsulatedData RipEncapsulationData(Conversation conversation, int startingIndex, bool ripHeaderandEncapsulators = false)
+            public static EncapsulatedData RipEncapsulationData(Conversation conversation, int startingIndex, bool ripHeaderandEncapsulators = false, int parentStartingIndex = 0)
             { 
                 int encapsulateDepth = 0;
-                EncapsulatedData data = new EncapsulatedData { lines = new List<string>(), startingIndex = startingIndex, endingIndex = 0 };
+                EncapsulatedData data = new EncapsulatedData { lines = new List<string>(), startingIndex = (startingIndex + parentStartingIndex), endingIndex = 0 };
+                
                 for (int i = startingIndex; i < conversation.Count; i++)
                 {
-                    string line = conversation.Getlines()[i];
+                    string line = conversation.GetLines()[i];
 
                     if (ripHeaderandEncapsulators || encapsulateDepth > 0 && !IsEncapsulationEnd(line))
                         data.lines.Add(line);
@@ -50,7 +49,7 @@ namespace Dialogue.LogicalLines
                         encapsulateDepth--;
                         if (encapsulateDepth == 0)
                         {
-                            data.endingIndex = i;
+                            data.endingIndex = (i + parentStartingIndex);
                             break;
                         }
                     }
@@ -210,7 +209,8 @@ namespace Dialogue.LogicalLines
             }
         }
         #endregion
-    
+
+        #region Conditions
         public static class Conditions
         {
             public static readonly string regex_conditional_operators = @"(==|!=|<=|>=|<|>|&&|\|\|)";
@@ -221,9 +221,9 @@ namespace Dialogue.LogicalLines
                 string[] parts = Regex.Split(condition, regex_conditional_operators)
                     .Select(parts => parts.Trim()).ToArray();
                 
-                for (int 1 = 0; int < parts.Length; int++)
+                for (int i = 0; i < parts.Length; i++)
                 {
-                    if parts[int].StartsWith("\"") && parts[int].EndsWith("\"")
+                    if (parts[i].StartsWith("\"") && parts[i].EndsWith("\""))
                         parts[i] = parts[i].Substring(1, parts[i].Length - 2);
                 }
 
@@ -253,7 +253,7 @@ namespace Dialogue.LogicalLines
 
             private delegate bool OperatorFunc<T>(T left, T right);
 
-            private static Dictionary<string OperatorFunc<bool>> boolOperators = new Dictionary<string, OperatorFunc<bool>>()
+            private static Dictionary<string, OperatorFunc<bool>> boolOperators = new Dictionary<string, OperatorFunc<bool>>()
             {
                 { "&&", (left, right) => left && right },
                 { "||", (left, right) => left || right },
@@ -261,7 +261,7 @@ namespace Dialogue.LogicalLines
                 { "!=", (left, right) => left != right }
             };
 
-            private static Dictionary<string, OperatorFunc<float>> floatOperators = new Dictionary<string, OperatorFunc<float>>();
+            private static Dictionary<string, OperatorFunc<float>> floatOperators = new Dictionary<string, OperatorFunc<float>>()
             {
                 { "==", (left, right) => left == right },
                 { "!=", (left, right) => left != right },
@@ -271,7 +271,7 @@ namespace Dialogue.LogicalLines
                 { "<=", (left, right) => left <= right }
             };
 
-            private static Dictionary<string, OperatorFunc<float>> intOperators = new Dictionary<string, OperatorFunc<float>>();
+            private static Dictionary<string, OperatorFunc<int>> intOperators = new Dictionary<string, OperatorFunc<int>>()
             {
                 { "==", (left, right) => left == right },
                 { "!=", (left, right) => left != right },
@@ -283,24 +283,25 @@ namespace Dialogue.LogicalLines
 
             private static bool EvaluateExpression(string left, string op, string right)
             {
-                if (bool.TryParse(left out bool leftBool) && bool.TryParse(right, out bool rightBool))
+                if (bool.TryParse(left, out bool leftBool) && bool.TryParse(right, out bool rightBool))
                     return boolOperators[op](leftBool, rightBool);
 
-                if (float.TryParse(left out float leftFloat) && float.TryParse(right, out float rightFloat))
+                if (float.TryParse(left, out float leftFloat) && float.TryParse(right, out float rightFloat))
                     return floatOperators[op](leftFloat, rightFloat);
                 
-                if (int.TryParse(left out int leftInt) && int.TryParse(right, out int rightInt))
+                if (int.TryParse(left, out int leftInt) && int.TryParse(right, out int rightInt))
                     return intOperators[op](leftInt, rightInt);
 
                 switch(op)
                 {
                     case "==": return left == right;
                     case "!=": return left != right;
-                    default: throw new InvalidOperationExpception($"Unsupported Operation '{op}'");
+                    default: throw new InvalidOperationException($"Unsupported Operation '{op}'");
                 }
             
             }
         }
+        #endregion
     }
-    
+
 }

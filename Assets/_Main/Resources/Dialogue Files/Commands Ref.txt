@@ -52,9 +52,9 @@ Characters:
 	Highlight(character)							- highlights specified character
 	UnHighlight(character)							- unhighlights specified character
 	SetColor(character -c color)					- adds color overlay to character
-	.SetSprite(spritename)							- sets character sprite / expression
-	.Animate(-a animation)							- animates character (hop / shiver)
-	.Flip()											- flips character
+	character.SetSprite(spritename)					- sets character sprite / expression
+	character.Animate(-a animation)					- animates character (hop / shiver)
+	character.Flip()								- flips character
 
   --------------------------------------------------------------------------------------
 

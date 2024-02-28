@@ -22,6 +22,8 @@ MonoBehaviour:
     dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
+    sprites:
+      _serializedList: []
   - name: Alexandria
     alias: a
     characterType: 1
@@ -31,6 +33,16 @@ MonoBehaviour:
     dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
+    sprites:
+      _serializedList:
+      - Key: Neutral
+        Value: {fileID: 21300000, guid: d5cec88339a2f1c4d88acd46bcb8945e, type: 3}
+      - Key: Happy
+        Value: {fileID: 21300000, guid: 31a0eedabdb6d9e42a37f129cd20ecf4, type: 3}
+      - Key: Upset
+        Value: {fileID: 21300000, guid: 5f8b9855831d48445b20c8f86520d00f, type: 3}
+      - Key: Mad
+        Value: {fileID: 21300000, guid: 2bc31f82d5f4d6d49a70abfc6aa68f2c, type: 3}
   - name: Loki
     alias: l
     characterType: 1
@@ -40,6 +52,8 @@ MonoBehaviour:
     dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
+    sprites:
+      _serializedList: []
   - name: Shein
     alias: s
     characterType: 1
@@ -49,6 +63,8 @@ MonoBehaviour:
     dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
+    sprites:
+      _serializedList: []
   - name: Mako
     alias: m
     characterType: 1
@@ -58,6 +74,8 @@ MonoBehaviour:
     dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
+    sprites:
+      _serializedList: []
   - name: Scylla
     alias: sc
     characterType: 1
@@ -67,6 +85,8 @@ MonoBehaviour:
     dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
+    sprites:
+      _serializedList: []
   - name: Teevee
     alias: t
     characterType: 1
@@ -76,3 +96,5 @@ MonoBehaviour:
     dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
+    sprites:
+      _serializedList: []

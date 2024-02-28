@@ -1608,7 +1608,7 @@ Transform:
   m_Children:
   - {fileID: 2082933731}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &678742943
 GameObject:
@@ -1922,7 +1922,7 @@ PrefabInstance:
     - target: {fileID: 1944195983234140225, guid: dbad13da97325454d8e20e5997f6440b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1944195983234140225, guid: dbad13da97325454d8e20e5997f6440b,
         type: 3}
@@ -2020,7 +2020,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &796222918
 MonoBehaviour:
@@ -2125,7 +2125,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &923980005
 GameObject:
@@ -2550,6 +2550,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1293345681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1293345683}
+  - component: {fileID: 1293345682}
+  m_Layer: 0
+  m_Name: Visual Novel Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1293345682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293345681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9c9970bdb46aa478c35e882eabf86d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1293345683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293345681}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.522698, y: 25.17236, z: 85.675095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1296818293
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,7 +2724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5655cba8106150439cf1a6a0968c1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allPanels:
+  <allPanels>k__BackingField:
   - panelName: Background
     rootPanel: {fileID: 1296818293}
   - panelName: Cinematic
@@ -4928,7 +4972,7 @@ Transform:
   - {fileID: 1938176629}
   - {fileID: 2145174400}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1871097624
 GameObject:
@@ -5403,6 +5447,7 @@ GameObject:
   - component: {fileID: 2082933735}
   - component: {fileID: 2082933736}
   - component: {fileID: 2082933737}
+  - component: {fileID: 2082933738}
   m_Layer: 0
   m_Name: Dialogue Testing
   m_TagString: Untagged
@@ -5432,7 +5477,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082933730}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0e74a88c379f7e47a707d10771ea2d8, type: 3}
   m_Name: 
@@ -5493,11 +5538,35 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082933730}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a475b927c274b54b9c75b3a44416962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2082933738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082933730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4898990743e77ba4cac4d120630e2abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    currentDialogue: 
+    currentSpeaker: 
+    dialoguefont: 
+    dialogueColor: {r: 0, g: 0, b: 0, a: 0}
+    dialogueScale: 0
+    speakerFont: 
+    speakerNameColor: {r: 0, g: 0, b: 0, a: 0}
+    speakerScale: 0
+  audioData: []
+  graphicData: []
+  characterData: []
 --- !u!1 &2092880251
 GameObject:
   m_ObjectHideFlags: 0
