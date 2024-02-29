@@ -14,6 +14,7 @@ namespace Dialogue
 
         private Coroutine process = null;
         public bool isRunning => process != null;
+        public bool isOnLogicalLine { get; private set; } = false;
 
     // constructor for conversation characterManager
         public TextArchitect architect = null;
@@ -26,6 +27,7 @@ namespace Dialogue
         public int conversationProgress => (conversationQueue.IsEmpty() ? -1 : conversationQueue.top.GetProgress());
         public Conversation conversation => (conversationQueue.IsEmpty() ? null : conversationQueue.top);
 
+        public bool allowUserPrompts = true;
 
         public ConversationManager(TextArchitect architect)
         {
@@ -36,9 +38,12 @@ namespace Dialogue
             conversationQueue = new ConversationQueue();
         }
 
+        public Conversation[] GetConversationQueue() => conversationQueue.GetReadOnly();
+
         private void OnUserPrompt_Next()
         {
-            userPrompt = true;
+            if (allowUserPrompts)
+                userPrompt = true;
         }
 
         #region Conversation Queue (choices)
@@ -95,6 +100,7 @@ namespace Dialogue
 
                 if (logicalLineManager.TryGetLogic(line, out Coroutine logic))
                 {
+                    isOnLogicalLine = true;
                     yield return logic;
                 }
 
@@ -115,10 +121,13 @@ namespace Dialogue
                         yield return WaitForUserInput();
 
                         CommandManager.instance.StopAllProcesses();
+
+                        dialogueSystem.onSystemPrompt_Clear();
                     }
                 }
 
                 TryAdvanceConversation(currentConversation);
+                isOnLogicalLine = false;
             }
 
             process = null;

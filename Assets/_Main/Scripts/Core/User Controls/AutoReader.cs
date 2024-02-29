@@ -24,6 +24,7 @@ namespace Dialogue
         private Coroutine co_running = null;
 
         [SerializeField] private TextMeshProUGUI statusText;
+        [HideInInspector] public bool allowToggle = true;
 
         public void Initialize(ConversationManager conversationManager)
         {
@@ -98,6 +99,9 @@ namespace Dialogue
 
         public void Toggle_Auto()
         {
+            if (!allowToggle)
+                return;
+
             bool prevState = skip;
             skip = false;
 
@@ -112,11 +116,15 @@ namespace Dialogue
                     Disable();
             }
 
-            statusText.text = status_text_auto;
+            if (isOn)
+                statusText.text = status_text_auto;
         }
 
         public void Toggle_Skip()
         {
+            if (!allowToggle)
+                return;
+
             bool prevState = skip;
             skip = true;
 
@@ -131,7 +139,8 @@ namespace Dialogue
                     Disable();
             }
 
-            statusText.text = status_text_skip;
+            if (isOn)
+                statusText.text = status_text_skip;
         }
 
     }

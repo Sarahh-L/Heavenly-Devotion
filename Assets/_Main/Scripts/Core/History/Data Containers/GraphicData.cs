@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace History
@@ -54,6 +55,35 @@ namespace History
             }
 
             return graphicPanels;
+        }
+        public static void Apply(List<GraphicData> data)
+        {
+            List<string> cache = new List<string>();
+
+            foreach (var panelData in data)
+            {
+                var panel = GraphicPanelManager.instance.GetPanel(panelData.panelName);
+
+                foreach(var layerData in panelData.layers)
+                {
+                    var layer = panel.GetLayer(layerData.depth, createIfDoesNotExist: true);
+                    if (layer.currentGraphic == null || layer.currentGraphic.graphicName != layerData.graphicName)
+                    {
+                        Texture tex = HistoryCache.LoadImage(layerData.graphicName);
+                        if (tex != null)
+                            layer.SetTexture(tex, filePath: layerData.graphicPath, immediate: true);
+                        else
+                            Debug.LogWarning($"History State: could not load image from path '{layerData.graphicPath}'.");
+                    }
+                }
+
+                cache.Add(panel.panelName);
+            }
+            foreach (var panel in GraphicPanelManager.instance.allPanels) 
+            {
+                if (!cache.Contains(panel.panelName))
+                    panel.Clear(immediate: true);
+            }
         }
     }
 }

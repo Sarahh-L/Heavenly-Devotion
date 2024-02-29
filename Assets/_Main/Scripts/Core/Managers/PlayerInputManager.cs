@@ -1,3 +1,4 @@
+using History;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace Dialogue
         private void InitializeActions()
         {
             actions.Add((input.actions["Next"], OnNext));
+            actions.Add((input.actions["HistoryBack"], OnHistoryBack));
+            actions.Add((input.actions["HistoryForward"], OnHistoryForward));
         }
 
         private void OnEnable()
@@ -39,6 +42,18 @@ namespace Dialogue
         public void OnNext(InputAction.CallbackContext c)
         {
             DialogueSystem.instance.OnUserPrompt_Next();
+        }
+
+        // useless but keep for now
+
+        public void OnHistoryBack(InputAction.CallbackContext c)
+        {
+            HistoryManager.instance.GoBack();
+        }
+
+        public void OnHistoryForward(InputAction.CallbackContext c)
+        {
+            HistoryManager.instance.GoForward();
         }
     }
 }

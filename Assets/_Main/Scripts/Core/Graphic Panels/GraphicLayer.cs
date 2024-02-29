@@ -23,13 +23,13 @@ public class GraphicLayer
             return null;
         }
 
-        return SetTexture(tex, transitionSpeed, blendingTexture, filePath);
+        return SetTexture(tex, transitionSpeed, blendingTexture, filePath, immediate);
     }
 
     // Direct media reference
-    public Coroutine SetTexture(Texture tex, float transitionSpeed = 1f, Texture blendingTexture = null, string filepath = "", bool immediate = false)
+    public Coroutine SetTexture(Texture tex, float transitionSpeed = 1f, Texture blendingTexture = null, string filePath = "", bool immediate = false)
     {
-        return CreateGraphic(tex, transitionSpeed, filepath, blendingTexture: blendingTexture, immediate: immediate);
+        return CreateGraphic(tex, transitionSpeed, filePath, blendingTexture: blendingTexture, immediate: immediate);
     }
 
     private Coroutine CreateGraphic<T>(T graphicData, float transitionSpeed, string filePath, bool useAudioOrVideo = true, Texture blendingTexture = null, bool immediate = false)

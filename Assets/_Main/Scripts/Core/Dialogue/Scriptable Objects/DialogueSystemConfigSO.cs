@@ -19,8 +19,5 @@ namespace Dialogue
         public float dialogueFontScale = 1f;
         public float defaultNameFontSize = default_fontsize_name;
         public float defaultDialogueFontSize = default_fontsize_dialogue;
-
-       
-        
     }
 }

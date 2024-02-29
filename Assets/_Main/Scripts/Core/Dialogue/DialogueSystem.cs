@@ -28,7 +28,9 @@ namespace Dialogue
         public delegate void DialogueSystemEvent();
         public event DialogueSystemEvent onUserPrompt_Next;
 
-    // conversation continues
+        public event DialogueSystemEvent onClear;
+
+        // conversation continues
         public bool isRunningConversation => conversationManager.isRunning;
 
         public DialogueContinuePrompt prompt;
@@ -73,6 +75,28 @@ namespace Dialogue
         public void OnSystemPrompt_Next()
         {
             onUserPrompt_Next?.Invoke();        // ? - if null, nothing will trigger
+        }
+
+        public void onSystemPrompt_Clear()
+        {
+            onClear?.Invoke();
+        }
+
+        public void OnStartViewingHistory()
+        {
+            prompt.Hide();
+            autoReader.allowToggle = false;
+            conversationManager.allowUserPrompts = false;
+
+            if (autoReader.isOn)
+                autoReader.Disable();
+        }
+
+        public void OnStopViewingHistory()
+        {
+            prompt.Show();
+            autoReader.allowToggle = true;
+            conversationManager.allowUserPrompts = true;
         }
 
         public void ApplySpeakerDataToDialogueContainer(string speakerName)

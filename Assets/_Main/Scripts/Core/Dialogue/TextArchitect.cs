@@ -57,6 +57,16 @@ namespace Dialogue
             buildProcess = tmpro.StartCoroutine(Building());
             return buildProcess;
         }
+
+        /*public void SetText(string text)
+        {
+            preText = "";
+            targetText = text;
+
+            Stop();
+
+            tmpro.text = targetText;
+        }*/
     
     // append
         public Coroutine Append(string text)
