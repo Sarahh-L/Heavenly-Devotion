@@ -10,9 +10,9 @@ public class FilePaths
     //Runtime paths
     public static readonly string gameSaves = $"{runtimePath}Save Files/";
 
+    // Resources paths
     public static readonly string resources_font = "Fonts/";
 
-    // Resources paths
     public static readonly string resources_graphics = "Graphics/";
     public static readonly string resources_backgroundImages = $"{resources_graphics}BG Images/";
     public static readonly string resources_blendTextures = $"{resources_graphics}Transition Effects/";

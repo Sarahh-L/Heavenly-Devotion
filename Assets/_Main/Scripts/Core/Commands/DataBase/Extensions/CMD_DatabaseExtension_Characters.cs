@@ -67,6 +67,7 @@ namespace Commands
 
             if (!enable)
                 return;
+
             else if (immediate)
             {
                 character.isVisible = true;

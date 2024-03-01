@@ -83,13 +83,13 @@ namespace History
                 {
                     case Character.CharacterType.Sprite:
                     case Character.CharacterType.SpriteSheet:
-                        Spritedata sData = new Spritedata();
-                        sData.layers = new List<Spritedata.LayerData>();
+                        SpriteData sData = new SpriteData();
+                        sData.layers = new List<SpriteData.LayerData>();
 
                         CharSprite sc = character as CharSprite;
                         foreach (var layer in sc.layers)
                         {
-                            var layerData = new Spritedata.LayerData();
+                            var layerData = new SpriteData.LayerData();
                             layerData.color = layer.renderer.color;
                             layerData.spriteName = layer.renderer.sprite.name;
                             sData.layers.Add(layerData);
@@ -175,7 +175,7 @@ namespace History
 
         #region JSON Sprites
         [System.Serializable]
-        public class Spritedata
+        public class SpriteData
         {
             public List<LayerData> layers;
 
@@ -221,7 +221,7 @@ namespace History
                 {
                     case Character.CharacterType.Sprite:
                     case Character.CharacterType.SpriteSheet:
-                        Spritedata sData = JsonUtility.FromJson<Spritedata>(characterData.dataJSON);
+                        SpriteData sData = JsonUtility.FromJson<SpriteData>(characterData.dataJSON);
                         CharSprite sc = character as CharSprite;
 
                         for (int i = 0; i < sData.layers.Count; i++)

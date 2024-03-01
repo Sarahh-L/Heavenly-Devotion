@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FileManager
 {
+
    public static List<string> ReadTextFile(string filePath, bool includeBlankLines = true)
    {
         if (!filePath.StartsWith('/'))
@@ -67,12 +68,12 @@ public class FileManager
 
     public static bool TryCreateDirectoryFromPath(string path)
     {
-        if (Directory.Exists(path) || FileManager.Exists(path))
+        if (Directory.Exists(path) || File.Exists(path))
             return true; 
 
         if (path.Contains("."))
         {
-            path = path.GetDirectoryName(path);
+            path = Path.GetDirectoryName(path);
             if (Directory.Exists(path))
                 return true;
         }
@@ -94,7 +95,7 @@ public class FileManager
     }
    public static void Save(string filePath, string JSONData)
    {
-        if (!TryCreateDirectoryFromPath)
+        if (!TryCreateDirectoryFromPath(filePath))
         {
             Debug.LogError($"Fails to save file '{filePath}' Please see the console for error details");
             return;
@@ -106,4 +107,18 @@ public class FileManager
 
         Debug.Log($"Saved data to file {filePath}");
    }
+
+    public static T Load<T>(string filePath)
+    {
+        if (File.Exists(filePath))
+        {
+            string JSONData = File.ReadAllLines(filePath)[0];
+            return JsonUtility.FromJson<T>(JSONData);
+        }
+        else
+        {
+            Debug.LogError($"Error- file does not exist! '{filePath}'");
+            return default(T);
+        }
+    }
 }

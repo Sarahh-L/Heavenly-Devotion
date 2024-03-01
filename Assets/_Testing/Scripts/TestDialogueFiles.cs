@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.IO;
+using VisualNovel;
 
 namespace Testing
 {

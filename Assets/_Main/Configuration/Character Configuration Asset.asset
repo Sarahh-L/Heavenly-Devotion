@@ -36,11 +36,11 @@ MonoBehaviour:
     sprites:
       _serializedList:
       - Key: Neutral
-        Value: {fileID: 21300000, guid: 6f0643255d1f0744b97503184c75d606, type: 3}
+        Value: {fileID: 21300000, guid: 8add8ddaab737f144959fbf889dfe504, type: 3}
       - Key: Happy
-        Value: {fileID: 21300000, guid: 31a0eedabdb6d9e42a37f129cd20ecf4, type: 3}
+        Value: {fileID: 21300000, guid: 899476ef002507e478664e610df97ae7, type: 3}
       - Key: Upset
-        Value: {fileID: 21300000, guid: 5f8b9855831d48445b20c8f86520d00f, type: 3}
+        Value: {fileID: 21300000, guid: 1d4b03aaf8c5d3a4bb509c8a2974074b, type: 3}
       - Key: Mad
         Value: {fileID: 21300000, guid: 2bc31f82d5f4d6d49a70abfc6aa68f2c, type: 3}
   - name: Loki

@@ -1,10 +1,10 @@
-﻿enter Alexandria " ya like jazz?"
+﻿enter Alexandria "ya like jazz?"
 
 choice "Do you like jazz?"
 {
 	-Nah
 		Alexandria "but why :("
-		<mainChar> "it's dumb"
+		narrator "it's dumb"
 		Alexandria "bruh"
 	-Sure
 		Alexandria "Awesome! {wa 0.5} i really like jazz, too!"
@@ -16,90 +16,38 @@ choice "Do you like jazz?"
 	choice "Do you know what jazz is?"
 	{
 		-Not really
+			Alexandria.SetSprite(Upset)
 			Alexandria "... that's sad"
 		-Uh, of course! (lie)
+			Alexandria.SetSprite(Happy)
 			Alexandria "oh, thank goodness!"
 			"I would have been very disappointed"
 	}
 	<mainChar> "it's an interesting genre"
 	Alexandria "I suppose"
-
 }
 
-playsfx(sparkle)
-playsong("space")
-narrator "guh"
-narrator "auto enable"
+SetLayerMedia(background "barracks")
+
+Alexandria.SetSprite(Neutral)
+Alexandria "What's your name?"
 
 input "Type Your Name"
 
-<mainChar> "tag manager testing <input>. {wa 1} what time is it?"
 
-Narrator "The time is <time> and you are only level fghseuiogrhfgfjghkdjfhgkdhgkdfhjjjjjjjjjjjjjjghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh <playerLevel>"
+<input> "tag manager testing <input>. {wa 1} what time is it?"
 
-stopsfx(sparkle)
+Narrator "The time is <time> and you are only level  <playerLevel>"
 
-SetLayerMedia(background barracks -blend hurricane -spd 0.7 -i true), SetLayerMedia(background 1 SpaceshipInterior)
-
-CreateCharacter(Alexandria -e true -i true), CreateCharacter(Loki), CreateCharacter(Shein), CreateCharacter(Mako -e true -i true), MoveCharacter(Mako 1 0.5 -i true)
-
-Alexandria "Welcome to the barracks!"
-
-"hide dialogue box"
-HideDB()
-
-ClearLayerMedia(background -b hypno) 
-
-wait(2)
+Alexandria "nice to meet you, <input>"
 
 
-"dialogue box return- and the cinematic should be clear!"
+Alexandria.SetSprite(Happy)
+wait(1)
 
-wait(5)
+Alexandria.SetSprite(Upset)
+wait(1)
 
-Alexandria "Ah, greetings"
-
-Alexandria.SetSprite(Mad -spd 0.75)
-
-wait(2)
-...
-
-[wait]Alexandria.SetSprite(Upset)
-
-wait(2)
-
-[wait]Alexandria.SetSprite(Happy)
-Alexandria "hop!"
-[wait]Alexandria.Animate(-a Hop), [wait]Alexandria.Animate(-a Hop)
-[wait]Mako.SetSprite(Happy)
-[wait]Mako.Animate(-a Shiver -st true), [wait]Mako.Animate(-a Shiver -st true)
-
-wait(2)
-
-[wait]Alexandria.SetSprite(Neutral)
-
-[wait]HideUI(-spd 0.1)
-
-MoveCharacter(Loki -x 1 -y 1 -spd 1 -i false)
-[wait]ShowUI(-i true)
-
-narrator " auto off- dialogue skipping"
-[wait]Alexandria.SetSprite(Happy)
-wait(2)
-[wait]Alexandria.SetSprite(Upset)
-Alexandria "dfdrgsdg"
-Alexandria "dfdrsdgergdg"
-Alexandria "dfdrasrfawetgawgsdg"
-Alexandria "dfdrgasdfawesdg"
-Alexandria "dfdrgefwegersdg"
-Alexandria "dfdrgsdg"
-Alexandria "dfdrsdgergdg"
-Alexandria "dfdrasrfawetgawgsdg"
-Alexandria "dfdrgasdfawesdg"
-Alexandria "dfdrgefwegersdg"
-Alexandria "skipping complete!"
-
-
-
-
+Alexandria.SetSprite(Neutral), wait(1), Alexandria.Flip(-i true)
+wait(1)
 

@@ -49,7 +49,7 @@ namespace History
             var dialogueText = ds.dialogueContainer.dialogueText;
             var nameText = ds.dialogueContainer.nameContainer.nameText;
 
-            //ds.conversationManager.architect.SetText(data.currentDialogue);
+            ds.conversationManager.architect.SetText(data.currentDialogue);
             dialogueText.color = data.dialogueColor;
             dialogueText.fontSize = data.dialogueScale;
 

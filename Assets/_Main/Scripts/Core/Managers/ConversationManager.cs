@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Characters;
 using Commands;
-using Dialogue;
 using Dialogue.LogicalLines;    // Input panel
 
 namespace Dialogue

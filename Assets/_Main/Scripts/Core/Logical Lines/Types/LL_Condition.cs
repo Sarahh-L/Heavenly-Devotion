@@ -36,12 +36,16 @@ namespace Dialogue.LogicalLines
                 }
             }
 
-            currentConversation.SetProgress(ifData.endingIndex);
+            currentConversation.SetProgress(elseData.isNull ? ifData.endingIndex : elseData.endingIndex);
 
             EncapsulatedData selData = conditionResult ? ifData : elseData;
             
             if (!selData.isNull && selData.lines.Count > 0)
             {
+                // Remove the header and encapsulator lines from the conversation indexes
+                selData.startingIndex += 2; // remove header and starting encapsulator {
+                selData.endingIndex -= 1;   // remove ending encapsulator }
+
                 Conversation newConversation = new Conversation(selData.lines, file: currentConversation.file, fileStartIndex: selData.startingIndex, fileEndIndex: selData.endingIndex);
                 DialogueSystem.instance.conversationManager.EnqueuePriority(newConversation);
             }
