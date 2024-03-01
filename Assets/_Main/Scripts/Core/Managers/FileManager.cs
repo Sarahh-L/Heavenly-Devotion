@@ -64,4 +64,46 @@ public class FileManager
 
         return lines;
    }
+
+    public static bool TryCreateDirectoryFromPath(string path)
+    {
+        if (Directory.Exists(path) || FileManager.Exists(path))
+            return true; 
+
+        if (path.Contains("."))
+        {
+            path = path.GetDirectoryName(path);
+            if (Directory.Exists(path))
+                return true;
+        }
+
+        if (path == string.Empty)
+            return false;
+
+        try 
+        {
+            Directory.CreateDirectory(path);
+            return true;
+        }
+
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Could not create directory! '{e}'");
+            return false;
+        }
+    }
+   public static void Save(string filePath, string JSONData)
+   {
+        if (!TryCreateDirectoryFromPath)
+        {
+            Debug.LogError($"Fails to save file '{filePath}' Please see the console for error details");
+            return;
+        }
+
+        StreamWriter sw = new StreamWriter(filePath);
+        sw.Write(JSONData);
+        sw.Close();
+
+        Debug.Log($"Saved data to file {filePath}");
+   }
 }

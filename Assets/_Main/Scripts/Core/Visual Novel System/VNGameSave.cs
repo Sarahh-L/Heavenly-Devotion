@@ -33,11 +33,17 @@ public class VNGameSave
         activeConversations = GetConversationData();
 
         string saveJSON = JsonUtility.ToJson(this);
+        FileManager.Save(filePath, saveJSON);
+
+        SetConversationData();
     }
 
     public void load()
     {
+        if (activeState != null)
+            activeState.Load();
 
+        HistoryManager.instance.history = historyLogs.ToList();
     }
 
     public string[] GetConversationData()
@@ -73,5 +79,44 @@ public class VNGameSave
         }
 
         return retData.ToArray();
+    }
+
+    private void SetConversationData()
+    {
+        for (int i = 0; i < activeConversations.Length; i++)
+        {
+            try
+            {
+                string data = activeConversations[i];
+                Conversation conversation = null;
+
+                var fullData = JsonUtility.FromJson<VN_ConversationData>(data);
+                if (fullData != null)
+                {
+                    conversation = new Conversation(fullData.conversation, fullData.progress);
+                }
+
+                else 
+                {
+                    var compressedData = JsonUtility.FromJson<VN_ConversationDataCompressed>(data);
+                    if (compressedData != null)
+                    {
+                        TextAsset file = Resources.Load<TextAsset>(compressedData.fileName);
+                        List<string> lines = FileManager.ReadTextAsset(file);
+
+
+
+                        conversation = new Conversation(lines, compressedData.progress, compressedData.fileName, compressedData.startIndex, compressedData.endindex);
+                    }
+                }
+            }
+
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Encountered error while extracting saves conversation data {e}");
+                continue;
+            }
+            
+        }
     }
 }
