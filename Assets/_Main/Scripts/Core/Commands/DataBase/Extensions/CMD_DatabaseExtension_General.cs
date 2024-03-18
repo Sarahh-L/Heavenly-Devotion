@@ -31,6 +31,9 @@ namespace Commands
             database.AddCommand("hideui", new Func<string[], IEnumerator>(HideDialogueSystem));
 
             database.AddCommand("load", new Action<string[]>(LoadNewDialogueFile));
+
+            //Variable Assignment
+            database.AddCommand("setplayername", new Action<string>(SetPlayerNameVariable));
         }
         #endregion
 

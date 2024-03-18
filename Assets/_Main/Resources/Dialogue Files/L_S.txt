@@ -32,7 +32,18 @@ SetLayerMedia(background "barracks")
 Alexandria.SetSprite(Neutral)
 Alexandria "What's your name?"
 
-input "Type Your Name"
+input "What is your name?"
+
+$VN.mainCharName = <input>
+
+if ($VN.mainCharName == "Spiderman")
+{
+	narrator "you are the amazing $VN.mainCharName!"
+}
+else
+{
+	narrator "it's nice to meet you $VN.mainCharName"
+}
 
 
 <input> "tag manager testing <input>. {wa 1} what time is it?"
