@@ -32,7 +32,8 @@ namespace Dialogue
 
         public virtual void ForceComplete()
         {
-
+            architect.tmpro.ForceMeshUpdate();
+            architect.tmpro.maxVisibleCharacters = architect.tmpro.textInfo.characterCount;
         }
 
         protected void OnComplete() => onComplete?.Invoke();

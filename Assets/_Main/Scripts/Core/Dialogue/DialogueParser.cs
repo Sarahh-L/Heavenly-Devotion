@@ -16,11 +16,17 @@ namespace Dialogue
 
         public static Dialogue_Line Parse(string rawLine)
         {
-            Debug.Log($"Parsing line- '{rawLine}'");
+            //Debug.Log($"Parsing line- '{rawLine}'");
 
-            (string speaker, string dialogue, string commands) = RipContent(rawLine); 
+            (string speaker, string dialogue, string commands) = RipContent(rawLine);
 
-            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommand = '{commands}'");
+            //Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommand = '{commands}'");
+
+
+            // We have to inject tags and variables into the speaker and dialogue separately because there are intial checks that have
+            // to be performed
+            // but commands need no checks, so we can inject the variables in them now
+            commands = TagManager.Inject(commands);
 
             return new Dialogue_Line(rawLine, speaker, dialogue, commands);
         } 

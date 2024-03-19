@@ -33,7 +33,7 @@ namespace History
             }
 
             Debug.LogWarning($"Could not load object from cache '{key}'");
-            return default(T);
+            return default (T);
             
         }
 

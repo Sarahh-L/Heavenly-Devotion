@@ -34,15 +34,15 @@ Alexandria "What's your name?"
 
 input "What is your name?"
 
-$VN.mainCharName = <input>
+SetPlayerName(<input>)
 
-if ($VN.mainCharName == "Spiderman")
+if (<mainChar> == "Spiderman")
 {
-	narrator "you are the amazing $VN.mainCharName!"
+	narrator "you are the amazing <mainChar>!"
 }
 else
 {
-	narrator "it's nice to meet you $VN.mainCharName"
+	narrator "it's nice to meet you <mainChar>"
 }
 
 

@@ -81,3 +81,7 @@ Audio:
 Graphic panels
 	SetLayerMedia(background (background))		- sets background of scene (change layers to overlay backgrounds)
 	CleayLayerMedia(background -b)				- remove background (can be faded out using blend)
+
+
+Visual Novel
+	SetPlayerName(<input>)						- changes the player's name to whatever the input is, or manually input a string

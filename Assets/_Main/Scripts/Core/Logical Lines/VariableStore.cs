@@ -57,13 +57,13 @@ public class VariableStore
 
         public override void Set(object newValue) => setter((T)newValue);
     }
-
     #endregion
 
-    #region Create database
-    private static Dictionary<string, Database> databases = new Dictionary<string, Database>() { { default_database_name, new Database(default_database_name) } };
+    public static Dictionary<string, Database> databases = new Dictionary<string, Database>() { { default_database_name, new Database(default_database_name) } };
 
     private static Database defaultDatabase => databases[default_database_name];
+
+    #region Create database
 
     public static bool CreateDatabase(string name)
     {

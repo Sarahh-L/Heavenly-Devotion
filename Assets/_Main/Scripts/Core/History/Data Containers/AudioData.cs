@@ -31,7 +31,7 @@ namespace History
 
         public static List<AudioData> Capture()
         {
-            List<AudioData>audioChannels = new List<AudioData>();
+            List<AudioData> audioChannels = new List<AudioData>();
 
             foreach (var channel in AudioManager.instance.channels)
             {

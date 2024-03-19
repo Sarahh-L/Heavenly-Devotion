@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace VisualNovel
 {
@@ -16,7 +17,7 @@ namespace VisualNovel
 
         public const string file_type = ".vns";
         public const string screenshot_file_type = ".jpg";
-        public const bool encrypt_files = false;
+        public const bool encrypt = true;
 
         public string filePath => $"{FilePaths.gameSaves}{slotNumber}{file_type}";
         public string screenshotPath => $"{FilePaths.gameSaves}{slotNumber}{screenshot_file_type}";
@@ -27,27 +28,43 @@ namespace VisualNovel
         public string[] activeConversations;
         public HistoryState activeState;
         public HistoryState[] historyLogs;
+        public VN_VariableData[] variables;
 
+
+        public static VNGameSave Load(string filePath, bool activateOnLoad = false)
+        {
+            VNGameSave save = FileManager.Load<VNGameSave>(filePath, encrypt);
+
+            activeFile = save;
+
+            if (activateOnLoad)
+                save.Activate();
+
+            return save;
+        }
         public void Save()
         {
             activeState = HistoryState.Capture();
             historyLogs = HistoryManager.instance.history.ToArray();
             activeConversations = GetConversationData();
+            variables = GetVariableData();
 
             string saveJSON = JsonUtility.ToJson(this);
-            FileManager.Save(filePath, saveJSON);
-
-            SetConversationData();
-
-            DialogueSystem.instance.prompt.Hide();
+            FileManager.Save(filePath, saveJSON, encrypt); 
         }
 
-        public void Load()
+        public void Activate()
         {
             if (activeState != null)
                 activeState.Load();
 
             HistoryManager.instance.history = historyLogs.ToList();
+            
+            SetVariableData();
+
+            SetConversationData();
+
+            DialogueSystem.instance.prompt.Hide();
         }
 
         public string[] GetConversationData()
@@ -135,6 +152,68 @@ namespace VisualNovel
                     continue;
                 }
 
+            }
+        }
+
+        private VN_VariableData[] GetVariableData()
+        {
+            List<VN_VariableData> retData = new List<VN_VariableData>();
+
+            foreach (var database in VariableStore.databases.Values)
+            {
+                foreach (var variable in database.variables)
+                {
+                    VN_VariableData variableData = new VN_VariableData();
+                    variableData.name = $"{database.name}.{variable.Key}";
+                    string val = $"{variable.Value.Get()}";
+                    variableData.value = val;
+                    variableData.type = val == string.Empty ? "System.String" : variable.Value.Get().GetType().ToString();
+                    retData.Add(variableData);
+                }
+            }
+
+            return retData.ToArray();
+        }
+
+        private void SetVariableData()
+        {
+            foreach (var variable in variables)
+            {
+                string val = variable.value;
+
+                switch (variable.type)
+                {
+                    case "System.Boolean":
+                        if (bool.TryParse(val, out bool b_val))
+                        {
+                            VariableStore.TrySetValue(variable.name, b_val);
+                            continue;
+                        }
+                        break;
+
+                    case "System.Int32":
+                        if (int.TryParse(val, out int i_val))
+                        {
+                            VariableStore.TrySetValue(variable.name, i_val);
+                            continue;
+                        }
+                        break;
+
+                    case "System.Single":
+                        if (float.TryParse(val, out float f_val))
+                        { 
+                            VariableStore.TrySetValue(variable.name, f_val);
+                            continue;
+                        }
+                        break;
+
+                    case "System.String":
+                        VariableStore.TrySetValue(variable.name, val);
+                        continue;
+
+                }
+
+                Debug.LogError($"Could not interperet variable tpe. {variable.name} = {variable.type}");
             }
         }
     }

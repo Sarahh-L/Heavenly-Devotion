@@ -7,6 +7,7 @@ namespace Testing
 {
     public class GameSavetesting : MonoBehaviour
     {
+        public VNGameSave save;
         // Start is called before the first frame update
         void Start()
         {
@@ -16,15 +17,21 @@ namespace Testing
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.M))
             {
                 VNGameSave.activeFile.Save();
                     
             }
             else if (Input.GetKeyDown(KeyCode.L))
             {
-                VNGameSave.activeFile = FileManager.Load<VNGameSave>($"{FilePaths.gameSaves}1{VNGameSave.file_type}");
-                VNGameSave.activeFile.Load();
+                try
+                {
+                    save = VNGameSave.Load($"{FilePaths.gameSaves}1{VNGameSave.file_type}", activateOnLoad: true);
+                }
+                catch(System.Exception e)
+                {
+                    Debug.LogError($"Do soemthing because we found an error. {e.ToString()}");
+                }
             }
         }
     }
