@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Media;
 using UnityEngine;
+using UnityEngine.UI;
+using Commands;
 
 namespace History
 {
@@ -39,7 +42,7 @@ namespace History
             {
                 if (panel.isClear)
                     continue;
-
+               
                 GraphicData data = new GraphicData();
 
                 data.panelName = panel.panelName;
@@ -47,6 +50,7 @@ namespace History
 
                 foreach (var layer in panel.layers)
                 {
+                    Debug.Log($"{layer.currentGraphic}");
                     LayerData entry = new LayerData(layer);
                     data.layers.Add(entry);
                 }
@@ -70,6 +74,13 @@ namespace History
                     if (layer.currentGraphic == null || layer.currentGraphic.graphicName != layerData.graphicName)
                     {
                         Texture tex = HistoryCache.LoadImage(layerData.graphicName);
+                        if (tex == null)
+                        {
+                            //need to load from file
+                            // Overridden code
+                            string pathToGraphic = CMD_DatabaseExtension_GraphicPanels.GetpathToGraphic(FilePaths.resources_backgroundImages, layerData.graphicName);       
+                            tex = Resources.Load<Texture>(pathToGraphic);
+                        }
                         if (tex != null)
                             layer.SetTexture(tex, filePath: layerData.graphicPath, immediate: true);
                         else
@@ -79,6 +90,7 @@ namespace History
 
                 cache.Add(panel.panelName);
             }
+
             foreach (var panel in GraphicPanelManager.instance.allPanels) 
             {
                 if (!cache.Contains(panel.panelName))

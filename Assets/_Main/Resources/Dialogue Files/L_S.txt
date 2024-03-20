@@ -27,7 +27,7 @@ choice "Do you like jazz?"
 	Alexandria "I suppose"
 }
 
-SetLayerMedia(background "barracks")
+SetLayerMedia(background "01_2")
 
 Alexandria.SetSprite(Neutral)
 Alexandria "What's your name?"
@@ -44,6 +44,8 @@ else
 {
 	narrator "it's nice to meet you <mainChar>"
 }
+
+SetLayerMedia(background "barracks")
 
 
 <input> "tag manager testing <input>. {wa 1} what time is it?"

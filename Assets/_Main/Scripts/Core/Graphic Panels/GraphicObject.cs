@@ -146,6 +146,7 @@ public class GraphicObject
 
         if (target == 0)
             Destroy();
+
         else
         {
             DestroyBackgroundGraphicOnLayer();

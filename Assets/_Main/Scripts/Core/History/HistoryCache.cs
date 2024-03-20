@@ -14,7 +14,11 @@ namespace History
             object resource = null;
 
             if (loadedAssets.ContainsKey(key))
+            {
+                Debug.Log($"Found key {key}");
                 resource = (T)loadedAssets[key].asset;
+                return (T)resource;
+            }
             else
             {
                 resource = Resources.Load(key);

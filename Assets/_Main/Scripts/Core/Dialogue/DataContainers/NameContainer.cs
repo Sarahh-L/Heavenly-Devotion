@@ -14,7 +14,7 @@ namespace Dialogue
     public class NameContainer
     {
         [SerializeField] private GameObject root;
-        [SerializeField] public TextMeshProUGUI nameText;
+        [field: SerializeField] public TextMeshProUGUI nameText { get; private set; }
 
 
         public void Show(string nameToShow = "")

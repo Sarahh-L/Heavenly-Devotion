@@ -50,7 +50,7 @@ namespace Commands
             GraphicPanel panel = GraphicPanelManager.instance.GetPanel(panelName);
             if (panel == null)
             {
-                Debug.LogError($"Unable to grab panel '{panelName}' because it is not a valid panel please check the pael name and adjust the command");
+                Debug.LogError($"Unable to grab panel '{panelName}' because it is not a valid panel please check the panel name and adjust the command");
                 yield break;
             }
 
@@ -70,8 +70,8 @@ namespace Commands
             // Try to get the blending texture for the media is we are using one
             parameters.TryGetValue(param_blendtex, out blendTexName);
 
-            pathToGraphic = FilePaths.GetPathToResources(FilePaths.resources_backgroundImages, mediaName);
-            graphic = Resources.Load<Texture>(pathToGraphic);
+            //pathToGraphic = FilePaths.GetPathToResources(FilePaths.resources_backgroundImages, mediaName);        May be dupes i dunno
+            //graphic = Resources.Load<Texture>(pathToGraphic);
 
             // Run logic
             pathToGraphic = GetpathToGraphic(FilePaths.resources_backgroundImages, mediaName);
@@ -152,7 +152,7 @@ namespace Commands
         }
         #endregion
 
-        private static string GetpathToGraphic(string defaultPath, string graphicName)
+        public static string GetpathToGraphic(string defaultPath, string graphicName)
         {
             if (graphicName.StartsWith(home_directory_symbol))
                 return graphicName.Substring(home_directory_symbol.Length);

@@ -13,8 +13,8 @@ namespace VisualNovel
         {
             instance = this;
 
-            VNDatabaseLinkSetup linkSetup = GetComponent<VNDatabaseLinkSetup>();
-            linkSetup.SetupExternalLinks();
+            //VNDatabaseLinkSetup linkSetup = GetComponent<VNDatabaseLinkSetup>();
+            //linkSetup.SetupExternalLinks();
         }
 
         public void LoadFile(string filePath)
