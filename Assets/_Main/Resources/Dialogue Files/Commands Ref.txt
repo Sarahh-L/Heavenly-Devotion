@@ -79,7 +79,7 @@ Audio:
   --------------------------------------------------------------------------------------
 
 Graphic panels
-	SetLayerMedia(background (background))		- sets background of scene (change layers to overlay backgrounds)
+	SetLayerMedia(background ("background"))		- sets background of scene (change layers to overlay backgrounds)
 	CleayLayerMedia(background -b)				- remove background (can be faded out using blend)
 
 

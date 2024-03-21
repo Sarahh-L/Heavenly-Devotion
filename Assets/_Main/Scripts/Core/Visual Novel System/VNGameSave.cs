@@ -1,5 +1,6 @@
 using Dialogue;
 using History;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace VisualNovel
         public const string screenshot_file_type = ".jpg";
         public const bool encrypt = true;
 
+        public const float screenshot_downscale_amount = 1f;
+
         public string filePath => $"{FilePaths.gameSaves}{slotNumber}{file_type}";
         public string screenshotPath => $"{FilePaths.gameSaves}{slotNumber}{screenshot_file_type}";
 
@@ -30,6 +33,7 @@ namespace VisualNovel
         public HistoryState[] historyLogs;
         public VN_VariableData[] variables;
 
+        public string timestamp;
 
         public static VNGameSave Load(string filePath, bool activateOnLoad = false)
         {
@@ -48,6 +52,10 @@ namespace VisualNovel
             historyLogs = HistoryManager.instance.history.ToArray();
             activeConversations = GetConversationData();
             variables = GetVariableData();
+
+            timestamp = DateTime.Now.ToString("yy-MM-dd HH:mm:ss");
+
+            ScreenshotMaster.CaptureScreenshot(VNManager.instance.mainCamera, Screen.width, Screen.height, screenshot_downscale_amount, screenshotPath);
 
             string saveJSON = JsonUtility.ToJson(this);
             FileManager.Save(filePath, saveJSON, encrypt); 
