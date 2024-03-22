@@ -2,54 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor.UI;
+using VisualNovel;
 
-
-namespace UnityEditor.UI
+public class _MainMenu : MonoBehaviour
 {
-    public class _MainMenu : MonoBehaviour
+    public const string main_menu_scene = "Main Menu";
+
+    public static _MainMenu instance { get; private set; }
+
+    public AudioClip menuMusic;
+    public CanvasGroup mainPanel;
+    private CanvasGroupController mainCG;
+
+    void Start()
     {
-        public Animator transition;
+        mainCG = new CanvasGroupController(this, mainPanel);
+        AudioManager.instance.PlayTrack(menuMusic, channel: 0, startingVolume: 1);
+    }
 
-        public float transitionTime = 1f;
+    void Awake()
+    {
+        instance = this;
+    }
+    public void StartNewGame()
+    {
+        VNGameSave.activeFile = new VNGameSave();
+        StartCoroutine(StartingGame());
+    }
 
-        void OnMouseOver()
-        {
-            Debug.Log ("hee hoo peanut");
-        }
+    public void LoadGame(VNGameSave file)
+    {
+        VNGameSave.activeFile = file;
+        StartCoroutine(StartingGame());
+    }
 
-        // Update is called once per frame
-        void OnMouseExit()
-        {
-            Debug.Log ("nuh uh");
-        }
+    private IEnumerator StartingGame()
+    {
+        mainCG.Hide(speed: 0.3f);
+        AudioManager.instance.StopTrack(0);
 
-        public void Play()
-        {
-            LoadScene = "HeavenlyDevotion";
-            SceneManager.LoadScene(LoadScene);
-            OnMouseOver();
-            LoadNextLevel();
-        }
+        while (mainCG.isVisible)
+            yield return null;
 
-        public void LoadNextLevel()
-        {
-            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
-        }
-
-        IEnumerator LoadLevel(int levelIndex)
-        {
-            transition.SetTrigger("Start");
-
-            yield return new WaitForSeconds(transitionTime);
-
-            SceneManager.LoadScene(levelIndex);
-        }
-
-        public void Quit()
-        {
-            Application.Quit();
-        }
-
-        private string LoadScene;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("HeavenlyDevotion");
     }
 }

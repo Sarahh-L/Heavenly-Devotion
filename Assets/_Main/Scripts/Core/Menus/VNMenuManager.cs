@@ -81,7 +81,7 @@ public class VNMenuManager : MonoBehaviour
         if (!isOpen)
             OpenRoot();
 
-        HideButton();
+        //HideButton();
     }
 
     public void OpenRoot()
@@ -97,10 +97,10 @@ public class VNMenuManager : MonoBehaviour
         rootCG.SetInteractableState(false);
         isOpen = false;
 
-        ShowButton();
+        //ShowButton();
     }
 
-    public void HideButton()
+   /* public void HideButton()
     {
         buttons.gameObject.SetActive(false);
     }
@@ -108,5 +108,15 @@ public class VNMenuManager : MonoBehaviour
     public void ShowButton()
     {
         buttons.gameObject.SetActive(true);
+    }*/
+
+    public void Click_Home()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(_MainMenu.main_menu_scene);
+    }
+
+    public void Click_Quit()
+    {
+        Application.Quit();
     }
 }

@@ -1,4 +1,6 @@
-﻿enter Alexandria "ya like jazz?"
+﻿playsong("space")
+
+enter Alexandria "ya like jazz?"
 
 choice "Do you like jazz?"
 {

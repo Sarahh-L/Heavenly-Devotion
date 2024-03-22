@@ -64,9 +64,14 @@ public class SaveLoadSlot : MonoBehaviour
 
     public void Load()
     {
-        VNGameSave file = VNGameSave.Load(filePath, true);
-
+        VNGameSave file = VNGameSave.Load(filePath, false);
         SaveAndLoadPage.Instance.Close(closeAllMenus: true);
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == _MainMenu.main_menu_scene)
+            _MainMenu.instance.LoadGame(file);
+        else
+            file.Activate();
+           
     }
 
     public void Save()

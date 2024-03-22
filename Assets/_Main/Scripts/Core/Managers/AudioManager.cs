@@ -5,6 +5,10 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    public const string music_vol_param_name = "Music";
+    public const string sfx_vol_param_name = "SFX";
+    public const float muted_volume_level = -80f;
+
     private const string sfx_parent_name = "sfx";
     private const string sfx_name_format = "sfx - [{0}]";
     public const float track_transition_speed = 1;
@@ -15,6 +19,8 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup musicMixer;
     public AudioMixerGroup sfxMixer;
     public AudioMixerGroup voiceMixer;
+
+    public AnimationCurve audioFalloffCurve;
 
     private Transform sfxRoot;
 
@@ -155,5 +161,16 @@ public class AudioManager : MonoBehaviour
         }
     }
     #endregion
+
+    public void SetMusicVolume(float volume, bool muted)
+    {
+        volume = muted ? muted_volume_level : audioFalloffCurve.Evaluate(volume);
+        musicMixer.audioMixer.SetFloat(music_vol_param_name, volume);
+    }
+    public void SetSFXVolume(float volume, bool muted)
+    {
+        volume = muted ? muted_volume_level : audioFalloffCurve.Evaluate(volume);
+        sfxMixer.audioMixer.SetFloat(sfx_vol_param_name, volume);
+    }
 
 }
