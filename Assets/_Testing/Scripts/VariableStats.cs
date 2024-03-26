@@ -1,24 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace Testing
+[System.Serializable]
+public class VariableStats
 {
-    public class VariableStats : MonoBehaviour
-    {
+        public string statName;
         public int var_int = 0;
-        public float var_flt = 0;
-        public bool var_bool = false;
-        public string var_str = "";
-        void Start()
+        //public int var_dance = 0;
+        //public int var_guh = 0;
+        //public int var_swag = 0;
+        //public string Charisma;
+        // public int var_int = 0;
+        //public float var_flt = 0;
+        // public bool var_bool = false;
+        //public string var_str = "";
+
+        [SerializeField] private CanvasGroup statBox;
+        [SerializeField] private LayoutGroup statLayoutGroup;
+        [SerializeField] private TextMeshProUGUI stats;
+        [SerializeField] private TextMeshProUGUI stat1;
+        [SerializeField] private TextMeshProUGUI stat2;
+        [SerializeField] private TextMeshProUGUI stat3;
+        [SerializeField] private TextMeshProUGUI stat4;
+
+        /*void Start()
         {
             VariableStore.CreateDatabase("DB_Links");
 
             VariableStore.CreateDatabase("Stats");
-            VariableStore.CreateVariable("Stats.Charisma", var_int, () => var_int, value => var_int = value);
-            VariableStore.CreateVariable("Stats.Danceoffskills", var_int, () => var_int, value => var_int = value);
-            VariableStore.CreateVariable("Stats.guh", var_int, () => var_int, value => var_int = value);
-            VariableStore.CreateVariable("Stats.Swagginess", var_int, () => var_int, value => var_int = value);
+            VariableStore.CreateVariable("Stats.Charisma", var_char, () => var_char, value => var_char = value);
+            VariableStore.CreateVariable("Stats.Danceoffskills", var_dance, () => var_dance, value => var_dance = value);
+            VariableStore.CreateVariable("Stats.guh", var_guh, () => var_guh, value => var_guh = value);
+            VariableStore.CreateVariable("Stats.Swagginess", var_swag, () => var_swag, value => var_swag = value);
 
             //VariableStore.CreateVariable("DB_Links.L_int", var_int, () => var_int, value => var_int = value);
             //VariableStore.CreateVariable("DB_Links.L_flt", var_flt, () => var_flt, value => var_flt = value);
@@ -70,7 +86,7 @@ namespace Testing
 
                 VariableStore.TryGetValue("Stats.Danceoffskills", out object dance);
                 VariableStore.TrySetValue("Stats.Danceoffskills", (int)dance + 4);
+
             }
-        }
+        }*/
     }
-}
