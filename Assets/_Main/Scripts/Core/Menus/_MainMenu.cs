@@ -15,6 +15,8 @@ public class _MainMenu : MonoBehaviour
     public CanvasGroup mainPanel;
     private CanvasGroupController mainCG;
 
+    [SerializeField] UIConfirmationMenu uiChoiceMenu => UIConfirmationMenu.instance;
+
     void Start()
     {
         mainCG = new CanvasGroupController(this, mainPanel);
@@ -25,7 +27,19 @@ public class _MainMenu : MonoBehaviour
     {
         instance = this;
     }
-    public void StartNewGame()
+
+    public void Click_StartNewGame()
+    {
+        uiChoiceMenu.Show(
+            // Title
+            "Start a new game?", 
+            // Yes
+            new UIConfirmationMenu.ConfirmationButton("Yes", StartNewGame), 
+            // No
+            new UIConfirmationMenu.ConfirmationButton("No", null));
+    } 
+
+    private void StartNewGame()
     {
         VNGameSave.activeFile = new VNGameSave();
         StartCoroutine(StartingGame());

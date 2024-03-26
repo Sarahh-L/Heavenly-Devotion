@@ -1,5 +1,8 @@
 ﻿playsong("space")
 
+
+$SetMoney = 50
+
 enter Alexandria "ya like jazz?"
 
 choice "Do you like jazz?"

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class VNMenuManager : MonoBehaviour
 {
+    [SerializeField] UIConfirmationMenu uiChoiceMenu => UIConfirmationMenu.instance;
+
     public static VNMenuManager instance;
     public GameObject buttons;
 
@@ -117,6 +119,12 @@ public class VNMenuManager : MonoBehaviour
 
     public void Click_Quit()
     {
-        Application.Quit();
+        uiChoiceMenu.Show(
+            // Title
+            "Quit to desktop?", 
+            // Yes
+            new UIConfirmationMenu.ConfirmationButton("Yes", () => Application.Quit()), 
+            // No
+            new UIConfirmationMenu.ConfirmationButton("No", null));
     }
 }
