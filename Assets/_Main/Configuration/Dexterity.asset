@@ -10,15 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2871a5869ddfeed4fba16e431be0b52c, type: 3}
-  m_Name: Stat Configuration
+  m_Name: Dexterity
   m_EditorClassIdentifier: 
   stats:
-  - statName: Charisma
+  - stat: Dexterity
     var_int: 0
-    statBox: {fileID: 0}
-    statLayoutGroup: {fileID: 0}
-    stats: {fileID: 0}
-    stat1: {fileID: 0}
-    stat2: {fileID: 0}
-    stat3: {fileID: 0}
-    stat4: {fileID: 0}

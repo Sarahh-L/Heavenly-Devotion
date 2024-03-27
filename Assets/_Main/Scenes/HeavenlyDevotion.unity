@@ -1942,7 +1942,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stat1
+  m_text: Swagginess
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2457,7 +2457,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stat1
+  m_text: Dexterity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2594,6 +2594,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: c4fa7172d46bfaf4ea5cdc791b802c2b, type: 2}
   mainCamera: {fileID: 330585545}
   startingFile: {fileID: 4900000, guid: f3cfbbda6637fe0428ba43cb234033f6, type: 3}
+  StatManager: {fileID: 0}
 --- !u!1 &130252140
 GameObject:
   m_ObjectHideFlags: 0
@@ -7541,7 +7542,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 176037828}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.46727774
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13650,7 +13651,7 @@ GameObject:
   - component: {fileID: 968359780}
   - component: {fileID: 968359781}
   m_Layer: 5
-  m_Name: Root
+  m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14948,7 +14949,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stat1
+  m_text: Charisma
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18063,6 +18064,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: c4fa7172d46bfaf4ea5cdc791b802c2b, type: 2}
   mainCamera: {fileID: 330585545}
   startingFile: {fileID: 4900000, guid: f3cfbbda6637fe0428ba43cb234033f6, type: 3}
+  StatManager: {fileID: 0}
 --- !u!4 &1293345683
 Transform:
   m_ObjectHideFlags: 0
@@ -27505,8 +27507,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1971959115}
+  - component: {fileID: 1971959116}
   m_Layer: 0
-  m_Name: Stat Manager thign
+  m_Name: Stat Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27527,6 +27530,30 @@ Transform:
   m_Father: {fileID: 2145174400}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1971959116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971959114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa9f9cce64e58a4cbb8d6f279d1e3af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statSO: {fileID: 11400000, guid: a5670b99e6fa94143a07872b6ae56756, type: 2}
+  statBox: {fileID: 968359781}
+  root: {fileID: 19915273}
+  statNameText: {fileID: 1849038795}
+  statList:
+  - {fileID: 1053530463}
+  - {fileID: 105926458}
+  - {fileID: 2114072216}
+  - {fileID: 122350827}
+  stats:
+  - stat: 
+    var_int: 0
 --- !u!1 &1977079093
 GameObject:
   m_ObjectHideFlags: 0
@@ -28822,7 +28849,6 @@ GameObject:
   - component: {fileID: 2082933734}
   - component: {fileID: 2082933735}
   - component: {fileID: 2082933736}
-  - component: {fileID: 2082933737}
   - component: {fileID: 2082933738}
   - component: {fileID: 2082933739}
   m_Layer: 0
@@ -28908,30 +28934,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766b654dffb38b443aa6735f864de108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2082933737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2082933730}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a475b927c274b54b9c75b3a44416962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  var_char: 0
-  var_dance: 0
-  var_guh: 0
-  var_swag: 0
-  Charisma: 
-  statBox: {fileID: 0}
-  statLayoutGroup: {fileID: 0}
-  stats: {fileID: 0}
-  stat1: {fileID: 0}
-  stat2: {fileID: 0}
-  stat3: {fileID: 0}
-  stat4: {fileID: 0}
 --- !u!114 &2082933738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28971,6 +28973,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   save:
     playerName: 
+    charisma: 
+    charVal: 0
     slotNumber: 1
     newGame: 1
     activeConversations: []
@@ -29546,7 +29550,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stat1
+  m_text: Rhythm
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -30805,7 +30809,7 @@ PrefabInstance:
     - target: {fileID: 4593573288933268017, guid: 770229e3acb28244c89599051da0d720,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 169.00056
+      value: 169.00063
       objectReference: {fileID: 0}
     - target: {fileID: 4593573288933268017, guid: 770229e3acb28244c89599051da0d720,
         type: 3}

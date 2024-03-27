@@ -9,7 +9,6 @@ using UnityEngine.Rendering;
 
 namespace VisualNovel
 {
-    // GO BACK IN THE HISTORY INTERMISSION AND FIX THE DIALOGUE PROMPT THING
 
     [System.Serializable]
     public class VNGameSave
@@ -26,6 +25,9 @@ namespace VisualNovel
         public string screenshotPath => $"{FilePaths.gameSaves}{slotNumber}{screenshot_file_type}";
 
         public string playerName;
+        public string charisma;
+        public int charVal = 0;
+        public string rizz { get; private set; } = string.Empty;
         public int slotNumber = 1;
 
         public bool newGame = true;
@@ -226,6 +228,12 @@ namespace VisualNovel
 
                 Debug.LogError($"Could not interperet variable tpe. {variable.name} = {variable.type}");
             }
+        }
+
+        public static void SetStat()
+        {
+            rizz = $"{charisma}: {charVal}";
+            Debug.Log( rizz );
         }
     }
 }

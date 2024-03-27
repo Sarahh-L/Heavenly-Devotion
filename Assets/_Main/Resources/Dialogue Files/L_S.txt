@@ -53,11 +53,11 @@ else
 SetLayerMedia(background "barracks")
 
 
-<input> "tag manager testing <input>. {wa 1} what time is it?"
+<mainChar> "tag manager testing <mainChar>. {wa 1} what time is it?"
 
 Narrator "The time is <time> and you are only level  <playerLevel>"
 
-Alexandria "nice to meet you, <input>"
+Alexandria "nice to meet you, <mainChar>"
 
 
 Alexandria.SetSprite(Happy)

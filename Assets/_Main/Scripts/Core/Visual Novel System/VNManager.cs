@@ -1,7 +1,9 @@
 using Dialogue;
+using Stats;
 using System.Collections;
 using System.Collections.Generic;
 using Testing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace VisualNovel
@@ -12,6 +14,9 @@ namespace VisualNovel
         [SerializeField] private VisualNovelSO config;
         public Camera mainCamera;
         [SerializeField] private TextAsset startingFile;
+        [SerializeField] private GameObject StatManager;
+
+        public StatSO playerStats => new StatSO();
 
         private void Awake()
         {
@@ -23,12 +28,16 @@ namespace VisualNovel
             if (VNGameSave.activeFile == null) 
                 VNGameSave.activeFile = new VNGameSave();
 
-
+            
         }
 
         private void Start()
         {
             LoadGame();
+
+            //StatManager.GetComponent<Stats.Stats>().UpdateStats();
+
+            VNGameSave.SetStat();
         }
 
         private void LoadGame()
