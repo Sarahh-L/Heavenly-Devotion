@@ -10,6 +10,7 @@ public class VariableStore
     public const char database_variable_relational_id = '.';
     public static readonly string regex_variable_ids = @"[!]?\$[a-zA-Z0-9_.]+";
     public const char variable_id = '$';
+    public const char update_id = '+';
 
     #region Variables
     public class Database

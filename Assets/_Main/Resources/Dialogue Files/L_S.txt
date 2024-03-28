@@ -1,9 +1,11 @@
 ﻿playsong("space")
 
 
-$SetMoney = 50
+$Stats.Charisma = 3
+$Stats.guh = 7
 
 enter Alexandria "ya like jazz?"
+UpdateCommand(1)
 
 choice "Do you like jazz?"
 {
@@ -52,6 +54,7 @@ else
 
 SetLayerMedia(background "barracks")
 
+$input
 
 <mainChar> "tag manager testing <mainChar>. {wa 1} what time is it?"
 

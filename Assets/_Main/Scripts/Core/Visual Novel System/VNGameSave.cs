@@ -27,6 +27,12 @@ namespace VisualNovel
         public string playerName;
         public string charisma;
         public int charVal = 0;
+        //public string danceOffSkills;
+        public int danceVal = 0;
+        //public string guh;
+        public int guhVal = 0;
+        //public string swagginess;
+        public int swagVal = 0;
         public string rizz { get; private set; } = string.Empty;
         public int slotNumber = 1;
 
@@ -230,10 +236,11 @@ namespace VisualNovel
             }
         }
 
-        public static void SetStat()
+
+        /*public static void SetStat()
         {
             rizz = $"{charisma}: {charVal}";
             Debug.Log( rizz );
-        }
+        }*/
     }
 }

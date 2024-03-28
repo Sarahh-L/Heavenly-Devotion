@@ -2586,7 +2586,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128807923}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea9c9970bdb46aa478c35e882eabf86d, type: 3}
   m_Name: 
@@ -2594,7 +2594,12 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: c4fa7172d46bfaf4ea5cdc791b802c2b, type: 2}
   mainCamera: {fileID: 330585545}
   startingFile: {fileID: 4900000, guid: f3cfbbda6637fe0428ba43cb234033f6, type: 3}
-  StatManager: {fileID: 0}
+  StatBox: {fileID: 968359779}
+  Stat1: {fileID: 1053530463}
+  Stat2: {fileID: 105926458}
+  Stat3: {fileID: 2114072216}
+  Stat4: {fileID: 122350827}
+  CurrentCharisma: 0
 --- !u!1 &130252140
 GameObject:
   m_ObjectHideFlags: 0
@@ -7542,7 +7547,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 176037828}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.46727774
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18064,7 +18069,12 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: c4fa7172d46bfaf4ea5cdc791b802c2b, type: 2}
   mainCamera: {fileID: 330585545}
   startingFile: {fileID: 4900000, guid: f3cfbbda6637fe0428ba43cb234033f6, type: 3}
-  StatManager: {fileID: 0}
+  StatBox: {fileID: 968359779}
+  Stat1: {fileID: 1053530463}
+  Stat2: {fileID: 105926458}
+  Stat3: {fileID: 2114072216}
+  Stat4: {fileID: 122350827}
+  CurrentCharisma: 0
 --- !u!4 &1293345683
 Transform:
   m_ObjectHideFlags: 0
@@ -27507,7 +27517,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1971959115}
-  - component: {fileID: 1971959116}
   m_Layer: 0
   m_Name: Stat Manager
   m_TagString: Untagged
@@ -27530,30 +27539,6 @@ Transform:
   m_Father: {fileID: 2145174400}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1971959116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971959114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa9f9cce64e58a4cbb8d6f279d1e3af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _statSO: {fileID: 11400000, guid: a5670b99e6fa94143a07872b6ae56756, type: 2}
-  statBox: {fileID: 968359781}
-  root: {fileID: 19915273}
-  statNameText: {fileID: 1849038795}
-  statList:
-  - {fileID: 1053530463}
-  - {fileID: 105926458}
-  - {fileID: 2114072216}
-  - {fileID: 122350827}
-  stats:
-  - stat: 
-    var_int: 0
 --- !u!1 &1977079093
 GameObject:
   m_ObjectHideFlags: 0
@@ -28851,6 +28836,7 @@ GameObject:
   - component: {fileID: 2082933736}
   - component: {fileID: 2082933738}
   - component: {fileID: 2082933739}
+  - component: {fileID: 2082933740}
   m_Layer: 0
   m_Name: Dialogue Testing
   m_TagString: Untagged
@@ -28975,6 +28961,9 @@ MonoBehaviour:
     playerName: 
     charisma: 
     charVal: 0
+    danceVal: 0
+    guhVal: 0
+    swagVal: 0
     slotNumber: 1
     newGame: 1
     activeConversations: []
@@ -28994,6 +28983,25 @@ MonoBehaviour:
     historyLogs: []
     variables: []
     timestamp: 
+--- !u!114 &2082933740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082933730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a475b927c274b54b9c75b3a44416962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  var_dance: 0
+  var_guh: 0
+  var_swag: 0
+  var_char: 0
+  var_flt: 0
+  var_bool: 0
+  var_str: 
 --- !u!1 &2092880251
 GameObject:
   m_ObjectHideFlags: 0
@@ -30809,7 +30817,7 @@ PrefabInstance:
     - target: {fileID: 4593573288933268017, guid: 770229e3acb28244c89599051da0d720,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 169.00063
+      value: 169.00069
       objectReference: {fileID: 0}
     - target: {fileID: 4593573288933268017, guid: 770229e3acb28244c89599051da0d720,
         type: 3}

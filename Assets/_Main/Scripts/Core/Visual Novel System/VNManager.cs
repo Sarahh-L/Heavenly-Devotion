@@ -1,8 +1,8 @@
 using Dialogue;
-using Stats;
 using System.Collections;
 using System.Collections.Generic;
 using Testing;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,9 +14,15 @@ namespace VisualNovel
         [SerializeField] private VisualNovelSO config;
         public Camera mainCamera;
         [SerializeField] private TextAsset startingFile;
-        [SerializeField] private GameObject StatManager;
 
-        public StatSO playerStats => new StatSO();
+        [SerializeField] private GameObject StatBox;
+        [SerializeField] private TextMeshProUGUI Stat1;
+        [SerializeField] private TextMeshProUGUI Stat2;
+        [SerializeField] private TextMeshProUGUI Stat3;
+        [SerializeField] private TextMeshProUGUI Stat4;
+
+        [SerializeField] private int CurrentCharisma;
+
 
         private void Awake()
         {
@@ -26,18 +32,18 @@ namespace VisualNovel
             linkSetup.SetupExternalLinks();
 
             if (VNGameSave.activeFile == null) 
-                VNGameSave.activeFile = new VNGameSave();
-
-            
+                VNGameSave.activeFile = new VNGameSave(); 
         }
 
         private void Start()
         {
             LoadGame();
 
-            //StatManager.GetComponent<Stats.Stats>().UpdateStats();
+        }
 
-            VNGameSave.SetStat();
+        private void Update()
+        {
+            //DisplayStats();
         }
 
         private void LoadGame()
@@ -52,6 +58,21 @@ namespace VisualNovel
             {
                 VNGameSave.activeFile.Activate();
             }
+            LoadStats();
+            DisplayStats();
+        }
+
+        private void DisplayStats()
+        {
+            // Need to load stats from database to local variables and update the display
+
+            Stat1.text = $"Charisma: {VNGameSave.activeFile.charVal}"; 
+            
+        }
+
+        public void LoadStats()
+        {
+            CurrentCharisma = VNGameSave.activeFile.charVal;
         }
        
     }

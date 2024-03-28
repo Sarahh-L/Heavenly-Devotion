@@ -11,6 +11,8 @@ namespace Commands
         {
             //Variable Assignment
             database.AddCommand("setplayername", new Action<string>(SetPlayerNameVariable));
+            //database.AddCommand("setplayerstats", new Action<string>(SetPlayerStats));
+            database.AddCommand("updatecommand", new Action<int>(UpdateCommand));
         }
 
 
@@ -18,6 +20,17 @@ namespace Commands
         {
             VisualNovel.VNGameSave.activeFile.playerName = data;
 
+        }
+
+        /*private static void SetPlayerStats(string charisma)
+        {
+            VisualNovel.VNGameSave.activeFile.charisma = charisma;
+        }*/
+
+        private static void UpdateCommand(int value)
+        {
+            Debug.Log("your mom");
+            VisualNovel.VNGameSave.activeFile.charVal = VisualNovel.VNGameSave.activeFile.charVal + value;
         }
     }
 }

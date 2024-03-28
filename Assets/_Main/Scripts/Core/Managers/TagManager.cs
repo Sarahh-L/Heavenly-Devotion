@@ -9,11 +9,9 @@ public class TagManager
     private static readonly Dictionary<string, Func<string>> tags = new Dictionary<string, Func<string>>()
     {
         { "<mainChar>",         () => VNGameSave.activeFile.playerName },
-        { "<charisma>",         () => VNGameSave.activeFile.charisma},
         { "<time>",             () => DateTime.Now.ToString("hh:mm tt") },
         { "<playerLevel>",      () => "15"},
         { "<input>",            () => InputPanel.instance.lastInput},
-        { "<tempVal1>",         () => "42" }
     };
     
     private static readonly Regex tagRegex = new Regex("<\\w+>");
@@ -37,6 +35,7 @@ public class TagManager
             {
                 if (tags.TryGetValue(match.Value, out var tagValueRequest))
                     value = value.Replace(match.Value, tagValueRequest());
+
             }
         }
 
