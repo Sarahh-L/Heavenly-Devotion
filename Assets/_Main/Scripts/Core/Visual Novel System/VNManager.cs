@@ -38,12 +38,12 @@ namespace VisualNovel
         private void Start()
         {
             LoadGame();
-
+            //LoadStats();
         }
 
         private void Update()
         {
-            //DisplayStats();
+            DisplayStats();
         }
 
         private void LoadGame()
@@ -58,8 +58,6 @@ namespace VisualNovel
             {
                 VNGameSave.activeFile.Activate();
             }
-            LoadStats();
-            DisplayStats();
         }
 
         private void DisplayStats()
@@ -67,12 +65,16 @@ namespace VisualNovel
             // Need to load stats from database to local variables and update the display
 
             Stat1.text = $"Charisma: {VNGameSave.activeFile.charVal}"; 
-            
+            Stat2.text = $"Swagginess: {VNGameSave.activeFile.swagVal}";
+            Stat3.text = $"Guh: {VNGameSave.activeFile.guhVal}";
+            Stat4.text = $"Rhythm: {VNGameSave.activeFile.danceVal}";
+
+
         }
 
         public void LoadStats()
         {
-            CurrentCharisma = VNGameSave.activeFile.charVal;
+            //CurrentCharisma = VNGameSave.activeFile.charVal;
         }
        
     }

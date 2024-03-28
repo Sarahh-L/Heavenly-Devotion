@@ -3,9 +3,11 @@
 
 $Stats.Charisma = 3
 $Stats.guh = 7
+$Stats.Danceoffskills = 9
+$Stats.Swagginess = 4
 
 enter Alexandria "ya like jazz?"
-UpdateCommand(1)
+UpdateCommand(2)
 
 choice "Do you like jazz?"
 {

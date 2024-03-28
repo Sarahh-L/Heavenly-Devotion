@@ -52,12 +52,13 @@ namespace Commands
             parameters.TryGetValue(Param_Loop, out loop, defaultValue: false);
 
             // Run the logic
-            AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResources(FilePaths.resources_sfx, filePath));
+            string resourcesPath = FilePaths.GetPathToResources(FilePaths.resources_sfx, filePath);
+            AudioClip sound = Resources.Load<AudioClip>(resourcesPath);
 
             if (sound == null)
                 return;
 
-            AudioManager.instance.PlaySoundEffect(sound, volume: volume, pitch: pitch, loop: loop);
+            AudioManager.instance.PlaySoundEffect(sound, volume: volume, pitch: pitch, loop: loop, filePath: resourcesPath);
         }
         //----------------------------------------------------------------------------------\\
         private static void StopSFX(string data)

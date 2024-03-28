@@ -53,12 +53,16 @@ public class AudioManager : MonoBehaviour
             return null;
         }
 
-        return PlaySoundEffect(clip, mixer, volume, pitch, loop);
+        return PlaySoundEffect(clip, mixer, volume, pitch, loop, filePath);
     }
 
-    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false)
+    public AudioSource PlaySoundEffect(AudioClip clip, AudioMixerGroup mixer = null, float volume = 1, float pitch = 1, bool loop = false, string filePath = "")
     {
-        AudioSource effectSource = new GameObject(string.Format(sfx_name_format, clip.name)).AddComponent<AudioSource>();
+        string fileName = clip.name;
+        if (filePath != string.Empty)
+            fileName = filePath;
+
+        AudioSource effectSource = new GameObject(string.Format(sfx_name_format, fileName)).AddComponent<AudioSource>();
         effectSource.transform.SetParent(sfxRoot);
         effectSource.transform.position = sfxRoot.position;
 
@@ -80,6 +84,12 @@ public class AudioManager : MonoBehaviour
 
         return effectSource;
     }
+
+    public void SetSFXVolume(float volume, bool muted)
+    {
+        volume = muted ? muted_volume_level : audioFalloffCurve.Evaluate(volume);
+        sfxMixer.audioMixer.SetFloat(sfx_vol_param_name, volume);
+    }
     //--------------------------------------------------------------------------------------------------------------------------\\
     public void StopSoundEffect(AudioClip clip) => StopSoundEffect(clip.name);
     public void StopSoundEffect(string soundName)
@@ -94,6 +104,16 @@ public class AudioManager : MonoBehaviour
                 Destroy(source.gameObject);
                 return;
             }
+        }
+    }
+
+    public void StopAllSoundEffects()
+    {
+        AudioSource[] sources = sfxRoot.GetComponentsInChildren<AudioSource>();
+        foreach(var source in sources)
+        {
+            Destroy(source.gameObject);
+              
         }
     }
     #endregion
@@ -160,17 +180,23 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    #endregion
 
     public void SetMusicVolume(float volume, bool muted)
     {
         volume = muted ? muted_volume_level : audioFalloffCurve.Evaluate(volume);
         musicMixer.audioMixer.SetFloat(music_vol_param_name, volume);
     }
-    public void SetSFXVolume(float volume, bool muted)
+
+    public void StopAllTracks()
     {
-        volume = muted ? muted_volume_level : audioFalloffCurve.Evaluate(volume);
-        sfxMixer.audioMixer.SetFloat(sfx_vol_param_name, volume);
+        foreach (AudioChannel channel in channels.Values)
+        {
+            channel.StopTrack();
+        }
     }
+    #endregion
+
+ 
+  
 
 }

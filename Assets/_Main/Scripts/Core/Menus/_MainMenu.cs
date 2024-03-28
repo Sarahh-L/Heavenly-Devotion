@@ -20,6 +20,9 @@ public class _MainMenu : MonoBehaviour
     void Start()
     {
         mainCG = new CanvasGroupController(this, mainPanel);
+
+        AudioManager.instance.StopAllSoundEffects();
+        AudioManager.instance.StopAllTracks();
         AudioManager.instance.PlayTrack(menuMusic, channel: 0, startingVolume: 1);
     }
 
@@ -59,6 +62,7 @@ public class _MainMenu : MonoBehaviour
         while (mainCG.isVisible)
             yield return null;
 
+        VN_Configuration.activeConfig.Save();
         UnityEngine.SceneManagement.SceneManager.LoadScene("HeavenlyDevotion");
     }
 }

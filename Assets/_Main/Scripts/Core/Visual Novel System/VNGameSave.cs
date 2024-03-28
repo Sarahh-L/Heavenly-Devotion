@@ -33,7 +33,7 @@ namespace VisualNovel
         public int guhVal = 0;
         //public string swagginess;
         public int swagVal = 0;
-        public string rizz { get; private set; } = string.Empty;
+        //public string rizz { get; private set; } = string.Empty;
         public int slotNumber = 1;
 
         public bool newGame = true;

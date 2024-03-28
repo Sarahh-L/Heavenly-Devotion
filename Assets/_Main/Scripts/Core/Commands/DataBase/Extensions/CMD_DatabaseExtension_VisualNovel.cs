@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VisualNovel;
+
 
 namespace Commands
 {
@@ -27,10 +29,10 @@ namespace Commands
             VisualNovel.VNGameSave.activeFile.charisma = charisma;
         }*/
 
-        private static void UpdateCommand(int value)
+        public static void UpdateCommand(int value)
         {
             Debug.Log("your mom");
-            VisualNovel.VNGameSave.activeFile.charVal = VisualNovel.VNGameSave.activeFile.charVal + value;
+            VNGameSave.activeFile.charVal = VNGameSave.activeFile.charVal + value;
         }
     }
 }

@@ -114,6 +114,8 @@ public class VNMenuManager : MonoBehaviour
 
     public void Click_Home()
     {
+        VN_Configuration.activeConfig.Save();
+
         UnityEngine.SceneManagement.SceneManager.LoadScene(_MainMenu.main_menu_scene);
     }
 
