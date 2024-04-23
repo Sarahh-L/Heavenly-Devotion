@@ -19,7 +19,7 @@ choice "Do you like jazz?"
 		Alexandria "Awesome! {wa 0.5} i really like jazz, too!"
 		"it's nice sounding"
 		"... except when it's not"
-		Load(Test -enqueue true)
+		Load(Test)
 	-What
 	Alexandria "do you.... not know what jazz is?"
 	choice "Do you know what jazz is?"
