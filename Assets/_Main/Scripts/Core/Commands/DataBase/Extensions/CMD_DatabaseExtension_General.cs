@@ -30,6 +30,8 @@ namespace Commands
             database.AddCommand("showui", new Func<string[], IEnumerator>(ShowDialogueSystem));
             database.AddCommand("hideui", new Func<string[], IEnumerator>(HideDialogueSystem));
 
+            database.AddCommand("showmap", new Func<string[], IEnumerator>(ShowMap));
+
             database.AddCommand("load", new Action<string[]>(LoadNewDialogueFile));
         }
         #endregion
@@ -131,6 +133,22 @@ namespace Commands
 
         #endregion
 
-       
+
+        #region Map
+        private static IEnumerator ShowMap(string[] data)
+        {
+            float speed;
+            bool immediate;
+
+            var parameters = ConvertDataToParameters(data);
+
+            parameters.TryGetValue(Param_Speed, out speed, defaultValue: 1f);
+            parameters.TryGetValue(Param_Immediate, out immediate, defaultValue: false);
+
+            yield return CanvasGroupController.instance.ShowMap(speed, immediate);
+        }
+
+        #endregion
+
     }
 }

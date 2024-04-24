@@ -19,7 +19,7 @@ public class _MainMenu : MonoBehaviour
 
     void Start()
     {
-        mainCG = new CanvasGroupController(this, mainPanel);
+        mainCG = new CanvasGroupController(this, mainPanel, null);
 
         AudioManager.instance.StopAllSoundEffects();
         AudioManager.instance.StopAllTracks();

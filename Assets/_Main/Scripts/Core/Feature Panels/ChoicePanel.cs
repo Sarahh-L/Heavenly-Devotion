@@ -31,7 +31,7 @@ public class ChoicePanel : MonoBehaviour
     {
         instance = this;
 
-        cg = new CanvasGroupController(this, canvasGroup);
+        cg = new CanvasGroupController(this, canvasGroup, null);
 
         cg.alpha = 0;
         cg.SetInteractableState(false);

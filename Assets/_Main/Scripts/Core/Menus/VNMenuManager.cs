@@ -26,7 +26,7 @@ public class VNMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rootCG = new CanvasGroupController(this, root);
+        rootCG = new CanvasGroupController(this, root, null);
     }
 
     private MenuPage GetPage(MenuPage.PageType pageType)

@@ -27,7 +27,7 @@ public class InputPanel : MonoBehaviour
     }
     void Start()
     {
-        cg = new CanvasGroupController(this, canvasGroup);
+        cg = new CanvasGroupController(this, canvasGroup, null);
 
         cg.alpha = 0;
         cg.SetInteractableState(active: false);

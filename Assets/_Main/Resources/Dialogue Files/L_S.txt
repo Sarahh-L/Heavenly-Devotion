@@ -1,4 +1,7 @@
-﻿playsong("space")
+﻿
+ShowMap()
+
+playsong("space")
 
 
 $Stats.Charisma = 3
