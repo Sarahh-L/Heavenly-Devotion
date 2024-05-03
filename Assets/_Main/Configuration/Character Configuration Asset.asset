@@ -36,13 +36,13 @@ MonoBehaviour:
     sprites:
       _serializedList:
       - Key: Neutral
-        Value: {fileID: 21300000, guid: 8add8ddaab737f144959fbf889dfe504, type: 3}
+        Value: {fileID: 21300000, guid: d485c0833ee73a54a93eee0ce78344d0, type: 3}
       - Key: Happy
-        Value: {fileID: 21300000, guid: 899476ef002507e478664e610df97ae7, type: 3}
+        Value: {fileID: 21300000, guid: abac2c7032258a7428d837b0517b7c5b, type: 3}
       - Key: Upset
-        Value: {fileID: 21300000, guid: 1d4b03aaf8c5d3a4bb509c8a2974074b, type: 3}
+        Value: {fileID: 21300000, guid: dd53db0d2839d4c4694756431fed237e, type: 3}
       - Key: Mad
-        Value: {fileID: 21300000, guid: ddfb1902c5f0d2d4fa3cebec5e87b817, type: 3}
+        Value: {fileID: 21300000, guid: 7f5591ef14a88e0459a8de7588d3da25, type: 3}
   - name: Loki
     alias: l
     characterType: 1
@@ -53,7 +53,11 @@ MonoBehaviour:
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
-      _serializedList: []
+      _serializedList:
+      - Key: Neutral
+        Value: {fileID: 21300000, guid: 0f45f221ee1fb414093e436a4d200969, type: 3}
+      - Key: Happy
+        Value: {fileID: 21300000, guid: c3bf980bb8516c146abdee86a7f5fb8d, type: 3}
   - name: Shein
     alias: s
     characterType: 1
@@ -64,7 +68,11 @@ MonoBehaviour:
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
-      _serializedList: []
+      _serializedList:
+      - Key: Neutral
+        Value: {fileID: 21300000, guid: dc5eda37a4b3dc549aa2a2acae302508, type: 3}
+      - Key: Mad
+        Value: {fileID: 21300000, guid: 5d36ac0e9a2af3442ab3a4ae38f5b75b, type: 3}
   - name: Mako
     alias: m
     characterType: 1
@@ -75,7 +83,9 @@ MonoBehaviour:
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
-      _serializedList: []
+      _serializedList:
+      - Key: Neutral
+        Value: {fileID: 21300000, guid: efa467f954fa200428f1e1e782b8701c, type: 3}
   - name: Scylla
     alias: sc
     characterType: 1
@@ -86,7 +96,9 @@ MonoBehaviour:
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
-      _serializedList: []
+      _serializedList:
+      - Key: Neutral
+        Value: {fileID: 21300000, guid: bb2fa8fd4ae057f47bb8aeda970a0e0e, type: 3}
   - name: Teevee
     alias: t
     characterType: 1
@@ -97,4 +109,8 @@ MonoBehaviour:
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
-      _serializedList: []
+      _serializedList:
+      - Key: Neutral
+        Value: {fileID: 21300000, guid: 5c9e121c9bcc1d8409cfbb216ad66722, type: 3}
+      - Key: Upset
+        Value: {fileID: 21300000, guid: cb2e0c1e416e7d247a34565f8e3fe20a, type: 3}

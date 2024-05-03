@@ -15,14 +15,6 @@ namespace VisualNovel
         public Camera mainCamera;
         [SerializeField] private TextAsset startingFile;
 
-        [SerializeField] private GameObject StatBox;
-        [SerializeField] private TextMeshProUGUI Stat1;
-        [SerializeField] private TextMeshProUGUI Stat2;
-        [SerializeField] private TextMeshProUGUI Stat3;
-        [SerializeField] private TextMeshProUGUI Stat4;
-
-        [SerializeField] private int CurrentCharisma;
-
 
         private void Awake()
         {
@@ -41,11 +33,6 @@ namespace VisualNovel
             //LoadStats();
         }
 
-        private void Update()
-        {
-            DisplayStats();
-        }
-
         private void LoadGame()
         {
             if (VNGameSave.activeFile.newGame)
@@ -58,18 +45,6 @@ namespace VisualNovel
             {
                 VNGameSave.activeFile.Activate();
             }
-        }
-
-        private void DisplayStats()
-        {
-            // Need to load stats from database to local variables and update the display
-
-            Stat1.text = $"Charisma: {VNGameSave.activeFile.charVal}"; 
-            Stat2.text = $"Swagginess: {VNGameSave.activeFile.swagVal}";
-            Stat3.text = $"Guh: {VNGameSave.activeFile.guhVal}";
-            Stat4.text = $"Rhythm: {VNGameSave.activeFile.danceVal}";
-
-
         }
 
         public void LoadStats()

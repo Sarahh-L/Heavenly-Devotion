@@ -15,7 +15,6 @@ namespace History
 
             if (loadedAssets.ContainsKey(key))
             {
-                Debug.Log($"Found key {key}");
                 resource = (T)loadedAssets[key].asset;
                 return (T)resource;
             }

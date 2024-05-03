@@ -8,6 +8,7 @@ using VisualNovel;
 public class _MainMenu : MonoBehaviour
 {
     public const string main_menu_scene = "Main Menu";
+    public const string dorms = "Dorms";
 
     public static _MainMenu instance { get; private set; }
 
@@ -19,7 +20,23 @@ public class _MainMenu : MonoBehaviour
 
     void Start()
     {
-        mainCG = new CanvasGroupController(this, mainPanel, null);
+       // if (Randomizer.firstTry == true)
+       // {
+       //     Debug.Log($"{Randomizer.listOfOptions.Count}guh");
+       // }
+
+        /*for (int i = 0; i < PlayerPrefs.GetInt("random_count"); i++)
+        {
+            Randomizer.listOfOptions[i] = PlayerPrefs.GetInt("options" + i);
+            Debug.Log($"{Randomizer.listOfOptions[i]} - {PlayerPrefs.GetInt("options" + i)}");
+            
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            Debug.Log($"{PlayerPrefs.GetInt("options" + i)}");
+        }*/
+        mainCG = new CanvasGroupController(this, mainPanel);
 
         AudioManager.instance.StopAllSoundEffects();
         AudioManager.instance.StopAllTracks();
@@ -44,12 +61,14 @@ public class _MainMenu : MonoBehaviour
 
     private void StartNewGame()
     {
+        Debug.Log("ya mama");
         VNGameSave.activeFile = new VNGameSave();
         StartCoroutine(StartingGame());
     }
 
     public void LoadGame(VNGameSave file)
     {
+        //Randomizer.firstTry = (PlayerPrefs.GetInt("firstTry") != 0);
         VNGameSave.activeFile = file;
         StartCoroutine(StartingGame());
     }
@@ -64,5 +83,19 @@ public class _MainMenu : MonoBehaviour
 
         VN_Configuration.activeConfig.Save();
         UnityEngine.SceneManagement.SceneManager.LoadScene("HeavenlyDevotion");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("p"))
+        {
+            PlayerPrefs.SetInt("random_count", Randomizer.backup.Count);
+            PlayerPrefs.Save();
+            for (int i = 0; i < Randomizer.backup.Count; i++)
+            {
+                PlayerPrefs.SetInt("options" + i, Randomizer.backup[i]);
+                PlayerPrefs.Save();
+            }
+        }
     }
 }

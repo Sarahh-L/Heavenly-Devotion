@@ -16,6 +16,7 @@ public class VNMenuManager : MonoBehaviour
     [SerializeField] private CanvasGroup root;
     [SerializeField] private MenuPage[] pages;
 
+
     private CanvasGroupController rootCG;
 
     void Awake()
@@ -26,7 +27,7 @@ public class VNMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rootCG = new CanvasGroupController(this, root, null);
+        rootCG = new CanvasGroupController(this, root);
     }
 
     private MenuPage GetPage(MenuPage.PageType pageType)
@@ -117,6 +118,11 @@ public class VNMenuManager : MonoBehaviour
         VN_Configuration.activeConfig.Save();
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(_MainMenu.main_menu_scene);
+    }
+    
+    public void Click_Dorm()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(_MainMenu.dorms);
     }
 
     public void Click_Quit()

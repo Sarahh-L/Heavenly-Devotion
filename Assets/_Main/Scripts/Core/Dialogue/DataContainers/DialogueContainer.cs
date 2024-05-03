@@ -25,7 +25,7 @@ namespace Dialogue
             if (initialized)
                 return;
 
-            cgController = new CanvasGroupController(DialogueSystem.instance, root.GetComponent<CanvasGroup>(), null);
+            cgController = new CanvasGroupController(DialogueSystem.instance, root.GetComponent<CanvasGroup>());
         }
 
         public bool isVisible => cgController.isVisible;

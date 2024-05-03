@@ -17,7 +17,8 @@ namespace Dialogue
         public AutoReader autoReader { get; private set; }
 
         [SerializeField] private CanvasGroup mainCanvas;
-        [SerializeField] private CanvasGroup mapCanvas;
+
+        public Map map = new Map();
 
         public static DialogueSystem instance
         {
@@ -58,8 +59,9 @@ namespace Dialogue
             architect = new TextArchitect(dialogueContainer.dialogueText);
             conversationManager = new ConversationManager(architect);
 
-            cgController = new CanvasGroupController(this, mainCanvas, mapCanvas);
+            cgController = new CanvasGroupController(this, mainCanvas);
             dialogueContainer.Initialize();
+            map.Initialize();
 
             autoReader = GetComponent<AutoReader>();
             if (autoReader != null)

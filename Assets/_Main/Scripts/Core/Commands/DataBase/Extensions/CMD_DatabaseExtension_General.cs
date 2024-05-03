@@ -2,8 +2,10 @@ using Dialogue;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using VisualNovel;
 
 namespace Commands
 {
@@ -30,7 +32,9 @@ namespace Commands
             database.AddCommand("showui", new Func<string[], IEnumerator>(ShowDialogueSystem));
             database.AddCommand("hideui", new Func<string[], IEnumerator>(HideDialogueSystem));
 
+            // Map visibility
             database.AddCommand("showmap", new Func<string[], IEnumerator>(ShowMap));
+            database.AddCommand("hidemap", new Func<string[], IEnumerator>(HideMap));
 
             database.AddCommand("load", new Action<string[]>(LoadNewDialogueFile));
         }
@@ -43,6 +47,34 @@ namespace Commands
             {
                 yield return new WaitForSeconds(time);
             }
+        }
+        #endregion
+
+        #region Show / Hide Map
+        private static IEnumerator ShowMap(string[] data)
+        {
+            float speed;
+            bool immediate;
+
+            var parameters = ConvertDataToParameters(data);
+
+            parameters.TryGetValue(Param_Speed, out speed, defaultValue: 1f);
+            parameters.TryGetValue(Param_Immediate, out immediate, defaultValue: false);
+
+            yield return DialogueSystem.instance.map.Show(speed, immediate);
+        }
+
+        private static IEnumerator HideMap(string[] data)
+        {
+            float speed;
+            bool immediate;
+
+            var parameters = ConvertDataToParameters(data);
+
+            parameters.TryGetValue(Param_Speed, out speed, defaultValue: 1f);
+            parameters.TryGetValue(Param_Immediate, out immediate, defaultValue: false);
+
+            yield return DialogueSystem.instance.map.Hide(speed, immediate);
         }
         #endregion
 
@@ -133,22 +165,6 @@ namespace Commands
 
         #endregion
 
-
-        #region Map
-        private static IEnumerator ShowMap(string[] data)
-        {
-            float speed;
-            bool immediate;
-
-            var parameters = ConvertDataToParameters(data);
-
-            parameters.TryGetValue(Param_Speed, out speed, defaultValue: 1f);
-            parameters.TryGetValue(Param_Immediate, out immediate, defaultValue: false);
-
-            yield return CanvasGroupController.instance.ShowMap(speed, immediate);
-        }
-
-        #endregion
 
     }
 }

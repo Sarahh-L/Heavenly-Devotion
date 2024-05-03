@@ -50,7 +50,6 @@ namespace History
 
                 foreach (var layer in panel.layers)
                 {
-                    Debug.Log($"{layer.currentGraphic}");
                     LayerData entry = new LayerData(layer);
                     data.layers.Add(entry);
                 }

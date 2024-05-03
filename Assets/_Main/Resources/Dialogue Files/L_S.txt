@@ -1,79 +1,12 @@
-﻿
-ShowMap()
-
-playsong("space")
-
-
-$Stats.Charisma = 3
-$Stats.guh = 7
-$Stats.Danceoffskills = 9
-$Stats.Swagginess = 4
-
+﻿playsong("space")
+SetLayerMedia(background "bathhouse")
+CreateCharacter(Alexandria), CreateCharacter(Loki), CreateCharacter(Shein), CreateCharacter(Mako), CreateCharacter(Teevee),CreateCharacter(Scylla), MoveCharacter(Alexandria 0 0 -i true)
+Alexandria.SetSprite(testa), Scylla.SetSprite(tests), Shein.SetSprite(Neutral), Teevee.SetSprite(Neutral), Scylla.SetSprite(Neutral)
 enter Alexandria "ya like jazz?"
-UpdateCommand(2)
-
-choice "Do you like jazz?"
-{
-	-Nah
-		Alexandria "but why :("
-		narrator "it's dumb"
-		Alexandria "bruh"
-	-Sure
-		Alexandria "Awesome! {wa 0.5} i really like jazz, too!"
-		"it's nice sounding"
-		"... except when it's not"
-		Load(Test)
-	-What
-	Alexandria "do you.... not know what jazz is?"
-	choice "Do you know what jazz is?"
-	{
-		-Not really
-			Alexandria.SetSprite(Upset)
-			Alexandria "... that's sad"
-		-Uh, of course! (lie)
-			Alexandria.SetSprite(Happy)
-			Alexandria "oh, thank goodness!"
-			"I would have been very disappointed"
-	}
-	<mainChar> "it's an interesting genre"
-	Alexandria "I suppose"
-}
-
-SetLayerMedia(background "01_2")
-
-Alexandria.SetSprite(Neutral)
-Alexandria "What's your name?"
-
-input "What is your name?"
-
-SetPlayerName(<input>)
-
-if (<mainChar> == "Spiderman")
-{
-	narrator "you are the amazing <mainChar>!"
-}
-else
-{
-	narrator "it's nice to meet you <mainChar>"
-}
-
-SetLayerMedia(background "barracks")
-
-$input
-
-<mainChar> "tag manager testing <mainChar>. {wa 1} what time is it?"
-
-Narrator "The time is <time> and you are only level  <playerLevel>"
-
-Alexandria "nice to meet you, <mainChar>"
-
-
-Alexandria.SetSprite(Happy)
-wait(1)
-
-Alexandria.SetSprite(Upset)
-wait(1)
-
-Alexandria.SetSprite(Neutral), wait(1), Alexandria.Flip(-i true)
-wait(1)
-
+enter Scylla "m?"
+MoveCharacter(Shein 1 0 -i true)
+enter Shein "ya mama"
+Show(Teevee), MoveCharacter(Teevee 0.3 1 -i true), MoveCharacter(Scylla 0.7 1)
+Sort(Shein Scylla Teevee Alexandria), Teevee.SetSprite(Upset), Teevee.Animate(-a Shiver), Shein.Animate(-a Shiver), Alexandria.Animate(-a Hop), Alexandria.Animate(-a Hop),
+wait(3)
+ShowMap()

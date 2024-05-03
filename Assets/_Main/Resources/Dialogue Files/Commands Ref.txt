@@ -60,7 +60,7 @@ Characters:
 
 UI:
 	wait(#)											- waits for specified amount of time between lines
-	HideDB()										- hides dialogue box
+	HideDb()										- hides dialogue box
 	ShowDb()										- shows dialogue box
 	HideUI()										- hides dialogue system (everything basically)
 	ShowUI()										- shows dialogue system (everything basically)
@@ -80,7 +80,7 @@ Audio:
 
 Graphic panels
 	SetLayerMedia(background ("background"))		- sets background of scene (change layers to overlay backgrounds)
-	CleayLayerMedia(background -b)				- remove background (can be faded out using blend)
+	ClearLayerMedia(background -b)				- remove background (can be faded out using blend)
 
 
 Visual Novel

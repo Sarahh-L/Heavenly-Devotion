@@ -120,7 +120,7 @@ namespace Commands
             GraphicPanel panel = GraphicPanelManager.instance.GetPanel(panelName);
             if (panel == null)
             {
-                Debug.LogError($"Unable to grab panel '{panelName}' because it is not a valid panel please check the pael name and adjust the command");
+                Debug.LogError($"Unable to grab panel '{panelName}' because it is not a valid panel please check the panel name and adjust the command");
                 yield break;
             }
 
