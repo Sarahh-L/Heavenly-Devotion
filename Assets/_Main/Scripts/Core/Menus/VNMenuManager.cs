@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,7 +104,7 @@ public class VNMenuManager : MonoBehaviour
         //ShowButton();
     }
 
-   /* public void HideButton()
+    public void HideButton()
     {
         buttons.gameObject.SetActive(false);
     }
@@ -111,7 +112,7 @@ public class VNMenuManager : MonoBehaviour
     public void ShowButton()
     {
         buttons.gameObject.SetActive(true);
-    }*/
+    }
 
     public void Click_Home()
     {
@@ -122,8 +123,36 @@ public class VNMenuManager : MonoBehaviour
     
     public void Click_Dorm()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(_MainMenu.dorms);
+        Debug.Log("dorm");
+        VN_Configuration.activeConfig.Save();
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Dorms");
     }
+    public void Click_Library()
+    {
+        VN_Configuration.activeConfig.Save();
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(_MainMenu.library);
+    }
+    public void Click_Cafe()
+    {
+        VN_Configuration.activeConfig.Save();
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(_MainMenu.cafe);
+    }
+    public void Click_Main()
+    {
+        VN_Configuration.activeConfig.Save();
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(_MainMenu.main);
+    }
+    public void Click_Subway()
+    {
+        VN_Configuration.activeConfig.Save();
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(_MainMenu.subway);
+    }
+ 
 
     public void Click_Quit()
     {

@@ -1,7 +1,0 @@
-1. make save n load content 0
-2. make content visible in config
-3. go to config object n expand panels- general first, audio second
-4. panel selection menu- general & audio buttons- add onclick function (openpanel)- Put "General" in general, "Audio" in audio
-5. test- flip between panels
-
-6. add options into config menu (general)

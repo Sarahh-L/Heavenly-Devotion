@@ -1,6 +1,0 @@
-playsfx(sparkle)
-playsong("space")
-narrator "guh"
-narrator "your mom"
-
-SetLayerMedia(background barracks -blend hurricane -spd 0.7 -i true)

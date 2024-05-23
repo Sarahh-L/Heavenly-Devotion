@@ -9,6 +9,10 @@ public class _MainMenu : MonoBehaviour
 {
     public const string main_menu_scene = "Main Menu";
     public const string dorms = "Dorms";
+    public const string library = "Library";
+    public const string cafe = "Cafe";
+    public const string main = "MainSt";
+    public const string subway = "Subway";
 
     public static _MainMenu instance { get; private set; }
 
@@ -87,7 +91,7 @@ public class _MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown("p"))
+        /*if (Input.GetKeyDown("p"))
         {
             PlayerPrefs.SetInt("random_count", Randomizer.backup.Count);
             PlayerPrefs.Save();
@@ -96,6 +100,6 @@ public class _MainMenu : MonoBehaviour
                 PlayerPrefs.SetInt("options" + i, Randomizer.backup[i]);
                 PlayerPrefs.Save();
             }
-        }
+        }*/
     }
 }

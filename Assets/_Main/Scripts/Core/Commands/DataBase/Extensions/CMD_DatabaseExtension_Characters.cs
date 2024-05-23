@@ -397,7 +397,7 @@ namespace Commands
                 });
 
                 while (characters.Any(c => c.isHighlighting) || (handleUnspecifiedCharacters && unspecifiedCharacters.Any(unspecifiedCharacters => unspecifiedCharacters.isUnHighlighting)))
-                        yield return null;
+                    yield return null;
             }
         }
 

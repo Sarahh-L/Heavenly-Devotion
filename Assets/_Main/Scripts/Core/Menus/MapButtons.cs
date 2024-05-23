@@ -11,10 +11,10 @@ public class MapButtons : MonoBehaviour
 
     private void Update()
     {
-        if(Randomizer.tries == 3)
+        /*if(Randomizer.tries == 3)
         {
             Dorms.SetActive(false);
-        }
+        }*/
     }
 
 }

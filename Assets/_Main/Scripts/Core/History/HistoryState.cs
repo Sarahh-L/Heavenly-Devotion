@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace History 
 {
     [System.Serializable]
     public class HistoryState
     {
+        public string SceneName = "HeavenlyDevotion";
         public DialogueData dialogue;
         public List<CharacterData> characters;
         public List<AudioTrackData> audio;
@@ -16,6 +18,7 @@ namespace History
         public static HistoryState Capture()
         {
             HistoryState state = new HistoryState();
+            state.SceneName = SceneManager.GetActiveScene().name;
             state.dialogue = DialogueData.Capture();
             state.characters = CharacterData.Capture();
             state.audio = AudioTrackData.Capture();
@@ -26,6 +29,7 @@ namespace History
         }
         public void Load()
         {
+            SceneManager.LoadScene(SceneName);
             DialogueData.Apply(dialogue);
             CharacterData.Apply(characters);
             AudioTrackData.Apply(audio);

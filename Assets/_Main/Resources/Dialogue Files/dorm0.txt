@@ -1,3 +1,0 @@
-dorm 0
-slay
-ShowMap()

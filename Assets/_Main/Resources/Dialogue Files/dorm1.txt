@@ -1,3 +1,0 @@
-dorm 1
-yuh
-ShowMap()

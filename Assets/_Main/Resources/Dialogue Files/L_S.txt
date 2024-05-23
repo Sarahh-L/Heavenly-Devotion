@@ -6,7 +6,16 @@ enter Alexandria "ya like jazz?"
 enter Scylla "m?"
 MoveCharacter(Shein 1 0 -i true)
 enter Shein "ya mama"
+
+Choice "ya mama?"
+{
+	- ya mama
+	- nah
+
+
+}
+
 Show(Teevee), MoveCharacter(Teevee 0.3 1 -i true), MoveCharacter(Scylla 0.7 1)
-Sort(Shein Scylla Teevee Alexandria), Teevee.SetSprite(Upset), Teevee.Animate(-a Shiver), Shein.Animate(-a Shiver), Alexandria.Animate(-a Hop), Alexandria.Animate(-a Hop),
-wait(3)
+Sort(Shein Scylla Teevee Alexandria), Teevee.SetSprite(Upset), Teevee.Animate(-a Shiver), Shein.Animate(-a Shiver), Alexandria.Animate(-a Hop), Alexandria.Animate(-a Hop)
+
 ShowMap()

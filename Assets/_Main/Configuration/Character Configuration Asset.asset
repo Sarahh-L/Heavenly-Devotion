@@ -29,8 +29,8 @@ MonoBehaviour:
     characterType: 1
     nameColor: {r: 0.09533267, g: 0, b: 0.1509434, a: 1}
     dialogueColor: {r: 0.82169807, g: 0.5330188, b: 1, a: 1}
-    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
-    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
+    dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
@@ -48,8 +48,8 @@ MonoBehaviour:
     characterType: 1
     nameColor: {r: 0.30965108, g: 0.4245283, b: 0.27033642, a: 1}
     dialogueColor: {r: 0.30980393, g: 0.42745098, b: 0.27058825, a: 1}
-    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
-    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
+    dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
@@ -63,8 +63,8 @@ MonoBehaviour:
     characterType: 1
     nameColor: {r: 0.5188679, g: 0.17185418, b: 0.15419188, a: 1}
     dialogueColor: {r: 0.52156866, g: 0.17254902, b: 0.15686275, a: 1}
-    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
-    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
+    dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
@@ -78,8 +78,8 @@ MonoBehaviour:
     characterType: 1
     nameColor: {r: 0.20683517, g: 0.32523358, b: 0.5283019, a: 1}
     dialogueColor: {r: 0.20784314, g: 0.3254902, b: 0.5294118, a: 1}
-    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
-    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
+    dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
@@ -91,8 +91,8 @@ MonoBehaviour:
     characterType: 1
     nameColor: {r: 0.15312387, g: 0.16547772, b: 0.3490566, a: 1}
     dialogueColor: {r: 0.15686275, g: 0.16862746, b: 0.3529412, a: 1}
-    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
-    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
+    dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:
@@ -104,8 +104,8 @@ MonoBehaviour:
     characterType: 1
     nameColor: {r: 0.3773585, g: 0.13349947, b: 0.14356324, a: 1}
     dialogueColor: {r: 0.38039216, g: 0.13725491, b: 0.14509805, a: 1}
-    nameFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
-    dialogueFont: {fileID: 11400000, guid: d634cb84f2d73c94eb509e2fb6b7b3dc, type: 2}
+    nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
+    dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1
     dialogueFontScale: 1
     sprites:

@@ -1,0 +1,19 @@
+CreateCharacter(Mako), CreateCharacter(Scylla)
+SetLayerMedia(background barracks -blend hurricane -spd 0.7 -i true)
+
+Narrator "You decide to head into the subways and explore for a bit"
+"There, {wa .8}you find an underground aquarium,{wa .8} bustling with life"
+"Many aquatic species seem to reside here, a majority hidden behind a glass."
+"It's...{wa .5} oddly peaceful, especially for a simple subway system."
+"Though, you've been to an aquarium before. {wa .7}It was nothing new."
+"You also find a random man on the stairs... {wa .9}hitting the jig... {wa .9}and yelling about global warming"
+". {wa 1} . {wa 1} ."
+"The fish seem a lot more interesting after that."
+
+MoveCharacter(Scylla 1 0 -i true), MoveCharacter(Mako 0 0 -i true), UnHighlight(Mako -i true), UnHighlight(), Show(Scylla), Show(Mako)
+Soon, you come across both Scylla and Mako, who...{wa .8} seem to be talking about wars?
+Huh.{wa 1} Never took Mako as the type.
+Though,{wa .5} he does look pretty uncomfortable...
+Regardless, you decide to approach them.
+Highlight(Mako -i false), Mako.Animate(-a Hop), MoveCharacter(Mako 0 1)
+Mako "uh..."

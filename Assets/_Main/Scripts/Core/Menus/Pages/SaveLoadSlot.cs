@@ -76,6 +76,16 @@ public class SaveLoadSlot : MonoBehaviour
 
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == _MainMenu.main_menu_scene)
             _MainMenu.instance.LoadGame(file);
+        /*else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == _MainMenu.dorms)
+            _MainMenu.instance.LoadGame(file);
+        else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == _MainMenu.library)
+            _MainMenu.instance.LoadGame(file);
+        else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == _MainMenu.cafe)
+            _MainMenu.instance.LoadGame(file);
+        else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == _MainMenu.subway)
+            _MainMenu.instance.LoadGame(file);
+        else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == _MainMenu.subway)
+            _MainMenu.instance.LoadGame(file);*/
         else
             file.Activate();
            

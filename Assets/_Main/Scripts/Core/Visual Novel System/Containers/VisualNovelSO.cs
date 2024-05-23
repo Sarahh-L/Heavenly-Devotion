@@ -7,4 +7,5 @@ using UnityEngine;
 public class VisualNovelSO : ScriptableObject
 {
     public TextAsset startingFile;
+
 }

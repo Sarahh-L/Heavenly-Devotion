@@ -1,4 +1,10 @@
-using System.Collections;
+
+
+// Randomizer for text scripts - works but doesn't save
+
+
+
+/*using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -68,11 +74,11 @@ public class Randomizer : MonoBehaviour
         PlayerPrefs.SetInt("random_count", listOfOptions.Count);
         PlayerPrefs.Save();
 
-        /*for (int i = 0; i < PlayerPrefs.GetInt("random_count"); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt("random_count"); i++)
         {
             PlayerPrefs.SetInt("options" + i, 0);
             PlayerPrefs.Save();
-        }*/
+        }
 
         // overwrite listOfOptions.Count with random count
         // something with uh selecteditem
@@ -138,3 +144,4 @@ public class Randomizer : MonoBehaviour
 
     }
 }
+*/

@@ -1,3 +1,0 @@
-dorm 2
-this will print a different script
-ShowMap()
