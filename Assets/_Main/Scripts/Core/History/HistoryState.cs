@@ -29,11 +29,19 @@ namespace History
         }
         public void Load()
         {
-            SceneManager.LoadScene(SceneName);
-            DialogueData.Apply(dialogue);
-            CharacterData.Apply(characters);
-            AudioTrackData.Apply(audio);
-            GraphicData.Apply(graphics);
+            if (SceneName == SceneManager.GetActiveScene().name)
+            {
+                yield return null;
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneName);
+                DialogueData.Apply(dialogue);
+                CharacterData.Apply(characters);
+                AudioTrackData.Apply(audio);
+                GraphicData.Apply(graphics);
+            }
+            return;
         }
    
     }

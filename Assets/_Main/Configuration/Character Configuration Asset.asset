@@ -27,7 +27,7 @@ MonoBehaviour:
   - name: Alexandria
     alias: a
     characterType: 1
-    nameColor: {r: 0.09533267, g: 0, b: 0.1509434, a: 1}
+    nameColor: {r: 0.7372543, g: 0.4485582, b: 0.9056604, a: 1}
     dialogueColor: {r: 0.82169807, g: 0.5330188, b: 1, a: 1}
     nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
@@ -61,8 +61,8 @@ MonoBehaviour:
   - name: Shein
     alias: s
     characterType: 1
-    nameColor: {r: 0.5188679, g: 0.17185418, b: 0.15419188, a: 1}
-    dialogueColor: {r: 0.52156866, g: 0.17254902, b: 0.15686275, a: 1}
+    nameColor: {r: 0.9622642, g: 0.3394963, b: 0.30411178, a: 1}
+    dialogueColor: {r: 1, g: 0.33642727, b: 0.3066038, a: 1}
     nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1
@@ -70,14 +70,14 @@ MonoBehaviour:
     sprites:
       _serializedList:
       - Key: Neutral
-        Value: {fileID: 21300000, guid: dc5eda37a4b3dc549aa2a2acae302508, type: 3}
+        Value: {fileID: 21300000, guid: 33e5835558eb84c4e96ac3c5461cf891, type: 3}
       - Key: Mad
         Value: {fileID: 21300000, guid: 5d36ac0e9a2af3442ab3a4ae38f5b75b, type: 3}
   - name: Mako
     alias: m
     characterType: 1
-    nameColor: {r: 0.20683517, g: 0.32523358, b: 0.5283019, a: 1}
-    dialogueColor: {r: 0.20784314, g: 0.3254902, b: 0.5294118, a: 1}
+    nameColor: {r: 0.62144, g: 0.75648606, b: 0.990566, a: 1}
+    dialogueColor: {r: 0.6556604, g: 0.78163826, b: 1, a: 1}
     nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1
@@ -89,8 +89,8 @@ MonoBehaviour:
   - name: Scylla
     alias: sc
     characterType: 1
-    nameColor: {r: 0.15312387, g: 0.16547772, b: 0.3490566, a: 1}
-    dialogueColor: {r: 0.15686275, g: 0.16862746, b: 0.3529412, a: 1}
+    nameColor: {r: 0.35248306, g: 0.38171142, b: 0.8396226, a: 1}
+    dialogueColor: {r: 0.32039872, g: 0.3555144, b: 0.9056604, a: 1}
     nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1
@@ -102,8 +102,8 @@ MonoBehaviour:
   - name: Teevee
     alias: t
     characterType: 1
-    nameColor: {r: 0.3773585, g: 0.13349947, b: 0.14356324, a: 1}
-    dialogueColor: {r: 0.38039216, g: 0.13725491, b: 0.14509805, a: 1}
+    nameColor: {r: 0.9245283, g: 0.23985407, b: 0.39755476, a: 1}
+    dialogueColor: {r: 0.9245283, g: 0.24857599, b: 0.38972408, a: 1}
     nameFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     dialogueFont: {fileID: 11400000, guid: 06a086c3a73f9ac4384911f2fc0190da, type: 2}
     nameFontScale: 1

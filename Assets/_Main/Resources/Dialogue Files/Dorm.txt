@@ -1,2 +1,15 @@
-Dorm 1
+CreateCharacter(Alexandria), CreateCharacter(Shein)
+SetLayerMedia(background Dorm -blend hurricane -spd 0.7 -i true)
+
+"You decide to head to the dorms for a quick rest break."
+There, you see that someone had left the tv on, the sound echoing from the speakers
+While inspecting the tv, you notice the channel it had been set to
+"... Was that... {wa .6} Cocomelon?"
+You realize it might be Loki, he has a bit of a... {wa .8} fascination with the channel
+You decide to stick around and watch a bit to see what all the fuss is about
+After around 3 hours, you begin to respect the novel storytelling and script writing of the episode.
+
+
+MoveCharacter(Shein 1 0 -i true), MoveCharacter(Alexandria 0 0 -i true), UnHighlight(Alexandria -i true), UnHighlight(Shein -i true), Show(Shein), Show(Alexandria) 
+".."
 ShowMap()
