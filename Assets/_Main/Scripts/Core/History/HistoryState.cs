@@ -29,7 +29,10 @@ namespace History
         }
         public void Load()
         {
-            SceneManager.LoadScene(SceneName);
+            Debug.Log($"Load:  Active Scene: {SceneManager.GetActiveScene().name} Loading Scene: {SceneName}");
+            if (SceneManager.GetActiveScene().name != SceneName){
+                SceneManager.LoadScene(SceneName);
+            }
             DialogueData.Apply(dialogue);
             CharacterData.Apply(characters);
             AudioTrackData.Apply(audio);
