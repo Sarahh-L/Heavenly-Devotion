@@ -1,7 +1,8 @@
+playsong("space")
 CreateCharacter(Alexandria), CreateCharacter(Shein)
 SetLayerMedia(background Dorm -blend hurricane -spd 0.7 -i true)
 
-"You decide to head to the dorms for a quick rest break."
+Narrator "You decide to head to the dorms for a quick rest break."
 There, you see that someone had left the tv on, the sound echoing from the speakers
 While inspecting the tv, you notice the channel it had been set to
 "... Was that... {wa .6} Cocomelon?"
@@ -9,7 +10,69 @@ You realize it might be Loki, he has a bit of a... {wa .8} fascination with the 
 You decide to stick around and watch a bit to see what all the fuss is about
 After around 3 hours, you begin to respect the novel storytelling and script writing of the episode.
 
+MoveCharacter(Alexandria .1 0 -i true), MoveCharacter(Shein 1 0 -i true), Show(Alexandria), Show(Shein)
 
-MoveCharacter(Shein 1 0 -i true), MoveCharacter(Alexandria 0 0 -i true), UnHighlight(Alexandria -i true), UnHighlight(Shein -i true), Show(Shein), Show(Alexandria) 
-".."
+You find Shein and Alexandria conversing in the middle of the hallway.
+They seem to be talking about rocks, or at least some form of them.
+It seems almost fitting... {wa .5} if Shein didn't seem a little confused.
+Shein.Animate(-a Hop)
+Shein "What do you mean 'Magic Rocks'?"
+Alexandria.SetSprite(Happy)
+Alexandria "I mean exactly what I said!"
+"Rocks can have healing properties too, darling, {wa .5} it isn't impossible"
+Shein "... But..{wa .6} that makes no sense."
+"They're rocks.{wa .8} Made from the ground."
+"... What's magical about that?"
+Alexandria.SetSprite(Upset)
+Alexandria "Well...{wa .9} er...{wa .9} I suppose you have a point..."
+"But then,{wa .4} my crystals would be useless!"
+"Yet they have healing properties...{wa .4} enhancements...{wa .4} Ooh! One can even make armor!"
+Shein ".{wa .5} .{wa .5} .{wa .5}"
+"Alex, hon"
+"Are you mentally well?"
+Alexandria.SetSprite(Mad), Alexandria.Animate(-a Hop)
+Alexandria "I am serious!"
+"I can show you!"
+
+Narrator "You watch as Alexandria tries to break her arm off in front of a very concerned Shein"
+"She seems...{wa .6} very intent on defending herself"
+"Almost too intent"
+"You decide to step in and stop her before you have to explain to everyone why the rock was missing an arm."
+
+Choice "..."
+{
+	- "C'mon, Alex, it's impossible for a little old rock to have powers! That's childish."
+	Alexandria.SetSprite(Upset), Alexandria.Animate(-a Hop)
+	Alexandria "W-what?!{wa .7} Childish?!"
+	Shein "Just a little bit, Alex..."
+	"It just feels...{wa .6} unlikely that you would have something that powerful, y'know?"
+	Alexandria "..."
+	"Maybe..."
+	Shein "..."
+	Alexandria "..."
+	Shein " Do ya...{wa .6} wanna talk about it still?"
+	Alexandria.SetSprite(Neutral)
+	Alexandria "Can I really?"
+	Shein "Mm. Sure, why not?{wa .6} got nothin' better to do"
+	Alexandria.SetSprite(Happy)
+	Alexandria "Awesome!{wa .6} Oh! You see this one on my hat? Well, it actually..."
+	Unhighlight(Alexandria -i false), UnHighlight(Shein -i false)
+	Narrator "Alexandria then proceeded to info dump for 3 hours"
+	"... poor Shein"
+
+	- "Shein, have a little faith in her! Anything is possible, even a rock with armor."
+	Highlight(Shein -i false)
+	Shein "I...{wa .5} guess?"
+	"I mean, i'm not denying the possibility..."
+	"... but it's very unlikely."
+	Alexandria.SetSprite(Happy)
+	Alexandria "That's alright, darling!{wa .6} You don't have to believe me!"
+	"So long as you don't doubt me...{wa .4} too much, anyway"
+	Shein "Eh, I guess. Maybe a smidge."
+	"..."
+	"Can you show me that armor rock y'got?"
+	Alexandria.Animate(-a Hop)
+	Alexandria "Of course!"
+
+}
 ShowMap()

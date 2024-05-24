@@ -1,21 +1,6 @@
-﻿playsong("space")
-SetLayerMedia(background "bathhouse")
-CreateCharacter(Alexandria), CreateCharacter(Loki), CreateCharacter(Shein), CreateCharacter(Mako), CreateCharacter(Teevee),CreateCharacter(Scylla), MoveCharacter(Alexandria 0 0 -i true)
-Alexandria.SetSprite(testa), Scylla.SetSprite(tests), Shein.SetSprite(Neutral), Teevee.SetSprite(Neutral), Scylla.SetSprite(Neutral)
-enter Alexandria "ya like jazz?"
-enter Scylla "m?"
-MoveCharacter(Shein 1 0 -i true)
-enter Shein "ya mama"
-
-Choice "ya mama?"
-{
-	- ya mama
-	- nah
-
-
-}
-
-Show(Teevee), MoveCharacter(Teevee 0.3 1 -i true), MoveCharacter(Scylla 0.7 1)
-Sort(Shein Scylla Teevee Alexandria), Teevee.SetSprite(Upset), Teevee.Animate(-a Shiver), Shein.Animate(-a Shiver), Alexandria.Animate(-a Hop), Alexandria.Animate(-a Hop)
-
+﻿Narrator "Hello!"
+Welcome to my little game :)
+"Unfortunately, it doesn't have much content to it {wa .9}(I have very poor time management skills)"
+But it's functional! And I hope the content that is provided is at least a little amusing
+Regardless, I hope you enjoy!
 ShowMap()
